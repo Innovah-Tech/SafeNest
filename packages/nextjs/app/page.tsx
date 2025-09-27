@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { BugAntIcon, MagnifyingGlassIcon, QuestionMarkCircleIcon, ShieldCheckIcon, UsersIcon, CurrencyDollarIcon, BanknotesIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
 const Home: NextPage = () => {
@@ -11,56 +11,236 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="flex items-center flex-col grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <div className="flex justify-center items-center space-x-2 flex-col">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        {/* Hero Section */}
+        <div className="relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+            <div className="text-center">
+              <div className="flex justify-center mb-8">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-lg opacity-30"></div>
+                  <div className="relative bg-white dark:bg-gray-800 p-6 rounded-full shadow-2xl">
+                    <ShieldCheckIcon className="h-16 w-16 text-blue-500" />
+                  </div>
+                </div>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
+                <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                  MicroSavings
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                Mobile-First DeFi Savings & Investment Platform
+              </p>
+              
+              <p className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                Save tiny amounts daily, invest in DeFi, build emergency funds, and join community pools for collective growth.
+              </p>
 
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
+              {/* Wallet Connection Status */}
+              {connectedAddress ? (
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-12 max-w-md mx-auto">
+                  <div className="flex items-center justify-center space-x-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-green-700 dark:text-green-300 font-medium">Wallet Connected</span>
+                  </div>
+                  <div className="mt-3">
+                    <Address address={connectedAddress} />
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 mb-12 max-w-md mx-auto">
+                  <div className="flex items-center justify-center space-x-3">
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <span className="text-yellow-700 dark:text-yellow-300 font-medium">Connect your wallet to get started</span>
+                  </div>
+                </div>
+              )}
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/savings"
+                  className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                >
+                  Start Saving
+                </Link>
+                <Link
+                  href="/help"
+                  className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transform hover:-translate-y-1 transition-all duration-200"
+                >
+                  Get Help
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col md:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contracts
-                </Link>{" "}
-                tab.
+        {/* Features Section */}
+        <div className="py-20 bg-white dark:bg-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Why Choose MicroSavings?
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                A mobile-first platform designed for inclusive financial growth
               </p>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <div className="group bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <BanknotesIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  Micro-Savings
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Save tiny amounts daily with round-up features and automatic deposits into stablecoin pools.
+                </p>
+                <Link href="/savings" className="text-green-500 hover:text-green-600 font-medium">
+                  Start saving →
+                </Link>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <ChartBarIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  Micro-Investments
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Access DeFi yield products with fractional investments and automatic yield optimization.
+                </p>
+                <Link href="/savings" className="text-blue-500 hover:text-blue-600 font-medium">
+                  Start investing →
+                </Link>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="group bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-purple-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <UsersIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  Community Pools
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Join digital chamas and rotating savings groups for collective growth and higher yields.
+                </p>
+                <Link href="/savings" className="text-purple-500 hover:text-purple-600 font-medium">
+                  Join community →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Platform Stats */}
+        <div className="py-20 bg-gradient-to-r from-green-500 to-blue-600">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                Platform Impact
+              </h2>
+              <p className="text-xl text-green-100 max-w-2xl mx-auto">
+                Empowering financial inclusion through mobile-first DeFi
               </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-white mb-2">$0</div>
+                <div className="text-green-100">Total Savings</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-white mb-2">0</div>
+                <div className="text-green-100">Active Users</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-white mb-2">0</div>
+                <div className="text-green-100">Community Pools</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-white mb-2">0%</div>
+                <div className="text-green-100">Average APY</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="py-20 bg-gray-50 dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Get Started Today
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+                Start your financial journey with mobile-first DeFi
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Link
+                href="/savings"
+                className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 dark:border-gray-700"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <CurrencyDollarIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  MicroSavings Platform
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Start saving tiny amounts daily and invest in DeFi with our mobile-first platform.
+                </p>
+                <div className="text-green-500 group-hover:text-green-600 font-medium">
+                  Start Saving →
+                </div>
+              </Link>
+
+              <Link
+                href="/help"
+                className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 dark:border-gray-700"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <QuestionMarkCircleIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  SafeNest Help System
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Get help and provide assistance with our decentralized help platform.
+                </p>
+                <div className="text-blue-500 group-hover:text-blue-600 font-medium">
+                  Get Help →
+                </div>
+              </Link>
+
+              <Link
+                href="/debug"
+                className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200 dark:border-gray-700"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-purple-500 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <BugAntIcon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  Debug Contracts
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  Tinker with your smart contracts using our debug interface.
+                </p>
+                <div className="text-purple-500 group-hover:text-purple-600 font-medium">
+                  Debug Now →
+                </div>
+              </Link>
             </div>
           </div>
         </div>
