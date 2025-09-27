@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
-import { Bars3Icon, BugAntIcon, QuestionMarkCircleIcon, ShieldCheckIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BugAntIcon, QuestionMarkCircleIcon, ShieldCheckIcon, CurrencyDollarIcon, ChartPieIcon, UsersIcon, BanknotesIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 
@@ -21,9 +21,24 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
+    label: "Vaults",
+    href: "/vaults",
+    icon: <BanknotesIcon className="h-4 w-4" />,
+  },
+  {
     label: "MicroSavings",
     href: "/savings",
     icon: <CurrencyDollarIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Community Pools",
+    href: "/community",
+    icon: <UsersIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Tokenomics",
+    href: "/tokenomics",
+    icon: <ChartPieIcon className="h-4 w-4" />,
   },
   {
     label: "SafeNest Help",
