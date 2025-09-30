@@ -135,7 +135,7 @@ SafeNest is a mobile-first wallet that combines:
 
 ## 🛠️ Tech Stack
 
-- **Blockchain**: Ethereum, Polygon, Base, Celo
+- **Blockchain**: U2U
 - **Frontend**: Next.js, React, Tailwind CSS, DaisyUI
 - **Web3**: Wagmi, RainbowKit, Viem
 - **Smart Contracts**: Solidity, Hardhat
