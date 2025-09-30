@@ -142,6 +142,30 @@ SafeNest is a mobile-first wallet that combines:
 - **Oracles**: Chainlink, Pyth
 - **Mobile**: Progressive Web App, Flutter (future)
 
+## 🌐 Deployed Contracts
+
+### **U2U Network Nebulas Testnet (Chain ID: 2484)**
+- **RPC URL**: `https://rpc-nebulas-testnet.u2u.xyz`
+- **Block Explorer**: `https://testnet.u2uscan.xyz`
+
+#### **Core Contracts**
+- **SafeNest Platform**: `0xD2972808ffEd601182C69b972cF14d4F552d06B5`
+- **SAFE Token**: `0xd517b427C0D799EcE58CF8eD7323620001A496c5`
+- **Vault System**: `0x8D0B5052fCC57Ac7Ee95036FB64ef5c11590910b`
+
+#### **Micro-Savings Ecosystem**
+- **INCL Token**: `0x7e7EdCf617B79893043e92Cd47EAFb37686046dE`
+- **MicroSavings**: `0x3B170bEBf9eaF003Bdb230211fa914B8D540C65E`
+- **SimpleMicroSavings**: `0x3772E17C1E8e96194ddc7AfBbcE4aD1634cfc7Cf`
+
+#### **Community Pools**
+- **CommunityPools**: `0x256EF23ffc4091663a36054fc75d4a8127A35366`
+- **CommunityPoolsAdvanced**: `0x04C760FcBC8BA074AE0f3a2935CBbe8C26c8641a`
+
+### **Local Development (Hardhat)**
+- **Chain ID**: 31337
+- **RPC URL**: `http://localhost:8545`
+
 ## 🚀 Quickstart
 
 ### Prerequisites
@@ -172,12 +196,28 @@ yarn chain
 yarn deploy
 ```
 
-5. **Start frontend:**
+5. **Deploy to U2U Network:**
+```bash
+yarn deploy --network u2uNebulas
+```
+
+6. **Start frontend:**
 ```bash
 yarn start
 ```
 
 Visit your app at: `http://localhost:3000`
+
+### **Connect to U2U Network**
+1. Add U2U Network Nebulas to your wallet:
+   - **Network Name**: U2U Network Nebulas
+   - **RPC URL**: `https://rpc-nebulas-testnet.u2u.xyz`
+   - **Chain ID**: 2484
+   - **Currency Symbol**: U2U
+   - **Block Explorer**: `https://testnet.u2uscan.xyz`
+
+2. Get testnet U2U tokens from the U2U faucet
+3. Connect your wallet and start using SafeNest!
 
 ## 📁 Project Structure
 

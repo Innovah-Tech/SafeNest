@@ -233,7 +233,7 @@ contract VaultSystem {
     /**
      * Execute auto-deposit (called by user or automated system)
      */
-    function executeAutoDeposit(VaultType _vaultType) external validVaultType(_vaultType) hasVault(msg.sender, _vaultType) {
+    function executeAutoDeposit(VaultType _vaultType) external payable validVaultType(_vaultType) hasVault(msg.sender, _vaultType) {
         UserVault storage vault = userVaults[msg.sender][_vaultType];
         require(vault.autoDepositAmount > 0, "Auto-deposit not enabled");
         require(block.timestamp >= vault.nextAutoDeposit, "Auto-deposit not due yet");
@@ -375,9 +375,9 @@ contract VaultSystem {
      * Get vault details
      */
     function getVaultDetails(address _user, VaultType _vaultType) external view validVaultType(_vaultType) returns (
-        uint256 totalDeposited,
+        uint256 vaultTotalDeposited,
         uint256 currentBalance,
-        uint256 totalWithdrawn,
+        uint256 vaultTotalWithdrawn,
         uint256 yieldEarned,
         uint256 lastDepositTime,
         uint256 lastWithdrawalTime,

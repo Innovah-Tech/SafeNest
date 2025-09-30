@@ -1,0 +1,1649 @@
+{
+  "address": "0x8D0B5052fCC57Ac7Ee95036FB64ef5c11590910b",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_safeToken",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "frequency",
+          "type": "uint256"
+        }
+      ],
+      "name": "AutoDepositEnabled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "AutoDepositExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "DepositMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "EmergencyWithdrawal",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "claimAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "InsuranceClaimProcessed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "coverageAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "premiumRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "InsurancePolicyPurchased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "feature",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "PremiumAccessGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldFee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProtocolFeeUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "VaultCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithdrawalMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "YieldEarned",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "strategyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "apy",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "riskLevel",
+          "type": "uint256"
+        }
+      ],
+      "name": "YieldStrategyAdded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_strategyContract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_apy",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_riskLevel",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_minDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxDeposit",
+          "type": "uint256"
+        }
+      ],
+      "name": "addYieldStrategy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        }
+      ],
+      "name": "calculateYield",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "checkPremiumAccess",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        }
+      ],
+      "name": "createVault",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositToVault",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "emergencyIncentiveRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "emergencyWithdrawalFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_frequency",
+          "type": "uint256"
+        }
+      ],
+      "name": "enableAutoDeposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        }
+      ],
+      "name": "executeAutoDeposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPlatformStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_totalUsers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalDeposited",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalYieldEarned",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalInsurancePolicies",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_protocolFeeRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getVaultDetails",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "vaultTotalDeposited",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "vaultTotalWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "yieldEarned",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastDepositTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastWithdrawalTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "autoDepositAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "autoDepositFrequency",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "grantPremiumAccess",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "hasPremiumAccess",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "insurancePolicies",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "coverageAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "premiumRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "coverageStartTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "coverageEndTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "claimsCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalClaimsPaid",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "microSavingsYieldBoost",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextYieldStrategyId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pensionYieldBoost",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "platformName",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_claimAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "processInsuranceClaim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "protocolFeeRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_coverageAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "purchaseInsurance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "safeToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "setEmergencyWithdrawalFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newBoost",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMicroSavingsYieldBoost",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newBoost",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPensionYieldBoost",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setProtocolFeeRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalDeposited",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalInsurancePolicies",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalUsers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalWithdrawn",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalYieldEarned",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "name": "userVaults",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "vaultType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalDeposited",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastDepositTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastWithdrawalTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "yieldEarned",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "autoDepositAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "autoDepositFrequency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nextAutoDeposit",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum VaultSystem.VaultType",
+          "name": "_vaultType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawFromVault",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawPlatformFees",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "yieldStrategies",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "strategyContract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "apy",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "riskLevel",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalDeposited",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "transactionHash": "0x9e1d5a2eef1c797a3e34164115165377e89a02748080622c5cc77ba6971a2a51",
+  "receipt": {
+    "to": null,
+    "from": "0xA889121299B61D09A75088CEc84D4Fc2E76D2ed7",
+    "contractAddress": "0x8D0B5052fCC57Ac7Ee95036FB64ef5c11590910b",
+    "transactionIndex": 0,
+    "gasUsed": "2328539",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x0002ccd0000005ac43ad8a28ceb6f1d0d63d9e43f57227f0aa8c8720e762045c",
+    "transactionHash": "0x9e1d5a2eef1c797a3e34164115165377e89a02748080622c5cc77ba6971a2a51",
+    "logs": [],
+    "blockNumber": 60317167,
+    "cumulativeGasUsed": "2328539",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xd517b427C0D799EcE58CF8eD7323620001A496c5"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "0ada7a5da3d26f26d8ea40f0e25e5925",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_safeToken\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"frequency\",\"type\":\"uint256\"}],\"name\":\"AutoDepositEnabled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AutoDepositExecuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"DepositMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"EmergencyWithdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"claimAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"InsuranceClaimProcessed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"coverageAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"premiumRate\",\"type\":\"uint256\"}],\"name\":\"InsurancePolicyPurchased\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"feature\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"PremiumAccessGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"VaultCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"WithdrawalMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"YieldEarned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"strategyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"apy\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"riskLevel\",\"type\":\"uint256\"}],\"name\":\"YieldStrategyAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_strategyContract\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_apy\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_riskLevel\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_minDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxDeposit\",\"type\":\"uint256\"}],\"name\":\"addYieldStrategy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"},{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"}],\"name\":\"calculateYield\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"checkPremiumAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"}],\"name\":\"createVault\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"depositToVault\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyIncentiveRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyWithdrawalFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_frequency\",\"type\":\"uint256\"}],\"name\":\"enableAutoDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"}],\"name\":\"executeAutoDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPlatformStats\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_totalUsers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalDeposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalWithdrawn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalYieldEarned\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalInsurancePolicies\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_protocolFeeRate\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"},{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"}],\"name\":\"getVaultDetails\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"vaultTotalDeposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"vaultTotalWithdrawn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"yieldEarned\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastDepositTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastWithdrawalTime\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"autoDepositAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"autoDepositFrequency\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"grantPremiumAccess\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"hasPremiumAccess\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"insurancePolicies\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"coverageAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"premiumRate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coverageStartTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"coverageEndTime\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"claimsCount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalClaimsPaid\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"microSavingsYieldBoost\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextYieldStrategyId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pensionYieldBoost\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"platformName\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_claimAmount\",\"type\":\"uint256\"}],\"name\":\"processInsuranceClaim\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_coverageAmount\",\"type\":\"uint256\"}],\"name\":\"purchaseInsurance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"safeToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newFee\",\"type\":\"uint256\"}],\"name\":\"setEmergencyWithdrawalFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newBoost\",\"type\":\"uint256\"}],\"name\":\"setMicroSavingsYieldBoost\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newBoost\",\"type\":\"uint256\"}],\"name\":\"setPensionYieldBoost\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newRate\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalDeposited\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalInsurancePolicies\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalUsers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalWithdrawn\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalYieldEarned\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"\",\"type\":\"uint8\"}],\"name\":\"userVaults\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"vaultType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"totalDeposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalWithdrawn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastDepositTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastWithdrawalTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"yieldEarned\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"autoDepositAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"autoDepositFrequency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nextAutoDeposit\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum VaultSystem.VaultType\",\"name\":\"_vaultType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawFromVault\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawPlatformFees\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"yieldStrategies\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"strategyContract\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"apy\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"riskLevel\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"minDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalDeposited\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"author\":\"SafeNest Team\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addYieldStrategy(string,address,uint256,uint256,uint256,uint256)\":{\"notice\":\"Add yield strategy\"},\"calculateYield(address,uint8)\":{\"notice\":\"Calculate and distribute yield\"},\"checkPremiumAccess(address)\":{\"notice\":\"Check premium access\"},\"createVault(uint8)\":{\"notice\":\"Create a new vault\"},\"depositToVault(uint8,uint256)\":{\"notice\":\"Make a deposit to vault\"},\"enableAutoDeposit(uint8,uint256,uint256)\":{\"notice\":\"Enable auto-deposit for vault\"},\"executeAutoDeposit(uint8)\":{\"notice\":\"Execute auto-deposit (called by user or automated system)\"},\"getPlatformStats()\":{\"notice\":\"Get platform statistics\"},\"getVaultDetails(address,uint8)\":{\"notice\":\"Get vault details\"},\"grantPremiumAccess(address)\":{\"notice\":\"Grant premium access (called by SAFE token contract)\"},\"processInsuranceClaim(uint256)\":{\"notice\":\"Process insurance claim\"},\"purchaseInsurance(uint256)\":{\"notice\":\"Purchase insurance policy\"},\"setProtocolFeeRate(uint256)\":{\"notice\":\"Admin functions\"},\"withdrawFromVault(uint8,uint256)\":{\"notice\":\"Withdraw from vault\"}},\"notice\":\"VaultSystem - Comprehensive vault system for SafeNest platform Implements micro-savings, pension nest, and emergency vaults\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/VaultSystem.sol\":\"VaultSystem\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/VaultSystem.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\r\\npragma solidity >=0.8.0 <0.9.0;\\r\\n\\r\\n/**\\r\\n * VaultSystem - Comprehensive vault system for SafeNest platform\\r\\n * Implements micro-savings, pension nest, and emergency vaults\\r\\n * @author SafeNest Team\\r\\n */\\r\\ncontract VaultSystem {\\r\\n    // State Variables\\r\\n    address public immutable owner;\\r\\n    address public safeToken;\\r\\n    string public platformName = \\\"SafeNest Vault System\\\";\\r\\n    \\r\\n    // Vault Types\\r\\n    enum VaultType {\\r\\n        MICRO_SAVINGS,    // Daily/weekly micro-savings\\r\\n        PENSION_NEST,     // Long-term retirement savings\\r\\n        EMERGENCY_VAULT   // Liquid emergency fund\\r\\n    }\\r\\n    \\r\\n    // User Vault Structure\\r\\n    struct UserVault {\\r\\n        address user;\\r\\n        VaultType vaultType;\\r\\n        uint256 totalDeposited;\\r\\n        uint256 currentBalance;\\r\\n        uint256 totalWithdrawn;\\r\\n        uint256 lastDepositTime;\\r\\n        uint256 lastWithdrawalTime;\\r\\n        uint256 yieldEarned;\\r\\n        bool isActive;\\r\\n        uint256 autoDepositAmount;\\r\\n        uint256 autoDepositFrequency; // in days\\r\\n        uint256 nextAutoDeposit;\\r\\n    }\\r\\n    \\r\\n    // Yield Strategy Structure\\r\\n    struct YieldStrategy {\\r\\n        uint256 id;\\r\\n        string name;\\r\\n        address strategyContract;\\r\\n        uint256 apy;\\r\\n        uint256 riskLevel; // 1=Low, 2=Medium, 3=High\\r\\n        bool isActive;\\r\\n        uint256 minDeposit;\\r\\n        uint256 maxDeposit;\\r\\n        uint256 totalDeposited;\\r\\n    }\\r\\n    \\r\\n    // Insurance Policy Structure\\r\\n    struct InsurancePolicy {\\r\\n        address user;\\r\\n        uint256 coverageAmount;\\r\\n        uint256 premiumRate;\\r\\n        uint256 coverageStartTime;\\r\\n        uint256 coverageEndTime;\\r\\n        bool isActive;\\r\\n        uint256 claimsCount;\\r\\n        uint256 totalClaimsPaid;\\r\\n    }\\r\\n    \\r\\n    // Mappings\\r\\n    mapping(address => mapping(VaultType => UserVault)) public userVaults;\\r\\n    mapping(uint256 => YieldStrategy) public yieldStrategies;\\r\\n    mapping(address => InsurancePolicy) public insurancePolicies;\\r\\n    mapping(address => bool) public hasPremiumAccess;\\r\\n    \\r\\n    // Platform Statistics\\r\\n    uint256 public totalUsers = 0;\\r\\n    uint256 public totalDeposited = 0;\\r\\n    uint256 public totalWithdrawn = 0;\\r\\n    uint256 public totalYieldEarned = 0;\\r\\n    uint256 public totalInsurancePolicies = 0;\\r\\n    \\r\\n    // Platform Parameters\\r\\n    uint256 public protocolFeeRate = 20; // 0.2% in basis points\\r\\n    uint256 public emergencyWithdrawalFee = 50; // 0.5%\\r\\n    uint256 public pensionYieldBoost = 200; // 2%\\r\\n    uint256 public microSavingsYieldBoost = 100; // 1%\\r\\n    uint256 public emergencyIncentiveRate = 25; // 0.25%\\r\\n    \\r\\n    // Counters\\r\\n    uint256 public nextYieldStrategyId = 1;\\r\\n    \\r\\n    // Events\\r\\n    event VaultCreated(address indexed user, VaultType vaultType, uint256 timestamp);\\r\\n    event DepositMade(address indexed user, VaultType vaultType, uint256 amount, uint256 timestamp);\\r\\n    event WithdrawalMade(address indexed user, VaultType vaultType, uint256 amount, uint256 fee, uint256 timestamp);\\r\\n    event AutoDepositEnabled(address indexed user, VaultType vaultType, uint256 amount, uint256 frequency);\\r\\n    event AutoDepositExecuted(address indexed user, VaultType vaultType, uint256 amount, uint256 timestamp);\\r\\n    event YieldStrategyAdded(uint256 indexed strategyId, string name, uint256 apy, uint256 riskLevel);\\r\\n    event YieldEarned(address indexed user, VaultType vaultType, uint256 amount, uint256 timestamp);\\r\\n    event InsurancePolicyPurchased(address indexed user, uint256 coverageAmount, uint256 premiumRate);\\r\\n    event InsuranceClaimProcessed(address indexed user, uint256 claimAmount, uint256 timestamp);\\r\\n    event PremiumAccessGranted(address indexed user, string feature, uint256 timestamp);\\r\\n    event ProtocolFeeUpdated(uint256 oldFee, uint256 newFee);\\r\\n    event EmergencyWithdrawal(address indexed user, uint256 amount, uint256 fee, uint256 timestamp);\\r\\n    \\r\\n    // Modifiers\\r\\n    modifier onlyOwner() {\\r\\n        require(msg.sender == owner, \\\"Not the owner\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier validVaultType(VaultType _vaultType) {\\r\\n        require(_vaultType >= VaultType.MICRO_SAVINGS && _vaultType <= VaultType.EMERGENCY_VAULT, \\\"Invalid vault type\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier validAmount(uint256 _amount) {\\r\\n        require(_amount > 0, \\\"Amount must be greater than 0\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier hasVault(address _user, VaultType _vaultType) {\\r\\n        require(userVaults[_user][_vaultType].isActive, \\\"Vault not active\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    // Constructor\\r\\n    constructor(address _safeToken) {\\r\\n        owner = msg.sender;\\r\\n        safeToken = _safeToken;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Create a new vault\\r\\n     */\\r\\n    function createVault(VaultType _vaultType) external validVaultType(_vaultType) {\\r\\n        require(!userVaults[msg.sender][_vaultType].isActive, \\\"Vault already exists\\\");\\r\\n        \\r\\n        userVaults[msg.sender][_vaultType] = UserVault({\\r\\n            user: msg.sender,\\r\\n            vaultType: _vaultType,\\r\\n            totalDeposited: 0,\\r\\n            currentBalance: 0,\\r\\n            totalWithdrawn: 0,\\r\\n            lastDepositTime: 0,\\r\\n            lastWithdrawalTime: 0,\\r\\n            yieldEarned: 0,\\r\\n            isActive: true,\\r\\n            autoDepositAmount: 0,\\r\\n            autoDepositFrequency: 0,\\r\\n            nextAutoDeposit: 0\\r\\n        });\\r\\n        \\r\\n        totalUsers++;\\r\\n        \\r\\n        emit VaultCreated(msg.sender, _vaultType, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Make a deposit to vault\\r\\n     */\\r\\n    function depositToVault(VaultType _vaultType, uint256 _amount) external validVaultType(_vaultType) validAmount(_amount) payable {\\r\\n        require(userVaults[msg.sender][_vaultType].isActive, \\\"Vault not active\\\");\\r\\n        require(msg.value >= _amount, \\\"Insufficient ETH sent\\\");\\r\\n        \\r\\n        UserVault storage vault = userVaults[msg.sender][_vaultType];\\r\\n        \\r\\n        // Apply vault-specific logic\\r\\n        if (_vaultType == VaultType.MICRO_SAVINGS) {\\r\\n            require(_amount >= 0.001 ether, \\\"Minimum deposit for micro-savings is 0.001 ETH\\\");\\r\\n        } else if (_vaultType == VaultType.PENSION_NEST) {\\r\\n            require(_amount >= 0.01 ether, \\\"Minimum deposit for pension nest is 0.01 ETH\\\");\\r\\n        } else if (_vaultType == VaultType.EMERGENCY_VAULT) {\\r\\n            require(_amount >= 0.005 ether, \\\"Minimum deposit for emergency vault is 0.005 ETH\\\");\\r\\n        }\\r\\n        \\r\\n        vault.totalDeposited += _amount;\\r\\n        vault.currentBalance += _amount;\\r\\n        vault.lastDepositTime = block.timestamp;\\r\\n        \\r\\n        totalDeposited += _amount;\\r\\n        \\r\\n        emit DepositMade(msg.sender, _vaultType, _amount, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Withdraw from vault\\r\\n     */\\r\\n    function withdrawFromVault(VaultType _vaultType, uint256 _amount) external validVaultType(_vaultType) validAmount(_amount) hasVault(msg.sender, _vaultType) {\\r\\n        UserVault storage vault = userVaults[msg.sender][_vaultType];\\r\\n        require(vault.currentBalance >= _amount, \\\"Insufficient balance\\\");\\r\\n        \\r\\n        uint256 fee = 0;\\r\\n        \\r\\n        // Apply vault-specific withdrawal logic\\r\\n        if (_vaultType == VaultType.EMERGENCY_VAULT) {\\r\\n            // Emergency vault has instant withdrawal with small fee\\r\\n            fee = (_amount * emergencyWithdrawalFee) / 10000;\\r\\n        } else if (_vaultType == VaultType.PENSION_NEST) {\\r\\n            // Pension nest has time-locked withdrawals\\r\\n            require(block.timestamp >= vault.lastDepositTime + 365 days, \\\"Pension withdrawals locked for 1 year\\\");\\r\\n        }\\r\\n        \\r\\n        uint256 netAmount = _amount - fee;\\r\\n        \\r\\n        vault.currentBalance -= _amount;\\r\\n        vault.totalWithdrawn += _amount;\\r\\n        vault.lastWithdrawalTime = block.timestamp;\\r\\n        \\r\\n        totalWithdrawn += _amount;\\r\\n        \\r\\n        // Transfer funds to user\\r\\n        (bool success, ) = msg.sender.call{value: netAmount}(\\\"\\\");\\r\\n        require(success, \\\"Transfer failed\\\");\\r\\n        \\r\\n        emit WithdrawalMade(msg.sender, _vaultType, _amount, fee, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Enable auto-deposit for vault\\r\\n     */\\r\\n    function enableAutoDeposit(\\r\\n        VaultType _vaultType,\\r\\n        uint256 _amount,\\r\\n        uint256 _frequency\\r\\n    ) external validVaultType(_vaultType) hasVault(msg.sender, _vaultType) {\\r\\n        require(_amount > 0, \\\"Auto-deposit amount must be positive\\\");\\r\\n        require(_frequency >= 1, \\\"Frequency must be at least 1 day\\\");\\r\\n        require(_frequency <= 365, \\\"Frequency cannot exceed 1 year\\\");\\r\\n        \\r\\n        UserVault storage vault = userVaults[msg.sender][_vaultType];\\r\\n        vault.autoDepositAmount = _amount;\\r\\n        vault.autoDepositFrequency = _frequency;\\r\\n        vault.nextAutoDeposit = block.timestamp + _frequency * 1 days;\\r\\n        \\r\\n        emit AutoDepositEnabled(msg.sender, _vaultType, _amount, _frequency);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Execute auto-deposit (called by user or automated system)\\r\\n     */\\r\\n    function executeAutoDeposit(VaultType _vaultType) external payable validVaultType(_vaultType) hasVault(msg.sender, _vaultType) {\\r\\n        UserVault storage vault = userVaults[msg.sender][_vaultType];\\r\\n        require(vault.autoDepositAmount > 0, \\\"Auto-deposit not enabled\\\");\\r\\n        require(block.timestamp >= vault.nextAutoDeposit, \\\"Auto-deposit not due yet\\\");\\r\\n        require(msg.value >= vault.autoDepositAmount, \\\"Insufficient ETH for auto-deposit\\\");\\r\\n        \\r\\n        vault.totalDeposited += vault.autoDepositAmount;\\r\\n        vault.currentBalance += vault.autoDepositAmount;\\r\\n        vault.lastDepositTime = block.timestamp;\\r\\n        vault.nextAutoDeposit = block.timestamp + vault.autoDepositFrequency * 1 days;\\r\\n        \\r\\n        totalDeposited += vault.autoDepositAmount;\\r\\n        \\r\\n        emit AutoDepositExecuted(msg.sender, _vaultType, vault.autoDepositAmount, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Add yield strategy\\r\\n     */\\r\\n    function addYieldStrategy(\\r\\n        string memory _name,\\r\\n        address _strategyContract,\\r\\n        uint256 _apy,\\r\\n        uint256 _riskLevel,\\r\\n        uint256 _minDeposit,\\r\\n        uint256 _maxDeposit\\r\\n    ) external onlyOwner {\\r\\n        require(_apy > 0, \\\"APY must be positive\\\");\\r\\n        require(_riskLevel >= 1 && _riskLevel <= 3, \\\"Risk level must be 1-3\\\");\\r\\n        require(_minDeposit > 0, \\\"Minimum deposit must be positive\\\");\\r\\n        \\r\\n        yieldStrategies[nextYieldStrategyId] = YieldStrategy({\\r\\n            id: nextYieldStrategyId,\\r\\n            name: _name,\\r\\n            strategyContract: _strategyContract,\\r\\n            apy: _apy,\\r\\n            riskLevel: _riskLevel,\\r\\n            isActive: true,\\r\\n            minDeposit: _minDeposit,\\r\\n            maxDeposit: _maxDeposit,\\r\\n            totalDeposited: 0\\r\\n        });\\r\\n        \\r\\n        emit YieldStrategyAdded(nextYieldStrategyId, _name, _apy, _riskLevel);\\r\\n        nextYieldStrategyId++;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Calculate and distribute yield\\r\\n     */\\r\\n    function calculateYield(address _user, VaultType _vaultType) external validVaultType(_vaultType) hasVault(_user, _vaultType) {\\r\\n        UserVault storage vault = userVaults[_user][_vaultType];\\r\\n        require(vault.currentBalance > 0, \\\"No balance to calculate yield\\\");\\r\\n        \\r\\n        // Calculate yield based on vault type and strategy\\r\\n        uint256 baseYield = 0;\\r\\n        uint256 yieldBoost = 0;\\r\\n        \\r\\n        if (_vaultType == VaultType.MICRO_SAVINGS) {\\r\\n            baseYield = (vault.currentBalance * 300) / 10000; // 3% base APY\\r\\n            yieldBoost = (vault.currentBalance * microSavingsYieldBoost) / 10000; // 1% boost\\r\\n        } else if (_vaultType == VaultType.PENSION_NEST) {\\r\\n            baseYield = (vault.currentBalance * 500) / 10000; // 5% base APY\\r\\n            yieldBoost = (vault.currentBalance * pensionYieldBoost) / 10000; // 2% boost\\r\\n        } else if (_vaultType == VaultType.EMERGENCY_VAULT) {\\r\\n            baseYield = (vault.currentBalance * 200) / 10000; // 2% base APY\\r\\n            yieldBoost = (vault.currentBalance * emergencyIncentiveRate) / 10000; // 0.25% boost\\r\\n        }\\r\\n        \\r\\n        uint256 totalYield = baseYield + yieldBoost;\\r\\n        uint256 protocolFee = (totalYield * protocolFeeRate) / 10000;\\r\\n        uint256 netYield = totalYield - protocolFee;\\r\\n        \\r\\n        vault.currentBalance += netYield;\\r\\n        vault.yieldEarned += netYield;\\r\\n        totalYieldEarned += netYield;\\r\\n        \\r\\n        emit YieldEarned(_user, _vaultType, netYield, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Purchase insurance policy\\r\\n     */\\r\\n    function purchaseInsurance(uint256 _coverageAmount) external validAmount(_coverageAmount) {\\r\\n        require(!insurancePolicies[msg.sender].isActive, \\\"Insurance already active\\\");\\r\\n        \\r\\n        insurancePolicies[msg.sender] = InsurancePolicy({\\r\\n            user: msg.sender,\\r\\n            coverageAmount: _coverageAmount,\\r\\n            premiumRate: 10, // 0.1% premium\\r\\n            coverageStartTime: block.timestamp,\\r\\n            coverageEndTime: block.timestamp + 365 days,\\r\\n            isActive: true,\\r\\n            claimsCount: 0,\\r\\n            totalClaimsPaid: 0\\r\\n        });\\r\\n        \\r\\n        totalInsurancePolicies++;\\r\\n        \\r\\n        emit InsurancePolicyPurchased(msg.sender, _coverageAmount, 10);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Process insurance claim\\r\\n     */\\r\\n    function processInsuranceClaim(uint256 _claimAmount) external {\\r\\n        InsurancePolicy storage policy = insurancePolicies[msg.sender];\\r\\n        require(policy.isActive, \\\"No active insurance policy\\\");\\r\\n        require(block.timestamp <= policy.coverageEndTime, \\\"Insurance expired\\\");\\r\\n        require(_claimAmount <= policy.coverageAmount, \\\"Claim exceeds coverage\\\");\\r\\n        \\r\\n        policy.claimsCount++;\\r\\n        policy.totalClaimsPaid += _claimAmount;\\r\\n        \\r\\n        // Transfer claim amount to user\\r\\n        (bool success, ) = msg.sender.call{value: _claimAmount}(\\\"\\\");\\r\\n        require(success, \\\"Transfer failed\\\");\\r\\n        \\r\\n        emit InsuranceClaimProcessed(msg.sender, _claimAmount, block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Check premium access\\r\\n     */\\r\\n    function checkPremiumAccess(address _user) external view returns (bool) {\\r\\n        return hasPremiumAccess[_user];\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Grant premium access (called by SAFE token contract)\\r\\n     */\\r\\n    function grantPremiumAccess(address _user) external {\\r\\n        require(msg.sender == safeToken, \\\"Only SAFE token can grant premium access\\\");\\r\\n        hasPremiumAccess[_user] = true;\\r\\n        \\r\\n        emit PremiumAccessGranted(_user, \\\"Premium Vault Access\\\", block.timestamp);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get vault details\\r\\n     */\\r\\n    function getVaultDetails(address _user, VaultType _vaultType) external view validVaultType(_vaultType) returns (\\r\\n        uint256 vaultTotalDeposited,\\r\\n        uint256 currentBalance,\\r\\n        uint256 vaultTotalWithdrawn,\\r\\n        uint256 yieldEarned,\\r\\n        uint256 lastDepositTime,\\r\\n        uint256 lastWithdrawalTime,\\r\\n        bool isActive,\\r\\n        uint256 autoDepositAmount,\\r\\n        uint256 autoDepositFrequency\\r\\n    ) {\\r\\n        UserVault memory vault = userVaults[_user][_vaultType];\\r\\n        return (\\r\\n            vault.totalDeposited,\\r\\n            vault.currentBalance,\\r\\n            vault.totalWithdrawn,\\r\\n            vault.yieldEarned,\\r\\n            vault.lastDepositTime,\\r\\n            vault.lastWithdrawalTime,\\r\\n            vault.isActive,\\r\\n            vault.autoDepositAmount,\\r\\n            vault.autoDepositFrequency\\r\\n        );\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get platform statistics\\r\\n     */\\r\\n    function getPlatformStats() external view returns (\\r\\n        uint256 _totalUsers,\\r\\n        uint256 _totalDeposited,\\r\\n        uint256 _totalWithdrawn,\\r\\n        uint256 _totalYieldEarned,\\r\\n        uint256 _totalInsurancePolicies,\\r\\n        uint256 _protocolFeeRate\\r\\n    ) {\\r\\n        return (\\r\\n            totalUsers,\\r\\n            totalDeposited,\\r\\n            totalWithdrawn,\\r\\n            totalYieldEarned,\\r\\n            totalInsurancePolicies,\\r\\n            protocolFeeRate\\r\\n        );\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Admin functions\\r\\n     */\\r\\n    function setProtocolFeeRate(uint256 _newRate) external onlyOwner {\\r\\n        require(_newRate >= 10 && _newRate <= 30, \\\"Fee rate must be between 0.1% and 0.3%\\\");\\r\\n        uint256 oldRate = protocolFeeRate;\\r\\n        protocolFeeRate = _newRate;\\r\\n        emit ProtocolFeeUpdated(oldRate, _newRate);\\r\\n    }\\r\\n    \\r\\n    function setEmergencyWithdrawalFee(uint256 _newFee) external onlyOwner {\\r\\n        require(_newFee <= 100, \\\"Fee cannot exceed 1%\\\");\\r\\n        emergencyWithdrawalFee = _newFee;\\r\\n    }\\r\\n    \\r\\n    function setPensionYieldBoost(uint256 _newBoost) external onlyOwner {\\r\\n        require(_newBoost <= 500, \\\"Boost cannot exceed 5%\\\");\\r\\n        pensionYieldBoost = _newBoost;\\r\\n    }\\r\\n    \\r\\n    function setMicroSavingsYieldBoost(uint256 _newBoost) external onlyOwner {\\r\\n        require(_newBoost <= 200, \\\"Boost cannot exceed 2%\\\");\\r\\n        microSavingsYieldBoost = _newBoost;\\r\\n    }\\r\\n    \\r\\n    function withdrawPlatformFees() external onlyOwner {\\r\\n        uint256 balance = address(this).balance;\\r\\n        require(balance > 0, \\\"No fees to withdraw\\\");\\r\\n        \\r\\n        (bool success, ) = owner.call{value: balance}(\\\"\\\");\\r\\n        require(success, \\\"Failed to withdraw fees\\\");\\r\\n    }\\r\\n    \\r\\n    receive() external payable {}\\r\\n}\\r\\n\",\"keccak256\":\"0x5bdb09f9453f6f633cc0b9c11322d7b86d99362e14fceae1ee37e749a1d4d400\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a0346200018257601f6200263b38819003918201601f19168301916001600160401b0383118484101762000187578084926020946040528339810103126200018257516001600160a01b038116908190036200018257600180548181811c9116801562000177575b60208210146200016157601f81116200012f575b50602a7f536166654e657374205661756c742053797374656d000000000000000000000001815560006006556000600755600060085560006009556000600a556014600b556032600c5560c8600d556064600e556019600f556010553360805260018060a01b0319600054161760005560405161249d90816200019e8239608051818181610515015281816108890152818161097701528181610d30015281816110080152818161109701526114080152f35b8160005281601f6020600020920160051c8201915b828110620001545750506200007c565b6000815501829062000144565b634e487b7160e01b600052602260045260246000fd5b90607f169062000068565b600080fd5b634e487b7160e01b600052604160045260246000fdfe608080604052600436101561001d575b50361561001b57600080fd5b005b60003560e01c90816308520b86146120f3575080630ccb091d14611fb4578063132fa15414611dab578063136d888314611d635780632305ae9d14611d455780633b291c0114611cb65780633d6638ab14611b4c57806347bedcfd14611b2e5780634b31971314611b105780634b3fd05a14611ae75780634ec6d56a146118ff5780635019b8fe146118e157806358f85880146118c357806360598476146117aa5780637b303a821461138357806380f9b6a0146110c65780638da5cb5b146110815780639f255ec014610fee578063a5f115f314610e24578063a67e12a814610837578063aa6eaca914610e06578063b13aa2d614610d16578063bfb866d714610af5578063bff1f9e114610ad7578063caa9628e14610a0f578063cc009679146109f1578063ce62eed71461095d578063d0b7830b14610876578063d527da9c14610837578063d721fe0214610754578063e5290c2514610736578063e64e45881461058c578063eacfb366146104fb578063ec5a2658146102ce578063f0e77ec5146101d95763ff50abdc146101b6573861000f565b346101d45760003660031901126101d4576020600754604051908152f35b600080fd5b346101d45760203660031901126101d4576101f26121c7565b6000546001600160a01b0391908216330361027857168060005260056020526040600020600160ff198254161790557fdff20926eded5216479291525322da280f3218868239fb0877a38a54ddaabfe860806040516040815260146040820152735072656d69756d205661756c742041636365737360601b6060820152426020820152a2005b60405162461bcd60e51b815260206004820152602860248201527f4f6e6c79205341464520746f6b656e2063616e206772616e74207072656d69756044820152676d2061636365737360c01b6064820152608490fd5b346101d4576102dc36612228565b60038210156104e5576102f2600283111561226c565b6102fd8115156122c8565b33600052600260205261032360ff600761031b856040600020612247565b015416612314565b33600052600260205261033a826040600020612247565b9060028201918254908282106104a9576000600286036104035750600080806103be94819461271061036e600c548a61237d565b04985b6103858961037f8c82612390565b94612390565b905560038101610396898254612353565b90556005429101556103aa87600854612353565b600855335af16103b861239d565b506123cd565b6103cb604051809461225f565b602083015260408201524260608201527f3010dc1dcfd46b07fa4887759aa726f28741cdcba20e256d7b4f93bfa9c0509460803392a2005b9360018693929314610420575b60008080936103be958294610371565b9060048301546301e1338081018091116104935742106104405790610410565b60405162461bcd60e51b815260206004820152602560248201527f50656e73696f6e207769746864726177616c73206c6f636b656420666f722031604482015264103cb2b0b960d91b6064820152608490fd5b634e487b7160e01b600052601160045260246000fd5b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b634e487b7160e01b600052602160045260246000fd5b346101d45760203660031901126101d457600435610543337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6064811161055057600c55005b60405162461bcd60e51b81526020600482015260146024820152734665652063616e6e6f742065786365656420312560601b6044820152606490fd5b346101d4576020806003193601126101d457600435906105ad8215156122c8565b336000526004815260ff600560406000200154166106f2576301e1338042019081421161049357604051610100810181811067ffffffffffffffff8211176106dc57600a9360079160405233835283830190868252610695604085019187835260608601904282526080870190815260a08701916001835260c08801946000865260e0890196600088523360005260048b5260406000209960018060a01b039051166bffffffffffffffffffffffff60a01b8b5416178a555160018a0155516002890155516003880155516004870155511515600586019060ff801983541691151516179055565b516006840155519101556106a982546122b9565b82556040519283528201527f1e269f8de238221324da7f673245a913eae94eb3574ef6e4158e18202599ae4160403392a2005b634e487b7160e01b600052604160045260246000fd5b6064906040519062461bcd60e51b82526004820152601860248201527f496e737572616e636520616c72656164792061637469766500000000000000006044820152fd5b346101d45760003660031901126101d4576020600e54604051908152f35b346101d45760003660031901126101d457604051600060018054906107788261210e565b8085529181811690811561081057506001146107b7575b6107b38461079f81860382612165565b604051918291602083526020830190612187565b0390f35b600081815292507fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf65b8284106107f857505050810160200161079f8261078f565b805460208587018101919091529093019281016107e0565b60ff191660208087019190915292151560051b8501909201925061079f915083905061078f565b346101d45760203660031901126101d4576001600160a01b036108586121c7565b166000526005602052602060ff604060002054166040519015158152f35b346101d45760003660031901126101d4577f00000000000000000000000000000000000000000000000000000000000000006108bc336001600160a01b0383161461240b565b4790811561092257600080809381935af16108d561239d565b50156108dd57005b60405162461bcd60e51b815260206004820152601760248201527f4661696c656420746f20776974686472617720666565730000000000000000006044820152606490fd5b60405162461bcd60e51b81526020600482015260136024820152724e6f206665657320746f20776974686472617760681b6044820152606490fd5b346101d45760203660031901126101d4576004356109a5337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6101f481116109b357600d55005b60405162461bcd60e51b8152602060048201526016602482015275426f6f73742063616e6e6f742065786365656420352560501b6044820152606490fd5b346101d45760003660031901126101d4576020600954604051908152f35b346101d457610180610a44610a23366121dd565b6001600160a01b039182166000908152600260205260409020919291612247565b805490600181015460028201546003830154600484015460058501549060068601549260ff60078801541694600888015496610a9d600a60098b01549a01549a60ff60206040519e8f9084168152019160a01c1661225f565b60408b015260608a0152608089015260a088015260c087015260e08601521515610100850152610120840152610140830152610160820152f35b346101d45760003660031901126101d4576020600654604051908152f35b346101d457610b03366121dd565b9060038210156104e557610b1a600283111561226c565b60018060a01b031690816000526002602052610b4160ff600761031b846040600020612247565b816000526002602052610b58816040600020612247565b9060028201918254908115610cd15760008084610c0b57505061012c82029061012b19838304016104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610bb2600e548a61237d565b0490612353565b612710610bc8600b548361237d565b0490612390565b8095612353565b905501610be4828254612353565b9055610bf281600954612353565b600955610c06604051928392429184612360565b0390a2005b60018503610c565750506101f48202906101f319838304016104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610bb2600d548a61237d565b60028514610c82575b94610bd6610bcf610bb96006959460008051602061244883398151915299612353565b505060c882029082820460c8036104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610cc2600f548a61237d565b04959650939850505050610c5f565b60405162461bcd60e51b815260206004820152601d60248201527f4e6f2062616c616e636520746f2063616c63756c617465207969656c640000006044820152606490fd5b346101d45760203660031901126101d457600435610d5e337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b600a81101580610dfb575b15610da75760407fb404cac19fb1cbeff98d325795b08886e3cd8fe8cb1a2f193aac66f13fb239c391600b549080600b5582519182526020820152a1005b60405162461bcd60e51b815260206004820152602660248201527f4665652072617465206d757374206265206265747765656e20302e312520616e6044820152656420302e332560d01b6064820152608490fd5b50601e811115610d69565b346101d45760003660031901126101d4576020600f54604051908152f35b346101d45760603660031901126101d45760043560038110156101d4576024906044358235610e56600284111561226c565b33600052602060028152610e7560ff600761031b876040600020612247565b8115610f9f5760018310610f5d5761016d8311610f1a576002903360005252610ea2836040600020612247565b8160088201558260098201556201518094858402958487041484151715610f065750600a610ef27f35bd5bc32b2e6b680c38adefc0f912a951880e864ec9b760d709b6bdb34b9396959642612353565b910155610c06604051928392339684612360565b634e487b7160e01b60009081526011600452fd5b606490601e866040519262461bcd60e51b845260048401528201527f4672657175656e63792063616e6e6f74206578636565642031207965617200006044820152fd5b846064916040519162461bcd60e51b83528160048401528201527f4672657175656e6379206d757374206265206174206c656173742031206461796044820152fd5b608490856040519162461bcd60e51b83526004830152808201527f4175746f2d6465706f73697420616d6f756e74206d75737420626520706f73696044820152637469766560e01b6064820152fd5b346101d45760203660031901126101d457600435611036337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b60c8811161104357600e55005b60405162461bcd60e51b8152602060048201526016602482015275426f6f73742063616e6e6f742065786365656420322560501b6044820152606490fd5b346101d45760003660031901126101d4576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b6110cf36612228565b9060038110156104e5576110e6600282111561226c565b6110f18215156122c8565b3360005260206002815261111060ff600761031b856040600020612247565b82341061134757336000526002815261112d826040600020612247565b908261120b5766038d7ea4c6800084106111b057507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c06915b60018101611178868254612353565b905560028101611189868254612353565b905560044291015561119d84600754612353565b6007556040519182913395429184612360565b6084906040519062461bcd60e51b82526004820152602e60248201527f4d696e696d756d206465706f73697420666f72206d6963726f2d736176696e6760448201526d0e640d2e640605c606062408aa8960931b6064820152fd5b600183036112a657662386f26fc10000841061124d57507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c0691611169565b6084906040519062461bcd60e51b82526004820152602c60248201527f4d696e696d756d206465706f73697420666f722070656e73696f6e206e65737460448201526b040d2e640605c6062408aa8960a31b6064820152fd5b600283146112db575b507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c0691611169565b6611c37937e080008410156112af576084906040519062461bcd60e51b82526004820152603060248201527f4d696e696d756d206465706f73697420666f7220656d657267656e637920766160448201526f0ead8e840d2e640605c60606a408aa8960831b6064820152fd5b6064906040519062461bcd60e51b825260048201526015602482015274125b9cdd59999a58da595b9d08115512081cd95b9d605a1b6044820152fd5b346101d45760c03660031901126101d45760043567ffffffffffffffff81116101d457366023820112156101d45780600401356113bf8161220c565b916113cd6040519384612165565b81835236602483830101116101d457816000926024602093018386013783010152602435906001600160a01b03821682036101d457611436337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6044351561176e576001606435101580611761575b1561172357608435156116df57601054604051928361012081011067ffffffffffffffff610120860111176106dc57610120840160405281845282602085015260018060a01b0316604084015260443560608401526064356080840152600160a084015260843560c084015260a43560e084015260006101008401526000526003602052604060002082518155602083015192835167ffffffffffffffff81116106dc576114fc600184015461210e565b601f8111611698575b506020601f821160011461161b576115f3949392826008936101009361160b99600092611610575b50508160011b916000199060031b1c19161760018501555b6002840160018060a01b036040830151166bffffffffffffffffffffffff60a01b825416179055606081015160038501556080810151600485015561159f60a08201511515600586019060ff801983541691151516179055565b60c0810151600685015560e0810151600785015501519101557fe056bc3c69cf375f5d6a9360d558211a615a35f6136dc2f64155265de8f088f5601054928392604051918291606083526060830190612187565b604435602083015260643560408301520390a26122b9565b601055005b01519050898061152d565b6001840160005260206000209560005b601f198416811061168057509260018361160b98610100946115f3999897600897601f19811610611667575b505050811b016001850155611545565b015160001960f88460031b161c19169055898080611657565b8282015188556001909701966020928301920161162b565b600184016000526020600020601f830160051c8101602084106116d8575b601f830160051c820181106116cc575050611505565b600081556001016116b6565b50806116b6565b606460405162461bcd60e51b815260206004820152602060248201527f4d696e696d756d206465706f736974206d75737420626520706f7369746976656044820152fd5b60405162461bcd60e51b81526020600482015260166024820152755269736b206c6576656c206d75737420626520312d3360501b6044820152606490fd5b506003606435111561144b565b60405162461bcd60e51b8152602060048201526014602482015273415059206d75737420626520706f73697469766560601b6044820152606490fd5b346101d4576117b8366121dd565b60038110156104e557806117d260026117f093111561226c565b6001600160a01b039283166000908152600260205260409020612247565b61181660ff6040519361180285612148565b8354908116855260a01c16602084016122ad565b600181015490816040840152600281015480606085015260038201549081608086015260048301548060a087015260058401548060c08801526006850154918260e089015260ff6007870154161515926101009584878b01526008880154956101209a878c820152610160600a60098c01549b8c6101408501520154910152604051998a5260208a015260408901526060880152608087015260a086015260c085015260e0840152820152f35b346101d45760003660031901126101d4576020600b54604051908152f35b346101d45760003660031901126101d4576020600d54604051908152f35b6020806003193601126101d4576004359060038210156101d457611926600283111561226c565b336000526002815261194360ff600761031b856040600020612247565b3360005260028152611959826040600020612247565b90600882018054928315611aa257600a81019283544210611a5e57843410611a1057508060016009920161198e868254612353565b90556002810161199f868254612353565b905542600482015501546201518090818102918183041490151715610493577fd3f82c748fab5488f465415105b4e7b3bc2fd35d78dc407c07bc605d0a54c9d193610c06936119f16119fb9342612353565b9055600754612353565b60075554926040519182913395429184612360565b6084906040519062461bcd60e51b82526004820152602160248201527f496e73756666696369656e742045544820666f72206175746f2d6465706f73696044820152601d60fa1b6064820152fd5b6064906040519062461bcd60e51b82526004820152601860248201527f4175746f2d6465706f736974206e6f74206475652079657400000000000000006044820152fd5b60405162461bcd60e51b815260048101849052601860248201527f4175746f2d6465706f736974206e6f7420656e61626c656400000000000000006044820152606490fd5b346101d45760003660031901126101d4576000546040516001600160a01b039091168152602090f35b346101d45760003660031901126101d4576020600854604051908152f35b346101d45760003660031901126101d4576020600a54604051908152f35b346101d4576020806003193601126101d457600435903360005260048152604060002060ff60058201541615611c715760048101544211611c385760018101548311611bfa5780600660079201611ba381546122b9565b905501611bb1838254612353565b9055611bc7600080808086335af16103b861239d565b60405191825242908201527fc788b24a2670cb77dd3772810e8c99cf42096d9dd9559609beaf908ddd8c1e6260403392a2005b60405162461bcd60e51b8152600481018390526016602482015275436c61696d206578636565647320636f76657261676560501b6044820152606490fd5b60405162461bcd60e51b8152600481018390526011602482015270125b9cdd5c985b98d948195e1c1a5c9959607a1b6044820152606490fd5b60405162461bcd60e51b815260048101839052601a60248201527f4e6f2061637469766520696e737572616e636520706f6c6963790000000000006044820152606490fd5b346101d45760203660031901126101d4576101006001600160a01b0380611cdb6121c7565b166000526004602052604060002090815416906001810154906002810154600382015460048301549060ff6005850154169260076006860154950154956040519788526020880152604087015260608601526080850152151560a084015260c083015260e0820152f35b346101d45760003660031901126101d4576020601054604051908152f35b346101d45760003660031901126101d45760c0600654600754600854600954600a5491600b5493604051958652602086015260408501526060840152608083015260a0820152f35b346101d45760203660031901126101d457600360043510156101d457611dd66002600435111561226c565b33600052600260205260ff6007611df36004356040600020612247565b015416611f7857604051611e0681612148565b3381526020810190611e1a600435836122ad565b600060408201526000606082015260006080820152600060a0820152600060c0820152600060e08201526001610100820152600061012082015260006101408201526000610160820152336000526002602052611e7d6004356040600020612247565b9160018060a01b0382511691835491519160038310156104e5576001600160a81b03191690921760a091821b60ff60a01b16178355604082015160018401556060820151600284015560808201516003840155810151600483015560c0810151600583015560e0810151600683015561010081015160078301805491151560ff1660ff1992909216919091179055600a9061016090610120810151600885015561014081015160098501550151910155611f386006546122b9565b600655604051611f4a8160043561225f565b4260208201527f758b57cbf8ca2b01de52a91c196f7ba605bab57976e9108ad5d1dd3b1418451060403392a2005b60405162461bcd60e51b81526020600482015260146024820152735661756c7420616c72656164792065786973747360601b6044820152606490fd5b346101d4576020806003193601126101d457600435600052600381526040600020805490600183818301604051928391600091815491611ff38361210e565b808652928281169081156120d05750600114612091575b50505061201992500382612165565b60018060a01b03600283015416916003810154600482015460ff6005840154169060068401549261206660086007870154960154966040519a8b9a8b5261012080918c01528a0190612187565b96604089015260608801526080870152151560a086015260c085015260e08401526101008301520390f35b600090815285812095935091905b8183106120b8575088945050820101612019888061200a565b8554878401850152948501948694509183019161209f565b9250505061201994925060ff191682840152151560051b8201018692888061200a565b346101d45760003660031901126101d457602090600c548152f35b90600182811c9216801561213e575b602083101461212857565b634e487b7160e01b600052602260045260246000fd5b91607f169161211d565b610180810190811067ffffffffffffffff8211176106dc57604052565b90601f8019910116810190811067ffffffffffffffff8211176106dc57604052565b919082519283825260005b8481106121b3575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201612192565b600435906001600160a01b03821682036101d457565b60409060031901126101d4576004356001600160a01b03811681036101d4579060243560038110156101d45790565b67ffffffffffffffff81116106dc57601f01601f191660200190565b60409060031901126101d45760043560038110156101d4579060243590565b9060038110156104e557600052602052604060002090565b9060038210156104e55752565b1561227357565b60405162461bcd60e51b8152602060048201526012602482015271496e76616c6964207661756c74207479706560701b6044820152606490fd5b60038210156104e55752565b60001981146104935760010190565b156122cf57565b60405162461bcd60e51b815260206004820152601d60248201527f416d6f756e74206d7573742062652067726561746572207468616e20300000006044820152606490fd5b1561231b57565b60405162461bcd60e51b815260206004820152601060248201526f5661756c74206e6f742061637469766560801b6044820152606490fd5b9190820180921161049357565b60409194939261237482606081019761225f565b60208201520152565b8181029291811591840414171561049357565b9190820391821161049357565b3d156123c8573d906123ae8261220c565b916123bc6040519384612165565b82523d6000602084013e565b606090565b156123d457565b60405162461bcd60e51b815260206004820152600f60248201526e151c985b9cd9995c8819985a5b1959608a1b6044820152606490fd5b1561241257565b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fdfe20d1a75bd95bfc77c5b8320aec0b51e8dce14ca0909c6f73bfbe014fa41512faa264697066735822122056c7027dfa69fca6c10c42b5b65f97b09a095638ba0c7c713ee26fa3b7be322264736f6c63430008140033",
+  "deployedBytecode": "0x608080604052600436101561001d575b50361561001b57600080fd5b005b60003560e01c90816308520b86146120f3575080630ccb091d14611fb4578063132fa15414611dab578063136d888314611d635780632305ae9d14611d455780633b291c0114611cb65780633d6638ab14611b4c57806347bedcfd14611b2e5780634b31971314611b105780634b3fd05a14611ae75780634ec6d56a146118ff5780635019b8fe146118e157806358f85880146118c357806360598476146117aa5780637b303a821461138357806380f9b6a0146110c65780638da5cb5b146110815780639f255ec014610fee578063a5f115f314610e24578063a67e12a814610837578063aa6eaca914610e06578063b13aa2d614610d16578063bfb866d714610af5578063bff1f9e114610ad7578063caa9628e14610a0f578063cc009679146109f1578063ce62eed71461095d578063d0b7830b14610876578063d527da9c14610837578063d721fe0214610754578063e5290c2514610736578063e64e45881461058c578063eacfb366146104fb578063ec5a2658146102ce578063f0e77ec5146101d95763ff50abdc146101b6573861000f565b346101d45760003660031901126101d4576020600754604051908152f35b600080fd5b346101d45760203660031901126101d4576101f26121c7565b6000546001600160a01b0391908216330361027857168060005260056020526040600020600160ff198254161790557fdff20926eded5216479291525322da280f3218868239fb0877a38a54ddaabfe860806040516040815260146040820152735072656d69756d205661756c742041636365737360601b6060820152426020820152a2005b60405162461bcd60e51b815260206004820152602860248201527f4f6e6c79205341464520746f6b656e2063616e206772616e74207072656d69756044820152676d2061636365737360c01b6064820152608490fd5b346101d4576102dc36612228565b60038210156104e5576102f2600283111561226c565b6102fd8115156122c8565b33600052600260205261032360ff600761031b856040600020612247565b015416612314565b33600052600260205261033a826040600020612247565b9060028201918254908282106104a9576000600286036104035750600080806103be94819461271061036e600c548a61237d565b04985b6103858961037f8c82612390565b94612390565b905560038101610396898254612353565b90556005429101556103aa87600854612353565b600855335af16103b861239d565b506123cd565b6103cb604051809461225f565b602083015260408201524260608201527f3010dc1dcfd46b07fa4887759aa726f28741cdcba20e256d7b4f93bfa9c0509460803392a2005b9360018693929314610420575b60008080936103be958294610371565b9060048301546301e1338081018091116104935742106104405790610410565b60405162461bcd60e51b815260206004820152602560248201527f50656e73696f6e207769746864726177616c73206c6f636b656420666f722031604482015264103cb2b0b960d91b6064820152608490fd5b634e487b7160e01b600052601160045260246000fd5b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b634e487b7160e01b600052602160045260246000fd5b346101d45760203660031901126101d457600435610543337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6064811161055057600c55005b60405162461bcd60e51b81526020600482015260146024820152734665652063616e6e6f742065786365656420312560601b6044820152606490fd5b346101d4576020806003193601126101d457600435906105ad8215156122c8565b336000526004815260ff600560406000200154166106f2576301e1338042019081421161049357604051610100810181811067ffffffffffffffff8211176106dc57600a9360079160405233835283830190868252610695604085019187835260608601904282526080870190815260a08701916001835260c08801946000865260e0890196600088523360005260048b5260406000209960018060a01b039051166bffffffffffffffffffffffff60a01b8b5416178a555160018a0155516002890155516003880155516004870155511515600586019060ff801983541691151516179055565b516006840155519101556106a982546122b9565b82556040519283528201527f1e269f8de238221324da7f673245a913eae94eb3574ef6e4158e18202599ae4160403392a2005b634e487b7160e01b600052604160045260246000fd5b6064906040519062461bcd60e51b82526004820152601860248201527f496e737572616e636520616c72656164792061637469766500000000000000006044820152fd5b346101d45760003660031901126101d4576020600e54604051908152f35b346101d45760003660031901126101d457604051600060018054906107788261210e565b8085529181811690811561081057506001146107b7575b6107b38461079f81860382612165565b604051918291602083526020830190612187565b0390f35b600081815292507fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf65b8284106107f857505050810160200161079f8261078f565b805460208587018101919091529093019281016107e0565b60ff191660208087019190915292151560051b8501909201925061079f915083905061078f565b346101d45760203660031901126101d4576001600160a01b036108586121c7565b166000526005602052602060ff604060002054166040519015158152f35b346101d45760003660031901126101d4577f00000000000000000000000000000000000000000000000000000000000000006108bc336001600160a01b0383161461240b565b4790811561092257600080809381935af16108d561239d565b50156108dd57005b60405162461bcd60e51b815260206004820152601760248201527f4661696c656420746f20776974686472617720666565730000000000000000006044820152606490fd5b60405162461bcd60e51b81526020600482015260136024820152724e6f206665657320746f20776974686472617760681b6044820152606490fd5b346101d45760203660031901126101d4576004356109a5337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6101f481116109b357600d55005b60405162461bcd60e51b8152602060048201526016602482015275426f6f73742063616e6e6f742065786365656420352560501b6044820152606490fd5b346101d45760003660031901126101d4576020600954604051908152f35b346101d457610180610a44610a23366121dd565b6001600160a01b039182166000908152600260205260409020919291612247565b805490600181015460028201546003830154600484015460058501549060068601549260ff60078801541694600888015496610a9d600a60098b01549a01549a60ff60206040519e8f9084168152019160a01c1661225f565b60408b015260608a0152608089015260a088015260c087015260e08601521515610100850152610120840152610140830152610160820152f35b346101d45760003660031901126101d4576020600654604051908152f35b346101d457610b03366121dd565b9060038210156104e557610b1a600283111561226c565b60018060a01b031690816000526002602052610b4160ff600761031b846040600020612247565b816000526002602052610b58816040600020612247565b9060028201918254908115610cd15760008084610c0b57505061012c82029061012b19838304016104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610bb2600e548a61237d565b0490612353565b612710610bc8600b548361237d565b0490612390565b8095612353565b905501610be4828254612353565b9055610bf281600954612353565b600955610c06604051928392429184612360565b0390a2005b60018503610c565750506101f48202906101f319838304016104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610bb2600d548a61237d565b60028514610c82575b94610bd6610bcf610bb96006959460008051602061244883398151915299612353565b505060c882029082820460c8036104935760008051602061244883398151915294610bd6610bcf610bb960069561271080910490610cc2600f548a61237d565b04959650939850505050610c5f565b60405162461bcd60e51b815260206004820152601d60248201527f4e6f2062616c616e636520746f2063616c63756c617465207969656c640000006044820152606490fd5b346101d45760203660031901126101d457600435610d5e337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b600a81101580610dfb575b15610da75760407fb404cac19fb1cbeff98d325795b08886e3cd8fe8cb1a2f193aac66f13fb239c391600b549080600b5582519182526020820152a1005b60405162461bcd60e51b815260206004820152602660248201527f4665652072617465206d757374206265206265747765656e20302e312520616e6044820152656420302e332560d01b6064820152608490fd5b50601e811115610d69565b346101d45760003660031901126101d4576020600f54604051908152f35b346101d45760603660031901126101d45760043560038110156101d4576024906044358235610e56600284111561226c565b33600052602060028152610e7560ff600761031b876040600020612247565b8115610f9f5760018310610f5d5761016d8311610f1a576002903360005252610ea2836040600020612247565b8160088201558260098201556201518094858402958487041484151715610f065750600a610ef27f35bd5bc32b2e6b680c38adefc0f912a951880e864ec9b760d709b6bdb34b9396959642612353565b910155610c06604051928392339684612360565b634e487b7160e01b60009081526011600452fd5b606490601e866040519262461bcd60e51b845260048401528201527f4672657175656e63792063616e6e6f74206578636565642031207965617200006044820152fd5b846064916040519162461bcd60e51b83528160048401528201527f4672657175656e6379206d757374206265206174206c656173742031206461796044820152fd5b608490856040519162461bcd60e51b83526004830152808201527f4175746f2d6465706f73697420616d6f756e74206d75737420626520706f73696044820152637469766560e01b6064820152fd5b346101d45760203660031901126101d457600435611036337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b60c8811161104357600e55005b60405162461bcd60e51b8152602060048201526016602482015275426f6f73742063616e6e6f742065786365656420322560501b6044820152606490fd5b346101d45760003660031901126101d4576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b6110cf36612228565b9060038110156104e5576110e6600282111561226c565b6110f18215156122c8565b3360005260206002815261111060ff600761031b856040600020612247565b82341061134757336000526002815261112d826040600020612247565b908261120b5766038d7ea4c6800084106111b057507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c06915b60018101611178868254612353565b905560028101611189868254612353565b905560044291015561119d84600754612353565b6007556040519182913395429184612360565b6084906040519062461bcd60e51b82526004820152602e60248201527f4d696e696d756d206465706f73697420666f72206d6963726f2d736176696e6760448201526d0e640d2e640605c606062408aa8960931b6064820152fd5b600183036112a657662386f26fc10000841061124d57507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c0691611169565b6084906040519062461bcd60e51b82526004820152602c60248201527f4d696e696d756d206465706f73697420666f722070656e73696f6e206e65737460448201526b040d2e640605c6062408aa8960a31b6064820152fd5b600283146112db575b507f9ff8e4d539d1d79cfcfc377ba5b9a51291f5720d64539bfde4bcc5ca58a1c46a91610c0691611169565b6611c37937e080008410156112af576084906040519062461bcd60e51b82526004820152603060248201527f4d696e696d756d206465706f73697420666f7220656d657267656e637920766160448201526f0ead8e840d2e640605c60606a408aa8960831b6064820152fd5b6064906040519062461bcd60e51b825260048201526015602482015274125b9cdd59999a58da595b9d08115512081cd95b9d605a1b6044820152fd5b346101d45760c03660031901126101d45760043567ffffffffffffffff81116101d457366023820112156101d45780600401356113bf8161220c565b916113cd6040519384612165565b81835236602483830101116101d457816000926024602093018386013783010152602435906001600160a01b03821682036101d457611436337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03161461240b565b6044351561176e576001606435101580611761575b1561172357608435156116df57601054604051928361012081011067ffffffffffffffff610120860111176106dc57610120840160405281845282602085015260018060a01b0316604084015260443560608401526064356080840152600160a084015260843560c084015260a43560e084015260006101008401526000526003602052604060002082518155602083015192835167ffffffffffffffff81116106dc576114fc600184015461210e565b601f8111611698575b506020601f821160011461161b576115f3949392826008936101009361160b99600092611610575b50508160011b916000199060031b1c19161760018501555b6002840160018060a01b036040830151166bffffffffffffffffffffffff60a01b825416179055606081015160038501556080810151600485015561159f60a08201511515600586019060ff801983541691151516179055565b60c0810151600685015560e0810151600785015501519101557fe056bc3c69cf375f5d6a9360d558211a615a35f6136dc2f64155265de8f088f5601054928392604051918291606083526060830190612187565b604435602083015260643560408301520390a26122b9565b601055005b01519050898061152d565b6001840160005260206000209560005b601f198416811061168057509260018361160b98610100946115f3999897600897601f19811610611667575b505050811b016001850155611545565b015160001960f88460031b161c19169055898080611657565b8282015188556001909701966020928301920161162b565b600184016000526020600020601f830160051c8101602084106116d8575b601f830160051c820181106116cc575050611505565b600081556001016116b6565b50806116b6565b606460405162461bcd60e51b815260206004820152602060248201527f4d696e696d756d206465706f736974206d75737420626520706f7369746976656044820152fd5b60405162461bcd60e51b81526020600482015260166024820152755269736b206c6576656c206d75737420626520312d3360501b6044820152606490fd5b506003606435111561144b565b60405162461bcd60e51b8152602060048201526014602482015273415059206d75737420626520706f73697469766560601b6044820152606490fd5b346101d4576117b8366121dd565b60038110156104e557806117d260026117f093111561226c565b6001600160a01b039283166000908152600260205260409020612247565b61181660ff6040519361180285612148565b8354908116855260a01c16602084016122ad565b600181015490816040840152600281015480606085015260038201549081608086015260048301548060a087015260058401548060c08801526006850154918260e089015260ff6007870154161515926101009584878b01526008880154956101209a878c820152610160600a60098c01549b8c6101408501520154910152604051998a5260208a015260408901526060880152608087015260a086015260c085015260e0840152820152f35b346101d45760003660031901126101d4576020600b54604051908152f35b346101d45760003660031901126101d4576020600d54604051908152f35b6020806003193601126101d4576004359060038210156101d457611926600283111561226c565b336000526002815261194360ff600761031b856040600020612247565b3360005260028152611959826040600020612247565b90600882018054928315611aa257600a81019283544210611a5e57843410611a1057508060016009920161198e868254612353565b90556002810161199f868254612353565b905542600482015501546201518090818102918183041490151715610493577fd3f82c748fab5488f465415105b4e7b3bc2fd35d78dc407c07bc605d0a54c9d193610c06936119f16119fb9342612353565b9055600754612353565b60075554926040519182913395429184612360565b6084906040519062461bcd60e51b82526004820152602160248201527f496e73756666696369656e742045544820666f72206175746f2d6465706f73696044820152601d60fa1b6064820152fd5b6064906040519062461bcd60e51b82526004820152601860248201527f4175746f2d6465706f736974206e6f74206475652079657400000000000000006044820152fd5b60405162461bcd60e51b815260048101849052601860248201527f4175746f2d6465706f736974206e6f7420656e61626c656400000000000000006044820152606490fd5b346101d45760003660031901126101d4576000546040516001600160a01b039091168152602090f35b346101d45760003660031901126101d4576020600854604051908152f35b346101d45760003660031901126101d4576020600a54604051908152f35b346101d4576020806003193601126101d457600435903360005260048152604060002060ff60058201541615611c715760048101544211611c385760018101548311611bfa5780600660079201611ba381546122b9565b905501611bb1838254612353565b9055611bc7600080808086335af16103b861239d565b60405191825242908201527fc788b24a2670cb77dd3772810e8c99cf42096d9dd9559609beaf908ddd8c1e6260403392a2005b60405162461bcd60e51b8152600481018390526016602482015275436c61696d206578636565647320636f76657261676560501b6044820152606490fd5b60405162461bcd60e51b8152600481018390526011602482015270125b9cdd5c985b98d948195e1c1a5c9959607a1b6044820152606490fd5b60405162461bcd60e51b815260048101839052601a60248201527f4e6f2061637469766520696e737572616e636520706f6c6963790000000000006044820152606490fd5b346101d45760203660031901126101d4576101006001600160a01b0380611cdb6121c7565b166000526004602052604060002090815416906001810154906002810154600382015460048301549060ff6005850154169260076006860154950154956040519788526020880152604087015260608601526080850152151560a084015260c083015260e0820152f35b346101d45760003660031901126101d4576020601054604051908152f35b346101d45760003660031901126101d45760c0600654600754600854600954600a5491600b5493604051958652602086015260408501526060840152608083015260a0820152f35b346101d45760203660031901126101d457600360043510156101d457611dd66002600435111561226c565b33600052600260205260ff6007611df36004356040600020612247565b015416611f7857604051611e0681612148565b3381526020810190611e1a600435836122ad565b600060408201526000606082015260006080820152600060a0820152600060c0820152600060e08201526001610100820152600061012082015260006101408201526000610160820152336000526002602052611e7d6004356040600020612247565b9160018060a01b0382511691835491519160038310156104e5576001600160a81b03191690921760a091821b60ff60a01b16178355604082015160018401556060820151600284015560808201516003840155810151600483015560c0810151600583015560e0810151600683015561010081015160078301805491151560ff1660ff1992909216919091179055600a9061016090610120810151600885015561014081015160098501550151910155611f386006546122b9565b600655604051611f4a8160043561225f565b4260208201527f758b57cbf8ca2b01de52a91c196f7ba605bab57976e9108ad5d1dd3b1418451060403392a2005b60405162461bcd60e51b81526020600482015260146024820152735661756c7420616c72656164792065786973747360601b6044820152606490fd5b346101d4576020806003193601126101d457600435600052600381526040600020805490600183818301604051928391600091815491611ff38361210e565b808652928281169081156120d05750600114612091575b50505061201992500382612165565b60018060a01b03600283015416916003810154600482015460ff6005840154169060068401549261206660086007870154960154966040519a8b9a8b5261012080918c01528a0190612187565b96604089015260608801526080870152151560a086015260c085015260e08401526101008301520390f35b600090815285812095935091905b8183106120b8575088945050820101612019888061200a565b8554878401850152948501948694509183019161209f565b9250505061201994925060ff191682840152151560051b8201018692888061200a565b346101d45760003660031901126101d457602090600c548152f35b90600182811c9216801561213e575b602083101461212857565b634e487b7160e01b600052602260045260246000fd5b91607f169161211d565b610180810190811067ffffffffffffffff8211176106dc57604052565b90601f8019910116810190811067ffffffffffffffff8211176106dc57604052565b919082519283825260005b8481106121b3575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201612192565b600435906001600160a01b03821682036101d457565b60409060031901126101d4576004356001600160a01b03811681036101d4579060243560038110156101d45790565b67ffffffffffffffff81116106dc57601f01601f191660200190565b60409060031901126101d45760043560038110156101d4579060243590565b9060038110156104e557600052602052604060002090565b9060038210156104e55752565b1561227357565b60405162461bcd60e51b8152602060048201526012602482015271496e76616c6964207661756c74207479706560701b6044820152606490fd5b60038210156104e55752565b60001981146104935760010190565b156122cf57565b60405162461bcd60e51b815260206004820152601d60248201527f416d6f756e74206d7573742062652067726561746572207468616e20300000006044820152606490fd5b1561231b57565b60405162461bcd60e51b815260206004820152601060248201526f5661756c74206e6f742061637469766560801b6044820152606490fd5b9190820180921161049357565b60409194939261237482606081019761225f565b60208201520152565b8181029291811591840414171561049357565b9190820391821161049357565b3d156123c8573d906123ae8261220c565b916123bc6040519384612165565b82523d6000602084013e565b606090565b156123d457565b60405162461bcd60e51b815260206004820152600f60248201526e151c985b9cd9995c8819985a5b1959608a1b6044820152606490fd5b1561241257565b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fdfe20d1a75bd95bfc77c5b8320aec0b51e8dce14ca0909c6f73bfbe014fa41512faa264697066735822122056c7027dfa69fca6c10c42b5b65f97b09a095638ba0c7c713ee26fa3b7be322264736f6c63430008140033",
+  "devdoc": {
+    "author": "SafeNest Team",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "addYieldStrategy(string,address,uint256,uint256,uint256,uint256)": {
+        "notice": "Add yield strategy"
+      },
+      "calculateYield(address,uint8)": {
+        "notice": "Calculate and distribute yield"
+      },
+      "checkPremiumAccess(address)": {
+        "notice": "Check premium access"
+      },
+      "createVault(uint8)": {
+        "notice": "Create a new vault"
+      },
+      "depositToVault(uint8,uint256)": {
+        "notice": "Make a deposit to vault"
+      },
+      "enableAutoDeposit(uint8,uint256,uint256)": {
+        "notice": "Enable auto-deposit for vault"
+      },
+      "executeAutoDeposit(uint8)": {
+        "notice": "Execute auto-deposit (called by user or automated system)"
+      },
+      "getPlatformStats()": {
+        "notice": "Get platform statistics"
+      },
+      "getVaultDetails(address,uint8)": {
+        "notice": "Get vault details"
+      },
+      "grantPremiumAccess(address)": {
+        "notice": "Grant premium access (called by SAFE token contract)"
+      },
+      "processInsuranceClaim(uint256)": {
+        "notice": "Process insurance claim"
+      },
+      "purchaseInsurance(uint256)": {
+        "notice": "Purchase insurance policy"
+      },
+      "setProtocolFeeRate(uint256)": {
+        "notice": "Admin functions"
+      },
+      "withdrawFromVault(uint8,uint256)": {
+        "notice": "Withdraw from vault"
+      }
+    },
+    "notice": "VaultSystem - Comprehensive vault system for SafeNest platform Implements micro-savings, pension nest, and emergency vaults",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 9774,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "safeToken",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 9777,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "platformName",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 9851,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "userVaults",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_mapping(t_enum(VaultType)9781,t_struct(UserVault)9807_storage))"
+      },
+      {
+        "astId": 9856,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "yieldStrategies",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_struct(YieldStrategy)9826_storage)"
+      },
+      {
+        "astId": 9861,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "insurancePolicies",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_address,t_struct(InsurancePolicy)9843_storage)"
+      },
+      {
+        "astId": 9865,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "hasPremiumAccess",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_address,t_bool)"
+      },
+      {
+        "astId": 9868,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "totalUsers",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9871,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "totalDeposited",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9874,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "totalWithdrawn",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9877,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "totalYieldEarned",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9880,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "totalInsurancePolicies",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9883,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "protocolFeeRate",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9886,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "emergencyWithdrawalFee",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9889,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "pensionYieldBoost",
+        "offset": 0,
+        "slot": "13",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9892,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "microSavingsYieldBoost",
+        "offset": 0,
+        "slot": "14",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9895,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "emergencyIncentiveRate",
+        "offset": 0,
+        "slot": "15",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 9898,
+        "contract": "contracts/VaultSystem.sol:VaultSystem",
+        "label": "nextYieldStrategyId",
+        "offset": 0,
+        "slot": "16",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_enum(VaultType)9781": {
+        "encoding": "inplace",
+        "label": "enum VaultSystem.VaultType",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_enum(VaultType)9781,t_struct(UserVault)9807_storage))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(enum VaultSystem.VaultType => struct VaultSystem.UserVault))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_enum(VaultType)9781,t_struct(UserVault)9807_storage)"
+      },
+      "t_mapping(t_address,t_struct(InsurancePolicy)9843_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct VaultSystem.InsurancePolicy)",
+        "numberOfBytes": "32",
+        "value": "t_struct(InsurancePolicy)9843_storage"
+      },
+      "t_mapping(t_enum(VaultType)9781,t_struct(UserVault)9807_storage)": {
+        "encoding": "mapping",
+        "key": "t_enum(VaultType)9781",
+        "label": "mapping(enum VaultSystem.VaultType => struct VaultSystem.UserVault)",
+        "numberOfBytes": "32",
+        "value": "t_struct(UserVault)9807_storage"
+      },
+      "t_mapping(t_uint256,t_struct(YieldStrategy)9826_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct VaultSystem.YieldStrategy)",
+        "numberOfBytes": "32",
+        "value": "t_struct(YieldStrategy)9826_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(InsurancePolicy)9843_storage": {
+        "encoding": "inplace",
+        "label": "struct VaultSystem.InsurancePolicy",
+        "members": [
+          {
+            "astId": 9828,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 9830,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "coverageAmount",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9832,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "premiumRate",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9834,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "coverageStartTime",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9836,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "coverageEndTime",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9838,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bool"
+          },
+          {
+            "astId": 9840,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "claimsCount",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9842,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "totalClaimsPaid",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "256"
+      },
+      "t_struct(UserVault)9807_storage": {
+        "encoding": "inplace",
+        "label": "struct VaultSystem.UserVault",
+        "members": [
+          {
+            "astId": 9783,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 9786,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "vaultType",
+            "offset": 20,
+            "slot": "0",
+            "type": "t_enum(VaultType)9781"
+          },
+          {
+            "astId": 9788,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "totalDeposited",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9790,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "currentBalance",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9792,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "totalWithdrawn",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9794,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "lastDepositTime",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9796,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "lastWithdrawalTime",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9798,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "yieldEarned",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9800,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_bool"
+          },
+          {
+            "astId": 9802,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "autoDepositAmount",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9804,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "autoDepositFrequency",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9806,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "nextAutoDeposit",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "352"
+      },
+      "t_struct(YieldStrategy)9826_storage": {
+        "encoding": "inplace",
+        "label": "struct VaultSystem.YieldStrategy",
+        "members": [
+          {
+            "astId": 9809,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "id",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9811,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "name",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 9813,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "strategyContract",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address"
+          },
+          {
+            "astId": 9815,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "apy",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9817,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "riskLevel",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9819,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bool"
+          },
+          {
+            "astId": 9821,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "minDeposit",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9823,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "maxDeposit",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 9825,
+            "contract": "contracts/VaultSystem.sol:VaultSystem",
+            "label": "totalDeposited",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "288"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

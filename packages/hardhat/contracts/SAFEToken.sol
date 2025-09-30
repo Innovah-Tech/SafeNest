@@ -363,7 +363,7 @@ contract SAFEToken {
     }
     
     function getGovernanceInfo() external view returns (
-        uint256 totalStakedSupply,
+        uint256 totalStakedSupplyValue,
         uint256 minStakeForVoting,
         uint256 quorumThreshold
     ) {
@@ -376,7 +376,7 @@ contract SAFEToken {
     
     function getReferralInfo(address _user) external view returns (
         address referrer,
-        uint256 referralCount,
+        uint256 userReferralCount,
         uint256 totalRewards
     ) {
         return (

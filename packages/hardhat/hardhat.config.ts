@@ -126,6 +126,11 @@ const config: HardhatUserConfig = {
       url: "https://forno.celo-sepolia.celo-testnet.org/",
       accounts: [deployerPrivateKey],
     },
+    u2uNebulas: {
+      url: "https://rpc-nebulas-testnet.u2u.xyz",
+      accounts: [deployerPrivateKey],
+      chainId: 2484,
+    },
   },
   // Configuration for harhdat-verify plugin
   etherscan: {

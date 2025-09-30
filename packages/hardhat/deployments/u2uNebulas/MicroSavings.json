@@ -1,0 +1,1541 @@
+{
+  "address": "0x3B170bEBf9eaF003Bdb230211fa914B8D540C65E",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "DepositMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "EmergencyDeposit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "EmergencyWithdrawal",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "goalName",
+          "type": "string"
+        }
+      ],
+      "name": "GoalCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "goalName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "targetAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "GoalCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "goalName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "currentAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "GoalUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "strategyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvestmentMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "strategyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvestmentWithdrawn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "decimals",
+          "type": "uint256"
+        }
+      ],
+      "name": "StablecoinAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithdrawalMade",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_strategyContract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_apy",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_minDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxDeposit",
+          "type": "uint256"
+        }
+      ],
+      "name": "addInvestmentStrategy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_decimals",
+          "type": "uint256"
+        }
+      ],
+      "name": "addStablecoin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_goalName",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_targetAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "createSavingsGoal",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositEmergencyFund",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositSavings",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "emergencyPause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPlatformStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_totalUsers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalDeposited",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalInvested",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalEmergencyFunds",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_platformFeeRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "getPortfolioValue",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalSavings",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalInvestments",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalEmergency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalValue",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_strategyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "investInStrategy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "investmentStrategies",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "strategyContract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "apy",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxDeposit",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextStrategyId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "platformFeeRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "platformName",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPlatformFeeRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "stablecoinDecimals",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "supportedStablecoins",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalDeposited",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalEmergencyFunds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalInvested",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalUsers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_goalIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_additionalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateGoalProgress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userEmergencyVaults",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastDepositTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "withdrawalCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userGoals",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "goalName",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "targetAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isCompleted",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "createdAt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userInvestments",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "strategyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "entryTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userSavingsAccounts",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalDeposited",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastDepositTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "userStablecoinBalances",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawEmergencyFund",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_positionIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_shares",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawFromInvestment",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawSavings",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x838b50e4471f08b474ef0f53b2e548908c983f8cbb479f1135c78aa836f2ca3a",
+  "receipt": {
+    "to": null,
+    "from": "0xA889121299B61D09A75088CEc84D4Fc2E76D2ed7",
+    "contractAddress": "0x3B170bEBf9eaF003Bdb230211fa914B8D540C65E",
+    "transactionIndex": 0,
+    "gasUsed": "1986422",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x0002ccd0000005269c14d22364a12cb9e23221866304ccacd8c30ab0b77576b1",
+    "transactionHash": "0x838b50e4471f08b474ef0f53b2e548908c983f8cbb479f1135c78aa836f2ca3a",
+    "logs": [],
+    "blockNumber": 60317143,
+    "cumulativeGasUsed": "1986422",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "0ada7a5da3d26f26d8ea40f0e25e5925",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"DepositMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"EmergencyDeposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"EmergencyWithdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"goalName\",\"type\":\"string\"}],\"name\":\"GoalCompleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"goalName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"targetAmount\",\"type\":\"uint256\"}],\"name\":\"GoalCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"goalName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"currentAmount\",\"type\":\"uint256\"}],\"name\":\"GoalUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"strategyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"InvestmentMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"strategyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"InvestmentWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"decimals\",\"type\":\"uint256\"}],\"name\":\"StablecoinAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"WithdrawalMade\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"_strategyContract\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_apy\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_minDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxDeposit\",\"type\":\"uint256\"}],\"name\":\"addInvestmentStrategy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_decimals\",\"type\":\"uint256\"}],\"name\":\"addStablecoin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_goalName\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_targetAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"}],\"name\":\"createSavingsGoal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"depositEmergencyFund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"depositSavings\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emergencyPause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPlatformStats\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_totalUsers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalDeposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalInvested\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalEmergencyFunds\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_platformFeeRate\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"getPortfolioValue\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalSavings\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalInvestments\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalEmergency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalValue\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_strategyId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"investInStrategy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"investmentStrategies\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"strategyContract\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"apy\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"minDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxDeposit\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextStrategyId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"platformFeeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"platformName\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newRate\",\"type\":\"uint256\"}],\"name\":\"setPlatformFeeRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"stablecoinDecimals\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"supportedStablecoins\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalDeposited\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalEmergencyFunds\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalInvested\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalUsers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_goalIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_additionalAmount\",\"type\":\"uint256\"}],\"name\":\"updateGoalProgress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userEmergencyVaults\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastDepositTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"withdrawalCount\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userGoals\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"goalName\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"targetAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isCompleted\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userInvestments\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"strategyId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"entryTime\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userSavingsAccounts\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"totalDeposited\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalWithdrawn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastDepositTime\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userStablecoinBalances\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawEmergencyFund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_positionIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_shares\",\"type\":\"uint256\"}],\"name\":\"withdrawFromInvestment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawSavings\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"SafeNest Team\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addInvestmentStrategy(string,address,uint256,uint256,uint256)\":{\"notice\":\"Add investment strategy\"},\"addStablecoin(address,uint256)\":{\"notice\":\"Add supported stablecoin\"},\"createSavingsGoal(string,uint256,uint256)\":{\"notice\":\"Create savings goal\"},\"depositEmergencyFund(address,uint256)\":{\"notice\":\"Deposit to emergency vault\"},\"depositSavings(address,uint256)\":{\"notice\":\"Make micro-savings deposit\"},\"emergencyPause()\":{\"notice\":\"Emergency function to pause platform (only owner)\"},\"getPlatformStats()\":{\"notice\":\"Get platform statistics\"},\"getPortfolioValue(address)\":{\"notice\":\"Get user's total portfolio value\"},\"investInStrategy(uint256,address,uint256)\":{\"notice\":\"Invest in DeFi strategy\"},\"setPlatformFeeRate(uint256)\":{\"notice\":\"Set platform fee rate (only owner)\"},\"updateGoalProgress(uint256,uint256)\":{\"notice\":\"Update goal progress\"},\"withdrawEmergencyFund(address,uint256)\":{\"notice\":\"Withdraw from emergency vault (instant)\"},\"withdrawFromInvestment(uint256,uint256)\":{\"notice\":\"Withdraw from investment\"},\"withdrawSavings(address,uint256)\":{\"notice\":\"Withdraw from savings\"}},\"notice\":\"MicroSavings - Mobile-first DeFi savings and investment platform Enables micro-savings, micro-investments, and on-chain micro-pensions\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/MicroSavings.sol\":\"MicroSavings\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/MicroSavings.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\r\\npragma solidity >=0.8.0 <0.9.0;\\r\\n\\r\\n// import \\\"hardhat/console.sol\\\";\\r\\n\\r\\n/**\\r\\n * MicroSavings - Mobile-first DeFi savings and investment platform\\r\\n * Enables micro-savings, micro-investments, and on-chain micro-pensions\\r\\n * @author SafeNest Team\\r\\n */\\r\\ncontract MicroSavings {\\r\\n    // State Variables\\r\\n    address public immutable owner;\\r\\n    string public platformName = \\\"MicroSavings - Mobile DeFi Platform\\\";\\r\\n    \\r\\n    // Supported stablecoins\\r\\n    mapping(address => bool) public supportedStablecoins;\\r\\n    mapping(address => uint256) public stablecoinDecimals;\\r\\n    \\r\\n    // User savings accounts\\r\\n    struct SavingsAccount {\\r\\n        address user;\\r\\n        address stablecoin;\\r\\n        uint256 totalDeposited;\\r\\n        uint256 totalWithdrawn;\\r\\n        uint256 currentBalance;\\r\\n        uint256 lastDepositTime;\\r\\n        bool isActive;\\r\\n    }\\r\\n    \\r\\n    // Investment strategies\\r\\n    struct InvestmentStrategy {\\r\\n        string name;\\r\\n        address strategyContract;\\r\\n        uint256 apy; // Annual percentage yield in basis points (100 = 1%)\\r\\n        bool isActive;\\r\\n        uint256 minDeposit;\\r\\n        uint256 maxDeposit;\\r\\n    }\\r\\n    \\r\\n    // User investment positions\\r\\n    struct InvestmentPosition {\\r\\n        address user;\\r\\n        uint256 strategyId;\\r\\n        address stablecoin;\\r\\n        uint256 amount;\\r\\n        uint256 shares;\\r\\n        uint256 entryTime;\\r\\n        bool isActive;\\r\\n    }\\r\\n    \\r\\n    // Emergency fund vault\\r\\n    struct EmergencyVault {\\r\\n        address user;\\r\\n        address stablecoin;\\r\\n        uint256 balance;\\r\\n        uint256 lastDepositTime;\\r\\n        uint256 withdrawalCount;\\r\\n        bool isActive;\\r\\n    }\\r\\n    \\r\\n    // Goal tracking\\r\\n    struct SavingsGoal {\\r\\n        address user;\\r\\n        string goalName;\\r\\n        uint256 targetAmount;\\r\\n        uint256 currentAmount;\\r\\n        uint256 deadline;\\r\\n        bool isCompleted;\\r\\n        uint256 createdAt;\\r\\n    }\\r\\n    \\r\\n    // Mappings\\r\\n    mapping(address => SavingsAccount) public userSavingsAccounts;\\r\\n    mapping(address => mapping(address => uint256)) public userStablecoinBalances;\\r\\n    mapping(uint256 => InvestmentStrategy) public investmentStrategies;\\r\\n    mapping(address => InvestmentPosition[]) public userInvestments;\\r\\n    mapping(address => EmergencyVault) public userEmergencyVaults;\\r\\n    mapping(address => SavingsGoal[]) public userGoals;\\r\\n    \\r\\n    // Platform statistics\\r\\n    uint256 public totalUsers = 0;\\r\\n    uint256 public totalDeposited = 0;\\r\\n    uint256 public totalInvested = 0;\\r\\n    uint256 public totalEmergencyFunds = 0;\\r\\n    uint256 public platformFeeRate = 30; // 0.3% in basis points\\r\\n    uint256 public nextStrategyId = 1;\\r\\n    \\r\\n    // Events\\r\\n    event StablecoinAdded(address indexed stablecoin, uint256 decimals);\\r\\n    event DepositMade(address indexed user, address indexed stablecoin, uint256 amount);\\r\\n    event WithdrawalMade(address indexed user, address indexed stablecoin, uint256 amount);\\r\\n    event InvestmentMade(address indexed user, uint256 strategyId, uint256 amount);\\r\\n    event InvestmentWithdrawn(address indexed user, uint256 strategyId, uint256 amount);\\r\\n    event EmergencyDeposit(address indexed user, address indexed stablecoin, uint256 amount);\\r\\n    event EmergencyWithdrawal(address indexed user, address indexed stablecoin, uint256 amount);\\r\\n    event GoalCreated(address indexed user, string goalName, uint256 targetAmount);\\r\\n    event GoalUpdated(address indexed user, string goalName, uint256 currentAmount);\\r\\n    event GoalCompleted(address indexed user, string goalName);\\r\\n    \\r\\n    // Modifiers\\r\\n    modifier onlyOwner() {\\r\\n        require(msg.sender == owner, \\\"Not the owner\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier validStablecoin(address _stablecoin) {\\r\\n        require(supportedStablecoins[_stablecoin], \\\"Unsupported stablecoin\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier validAmount(uint256 _amount) {\\r\\n        require(_amount > 0, \\\"Amount must be greater than 0\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    // Constructor\\r\\n    constructor() {\\r\\n        owner = msg.sender;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Add supported stablecoin\\r\\n     */\\r\\n    function addStablecoin(address _stablecoin, uint256 _decimals) external onlyOwner {\\r\\n        supportedStablecoins[_stablecoin] = true;\\r\\n        stablecoinDecimals[_stablecoin] = _decimals;\\r\\n        emit StablecoinAdded(_stablecoin, _decimals);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Add investment strategy\\r\\n     */\\r\\n    function addInvestmentStrategy(\\r\\n        string memory _name,\\r\\n        address _strategyContract,\\r\\n        uint256 _apy,\\r\\n        uint256 _minDeposit,\\r\\n        uint256 _maxDeposit\\r\\n    ) external onlyOwner {\\r\\n        investmentStrategies[nextStrategyId] = InvestmentStrategy({\\r\\n            name: _name,\\r\\n            strategyContract: _strategyContract,\\r\\n            apy: _apy,\\r\\n            isActive: true,\\r\\n            minDeposit: _minDeposit,\\r\\n            maxDeposit: _maxDeposit\\r\\n        });\\r\\n        nextStrategyId++;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Make micro-savings deposit\\r\\n     */\\r\\n    function depositSavings(\\r\\n        address _stablecoin,\\r\\n        uint256 _amount\\r\\n    ) external validStablecoin(_stablecoin) validAmount(_amount) {\\r\\n        // Transfer stablecoin from user\\r\\n        // Note: In production, you'd use IERC20(_stablecoin).transferFrom(msg.sender, address(this), _amount)\\r\\n        \\r\\n        // Update user savings account\\r\\n        if (!userSavingsAccounts[msg.sender].isActive) {\\r\\n            userSavingsAccounts[msg.sender] = SavingsAccount({\\r\\n                user: msg.sender,\\r\\n                stablecoin: _stablecoin,\\r\\n                totalDeposited: 0,\\r\\n                totalWithdrawn: 0,\\r\\n                currentBalance: 0,\\r\\n                lastDepositTime: 0,\\r\\n                isActive: true\\r\\n            });\\r\\n            totalUsers++;\\r\\n        }\\r\\n        \\r\\n        userSavingsAccounts[msg.sender].totalDeposited += _amount;\\r\\n        userSavingsAccounts[msg.sender].currentBalance += _amount;\\r\\n        userSavingsAccounts[msg.sender].lastDepositTime = block.timestamp;\\r\\n        userStablecoinBalances[msg.sender][_stablecoin] += _amount;\\r\\n        \\r\\n        totalDeposited += _amount;\\r\\n        \\r\\n        emit DepositMade(msg.sender, _stablecoin, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Withdraw from savings\\r\\n     */\\r\\n    function withdrawSavings(\\r\\n        address _stablecoin,\\r\\n        uint256 _amount\\r\\n    ) external validStablecoin(_stablecoin) validAmount(_amount) {\\r\\n        require(\\r\\n            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,\\r\\n            \\\"Insufficient balance\\\"\\r\\n        );\\r\\n        \\r\\n        userSavingsAccounts[msg.sender].totalWithdrawn += _amount;\\r\\n        userSavingsAccounts[msg.sender].currentBalance -= _amount;\\r\\n        userStablecoinBalances[msg.sender][_stablecoin] -= _amount;\\r\\n        \\r\\n        totalDeposited -= _amount;\\r\\n        \\r\\n        // Transfer stablecoin to user\\r\\n        // Note: In production, you'd use IERC20(_stablecoin).transfer(msg.sender, _amount)\\r\\n        \\r\\n        emit WithdrawalMade(msg.sender, _stablecoin, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Invest in DeFi strategy\\r\\n     */\\r\\n    function investInStrategy(\\r\\n        uint256 _strategyId,\\r\\n        address _stablecoin,\\r\\n        uint256 _amount\\r\\n    ) external validStablecoin(_stablecoin) validAmount(_amount) {\\r\\n        InvestmentStrategy storage strategy = investmentStrategies[_strategyId];\\r\\n        require(strategy.isActive, \\\"Strategy not active\\\");\\r\\n        require(_amount >= strategy.minDeposit, \\\"Amount below minimum\\\");\\r\\n        require(_amount <= strategy.maxDeposit, \\\"Amount above maximum\\\");\\r\\n        require(\\r\\n            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,\\r\\n            \\\"Insufficient balance\\\"\\r\\n        );\\r\\n        \\r\\n        // Calculate shares (simplified - in production, use proper share calculation)\\r\\n        uint256 shares = _amount * 1e18 / 1e18; // 1:1 for simplicity\\r\\n        \\r\\n        userInvestments[msg.sender].push(InvestmentPosition({\\r\\n            user: msg.sender,\\r\\n            strategyId: _strategyId,\\r\\n            stablecoin: _stablecoin,\\r\\n            amount: _amount,\\r\\n            shares: shares,\\r\\n            entryTime: block.timestamp,\\r\\n            isActive: true\\r\\n        }));\\r\\n        \\r\\n        userStablecoinBalances[msg.sender][_stablecoin] -= _amount;\\r\\n        totalInvested += _amount;\\r\\n        \\r\\n        emit InvestmentMade(msg.sender, _strategyId, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Withdraw from investment\\r\\n     */\\r\\n    function withdrawFromInvestment(\\r\\n        uint256 _positionIndex,\\r\\n        uint256 _shares\\r\\n    ) external validAmount(_shares) {\\r\\n        require(\\r\\n            _positionIndex < userInvestments[msg.sender].length,\\r\\n            \\\"Invalid position index\\\"\\r\\n        );\\r\\n        \\r\\n        InvestmentPosition storage position = userInvestments[msg.sender][_positionIndex];\\r\\n        require(position.isActive, \\\"Position not active\\\");\\r\\n        require(position.shares >= _shares, \\\"Insufficient shares\\\");\\r\\n        \\r\\n        // Calculate withdrawal amount (simplified)\\r\\n        uint256 withdrawalAmount = position.amount * _shares / position.shares;\\r\\n        \\r\\n        position.shares -= _shares;\\r\\n        position.amount -= withdrawalAmount;\\r\\n        \\r\\n        if (position.shares == 0) {\\r\\n            position.isActive = false;\\r\\n        }\\r\\n        \\r\\n        userStablecoinBalances[msg.sender][position.stablecoin] += withdrawalAmount;\\r\\n        totalInvested -= withdrawalAmount;\\r\\n        \\r\\n        emit InvestmentWithdrawn(msg.sender, position.strategyId, withdrawalAmount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Deposit to emergency vault\\r\\n     */\\r\\n    function depositEmergencyFund(\\r\\n        address _stablecoin,\\r\\n        uint256 _amount\\r\\n    ) external validStablecoin(_stablecoin) validAmount(_amount) {\\r\\n        require(\\r\\n            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,\\r\\n            \\\"Insufficient balance\\\"\\r\\n        );\\r\\n        \\r\\n        if (!userEmergencyVaults[msg.sender].isActive) {\\r\\n            userEmergencyVaults[msg.sender] = EmergencyVault({\\r\\n                user: msg.sender,\\r\\n                stablecoin: _stablecoin,\\r\\n                balance: 0,\\r\\n                lastDepositTime: 0,\\r\\n                withdrawalCount: 0,\\r\\n                isActive: true\\r\\n            });\\r\\n        }\\r\\n        \\r\\n        userEmergencyVaults[msg.sender].balance += _amount;\\r\\n        userEmergencyVaults[msg.sender].lastDepositTime = block.timestamp;\\r\\n        userStablecoinBalances[msg.sender][_stablecoin] -= _amount;\\r\\n        \\r\\n        totalEmergencyFunds += _amount;\\r\\n        \\r\\n        emit EmergencyDeposit(msg.sender, _stablecoin, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Withdraw from emergency vault (instant)\\r\\n     */\\r\\n    function withdrawEmergencyFund(\\r\\n        address _stablecoin,\\r\\n        uint256 _amount\\r\\n    ) external validStablecoin(_stablecoin) validAmount(_amount) {\\r\\n        require(userEmergencyVaults[msg.sender].isActive, \\\"No emergency vault\\\");\\r\\n        require(\\r\\n            userEmergencyVaults[msg.sender].balance >= _amount,\\r\\n            \\\"Insufficient emergency balance\\\"\\r\\n        );\\r\\n        \\r\\n        userEmergencyVaults[msg.sender].balance -= _amount;\\r\\n        userEmergencyVaults[msg.sender].withdrawalCount++;\\r\\n        userStablecoinBalances[msg.sender][_stablecoin] += _amount;\\r\\n        \\r\\n        totalEmergencyFunds -= _amount;\\r\\n        \\r\\n        emit EmergencyWithdrawal(msg.sender, _stablecoin, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Create savings goal\\r\\n     */\\r\\n    function createSavingsGoal(\\r\\n        string memory _goalName,\\r\\n        uint256 _targetAmount,\\r\\n        uint256 _deadline\\r\\n    ) external validAmount(_targetAmount) {\\r\\n        require(_deadline > block.timestamp, \\\"Deadline must be in the future\\\");\\r\\n        \\r\\n        userGoals[msg.sender].push(SavingsGoal({\\r\\n            user: msg.sender,\\r\\n            goalName: _goalName,\\r\\n            targetAmount: _targetAmount,\\r\\n            currentAmount: 0,\\r\\n            deadline: _deadline,\\r\\n            isCompleted: false,\\r\\n            createdAt: block.timestamp\\r\\n        }));\\r\\n        \\r\\n        emit GoalCreated(msg.sender, _goalName, _targetAmount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Update goal progress\\r\\n     */\\r\\n    function updateGoalProgress(\\r\\n        uint256 _goalIndex,\\r\\n        uint256 _additionalAmount\\r\\n    ) external validAmount(_additionalAmount) {\\r\\n        require(_goalIndex < userGoals[msg.sender].length, \\\"Invalid goal index\\\");\\r\\n        \\r\\n        SavingsGoal storage goal = userGoals[msg.sender][_goalIndex];\\r\\n        require(!goal.isCompleted, \\\"Goal already completed\\\");\\r\\n        \\r\\n        goal.currentAmount += _additionalAmount;\\r\\n        \\r\\n        if (goal.currentAmount >= goal.targetAmount) {\\r\\n            goal.isCompleted = true;\\r\\n            emit GoalCompleted(msg.sender, goal.goalName);\\r\\n        }\\r\\n        \\r\\n        emit GoalUpdated(msg.sender, goal.goalName, goal.currentAmount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get user's total portfolio value\\r\\n     */\\r\\n    function getPortfolioValue(address _user) external view returns (\\r\\n        uint256 totalSavings,\\r\\n        uint256 totalInvestments,\\r\\n        uint256 totalEmergency,\\r\\n        uint256 totalValue\\r\\n    ) {\\r\\n        totalSavings = userSavingsAccounts[_user].currentBalance;\\r\\n        totalEmergency = userEmergencyVaults[_user].balance;\\r\\n        \\r\\n        // Calculate total investments (simplified to avoid stack too deep)\\r\\n        InvestmentPosition[] memory investments = userInvestments[_user];\\r\\n        for (uint256 i = 0; i < investments.length; i++) {\\r\\n            if (investments[i].isActive) {\\r\\n                totalInvestments += investments[i].amount;\\r\\n            }\\r\\n        }\\r\\n        \\r\\n        totalValue = totalSavings + totalInvestments + totalEmergency;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get platform statistics\\r\\n     */\\r\\n    function getPlatformStats() external view returns (\\r\\n        uint256 _totalUsers,\\r\\n        uint256 _totalDeposited,\\r\\n        uint256 _totalInvested,\\r\\n        uint256 _totalEmergencyFunds,\\r\\n        uint256 _platformFeeRate\\r\\n    ) {\\r\\n        return (totalUsers, totalDeposited, totalInvested, totalEmergencyFunds, platformFeeRate);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Set platform fee rate (only owner)\\r\\n     */\\r\\n    function setPlatformFeeRate(uint256 _newRate) external onlyOwner {\\r\\n        require(_newRate <= 1000, \\\"Fee rate too high\\\"); // Max 10%\\r\\n        platformFeeRate = _newRate;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Emergency function to pause platform (only owner)\\r\\n     */\\r\\n    function emergencyPause() external onlyOwner {\\r\\n        // In production, implement pausable functionality\\r\\n        // This would prevent new deposits/withdrawals\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0x70ef7ab4d1dc2ebf0ba95e0cd1c3aff91059396218ce8bd766730ab6be87dd4b\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a080604052346200010c5760008054906001918281811c9116801562000101575b6020821014620000ed57601f8111620000bb575b5060478155808052626f726d60e81b82602083207f4d6963726f536176696e6773202d204d6f62696c65204465466920506c617466815501558060095580600a5580600b55600c55601e600d55600e5533608052611fdd9081620001128239608051818181610d110152818161111901528181611675015281816116ff015261176f0152f35b818052826002601f60208520930160051c830192015b828110620000e157505062000035565b838155018390620000d1565b634e487b7160e01b82526022600452602482fd5b90607f169062000021565b600080fdfe6080604052600436101561001257600080fd5b60003560e01c8063033a9c7b146119c4578063136d888314611984578063185f84471461196657806328c5225b1461172f57806351858e27146116e85780635216aeec146116ca57806352eb35d11461162457806375259fec1461142e5780637d460cc7146113aa57806386c3dfd91461132157806388239d99146112d05780638c81e4d1146111485780638da5cb5b146111035780638e8ae37514610e4157806390eda7b514610e235780639244adcd14610d86578063927fef2e14610cf7578063a1617f8e14610b72578063b6b3eedf14610abd578063b85b91f114610a43578063bf7d911914610a04578063bff1f9e1146109e6578063c2c1325f14610860578063c4a2c52f146106b0578063c9671c33146105a6578063d21a74ff1461056c578063d2651b411461028a578063d721fe02146101a7578063eeca08f0146101895763ff50abdc1461016657600080fd5b34610184576000366003190112610184576020600a54604051908152f35b600080fd5b34610184576000366003190112610184576020600d54604051908152f35b3461018457600036600319011261018457604051600080546101c881611c72565b80845290600190818116908115610263575060011461020a575b610206846101f281860382611be3565b604051918291602083526020830190611d52565b0390f35b600080805292507f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e5635b82841061024b5750505081016020016101f2826101e2565b80546020858701810191909152909301928101610233565b60ff191660208087019190915292151560051b850190920192506101f291508390506101e2565b34610184576060366003190112610184576004356102a6611b95565b6044359060018060a01b0380911680600052602091600183526102d060ff60406000205416611e0f565b83156102dc8115611e54565b8560005260058452604060002060ff6003820154161561053157600481015486106104f5576005015485116104b9573360005260048452604060002083600052845261032f856040600020541015611ead565b670de0b6b3a764000080860291868304821417156104a357336000526006855260406000206040519161036183611bab565b33835286830193898552604084019187835260608501908a8252608086019204825260a085019242845260c0860194600186528054600160401b81101561048d576103b191600182018155611d92565b9790976104775788610412996006985116916001600160601b0360a01b92838b5416178a555160018a0155600289019251169082541617905551600386015551600485015551600584015551151591019060ff801983541691151516179055565b336000526004825260406000209060005281526040600020610435838254611ef0565b905561044382600b54611ea0565b600b556040519283528201527f0a9bd546b0677820e552855be50bea4847cd782448e9f00d2543ceb3b91c2c5b60403392a2005b634e487b7160e01b600052600060045260246000fd5b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b60405162461bcd60e51b8152600481018590526014602482015273416d6f756e742061626f7665206d6178696d756d60601b6044820152606490fd5b60405162461bcd60e51b8152600481018690526014602482015273416d6f756e742062656c6f77206d696e696d756d60601b6044820152606490fd5b60405162461bcd60e51b81526004810186905260136024820152725374726174656779206e6f742061637469766560681b6044820152606490fd5b34610184576020366003190112610184576001600160a01b0361058d611b7f565b1660005260026020526020604060002054604051908152f35b34610184576040366003190112610184576105bf611b7f565b6024359060018060a01b031690816000527f26aabd0b187d03562b9e52195f1ff57274164c7fd5588254b7654cc27dde2b0060206001815261060860ff60406000205416611e0f565b610613831515611e54565b33600052600481526040600020846000528152610637836040600020541015611ead565b33600052600381526003604060002001610652848254611ea0565b90553360005260038152600460406000200161066f848254611ef0565b9055336000526004815260406000208460005281526040600020610694848254611ef0565b90556106a283600a54611ef0565b600a556040519283523392a3005b34610184576040366003190112610184576106c9611b7f565b6024357fad7a046b77da2b78a35150b3d1f3820f14160df51ca88e6ac28c1c1acec76b0360018060a01b0380931692836000526020906001825261071460ff60406000205416611e0f565b61071f841515611e54565b33600052600482526040600020856000528252610743846040600020541015611ead565b336000526007825260ff60056040600020015416156107c0575b506002604060002001610771848254611ea0565b905533600052600781524260036040600020015560048152604060002084600052815260406000206107a4848254611ef0565b90556107b283600c54611ea0565b600c556040519283523392a3005b61085a906005604051916107d383611bc7565b338352848301888152604084016000815260608501906000825260808601926000845260a0870194600186523360005260078a52806040600020985116906001600160601b0360a01b91828a5416178955600189019251169082541617905551600286015551600385015551600484015551151591019060ff801983541691151516179055565b8461075d565b346101845761086e36611c5c565b9061087a821515611e54565b33600052602090600882526040600020548110156109ac576108a89033600052600883526040600020611d92565b50600581019283549360ff851661096e577fd176353c7ebabea1f8770a607428af3da0d72db189cec791714de4d07043532d93946108eb60038501938454611ea0565b8093556002840154831015610921575b505061091560405192604084526001604085019101611efd565b938201528033930390a2005b60019060ff19161790556040518481527f3033c750e3a83865f7afc469bfe356b34ffe53ac3b79014110d037436f163aa033918061096488820160018801611efd565b0390a284806108fb565b60405162461bcd60e51b815260048101859052601660248201527511dbd85b08185b1c9958591e4818dbdb5c1b195d195960521b6044820152606490fd5b60405162461bcd60e51b8152600481018390526012602482015271092dcecc2d8d2c840cedec2d840d2dcc8caf60731b6044820152606490fd5b34610184576000366003190112610184576020600954604051908152f35b34610184576020366003190112610184576001600160a01b03610a25611b7f565b166000526001602052602060ff604060002054166040519015158152f35b346101845760203660031901126101845760c06001600160a01b0380610a67611b7f565b1660005260076020526040600020818154169160018201541690600281015460038201549060ff6005600485015494015416936040519586526020860152604085015260608401526080830152151560a0820152f35b3461018457604036600319011261018457610ad6611b7f565b6001600160a01b03908116600090815260086020526040902080546024359081101561018457610b0591611d92565b5090815416610b1660018301611cac565b916002810154906003810154906004810154600660ff60058401541692015492610b52604051978897885260e0602089015260e0880190611d52565b94604087015260608601526080850152151560a084015260c08301520390f35b3461018457604036600319011261018457610b8b611b7f565b6024359060018060a01b03169081600052602060018152610bb360ff60406000205416611e0f565b610bbe821515611e54565b336000526007815260ff6005604060002001541615610cbe5733600052600781528160026040600020015410610c7a577f9495d03190a79a43e534c9e328ff322f6283261383f5f19c809564f6ad5a57b39033600052600781526002604060002001610c2b848254611ef0565b905533600052600781526004604060002001610c478154611e00565b9055336000526004815260406000208460005281526040600020610c6c848254611ea0565b90556107b283600c54611ef0565b6064906040519062461bcd60e51b82526004820152601e60248201527f496e73756666696369656e7420656d657267656e63792062616c616e636500006044820152fd5b6064906040519062461bcd60e51b825260048201526012602482015271139bc8195b595c99d95b98de481d985d5b1d60721b6044820152fd5b3461018457602036600319011261018457600435610d3f337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b6103e88111610d4d57600d55005b60405162461bcd60e51b815260206004820152601160248201527008ccaca40e4c2e8ca40e8dede40d0d2ced607b1b6044820152606490fd5b3461018457604036600319011261018457610d9f611b7f565b6024359060018060a01b038091166000526006602052604060002080548310156101845760e092610dcf91611d92565b50908082541691600181015491600282015416600382015460048301549160ff600660058601549501541694604051968752602087015260408601526060850152608084015260a0830152151560c0820152f35b34610184576000366003190112610184576020600c54604051908152f35b346101845760603660031901126101845767ffffffffffffffff60043581811161018457610e73903690600401611c05565b9060443590610e856024351515611e54565b428211156110be5733600052600860205260406000209060405191610ea983611bab565b33835260208301938585526024356040850152600060608501526080840152600060a08401524260c08401528054600160401b81101561048d57610ef291600182018155611d92565b93909361047757825184546001600160a01b0319166001600160a01b039190911617845551805191821161048d57610f2d6001850154611c72565b601f8111611077575b50602090601f83116001146110025791806006949260c094600092610ff7575b50508160011b916000199060031b1c19161760018501555b604081015160028501556060810151600385015560808101516004850155610fab60a08201511515600586019060ff801983541691151516179055565b01519101557fcbe86d965b7a734341821c9b1a56fe2212df4b71ba71b354a2811945d517dae8610fe660405192604084526040840190611d52565b9160243560208201528033930390a2005b015190508780610f56565b906001850160005260206000209160005b601f198516811061105f5750926006949260019260c09583601f19811610611046575b505050811b016001850155610f6e565b015160001960f88460031b161c19169055878080611036565b91926020600181928685015181550194019201611013565b600185016000526020600020601f840160051c8101602085106110b7575b601f830160051c820181106110ab575050610f36565b60008155600101611095565b5080611095565b60405162461bcd60e51b815260206004820152601e60248201527f446561646c696e65206d75737420626520696e207468652066757475726500006044820152606490fd5b34610184576000366003190112610184576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b3461018457602036600319011261018457611161611b7f565b60009060018060a01b031660005260036020526004604060002001546007602052600260406000200154916006602052604060002090815467ffffffffffffffff811161048d57604051926111bc60208360051b0185611be3565b818452602084019060005260206000206000915b83831061125e575050505060005b825181101561122e5760c06111f38285611f93565b510151611209575b61120490611e00565b6111de565b9061122661120491606061121d8587611f93565b51015190611ea0565b9190506111fb565b6080848387611246816112418486611ea0565b611ea0565b91604051938452602084015260408301526060820152f35b6007602060019260405161127181611bab565b848060a01b0386541681528486015483820152848060a01b0360028701541660408201526003860154606082015260048601546080820152600586015460a082015260ff600687015416151560c08201528152019201920191906111d0565b34610184576040366003190112610184576112e9611b7f565b6112f1611b95565b9060018060a01b038091166000526004602052604060002091166000526020526020604060002054604051908152f35b3461018457602036600319011261018457600435600052600560205261138a604060002061134e81611cac565b9060018060a01b036001820154169060028101549060ff600382015416600560048301549201549260405196879660c0885260c0880190611d52565b946020870152604086015215156060850152608084015260a08301520390f35b346101845760203660031901126101845760e06001600160a01b03806113ce611b7f565b16600052600360205260406000208181541691600182015416906002810154600382015460048301549160ff600660058601549501541694604051968752602087015260408601526060850152608084015260a0830152151560c0820152f35b346101845761143c36611c5c565b611447811515611e54565b33600052602091600683526040600020548110156115e6576114759033600052600684526040600020611d92565b50600681019081549160ff8316156115ab5760048201928354938585106115705760038401805495878702908782048914881517156104a357801561155a576001976114c8826114d094049a8b93611ef0565b809555611ef0565b90551561154d575b505033600052600484526040600020828060a01b0360028301541660005284526040600020611508848254611ea0565b905561151683600b54611ef0565b600b550154916040519283528201527f76f7baccc63349c3ae8ff1095e67a1a2f1174488051253300786957d942ecdfe60403392a2005b60ff1916905584806114d8565b634e487b7160e01b600052601260045260246000fd5b60405162461bcd60e51b8152600481018890526013602482015272496e73756666696369656e742073686172657360681b6044820152606490fd5b60405162461bcd60e51b8152600481018690526013602482015272506f736974696f6e206e6f742061637469766560681b6044820152606490fd5b60405162461bcd60e51b8152600481018490526016602482015275092dcecc2d8d2c840e0dee6d2e8d2dedc40d2dcc8caf60531b6044820152606490fd5b346101845760403660031901126101845761163d611b7f565b602435907f545d2dad8c10348e7856ed5a80dffdc2fdd064efc1298eaf30b2501206b8acb9906020906001600160a01b039061169c337f0000000000000000000000000000000000000000000000000000000000000000841614611dc4565b169283600052600182526040600020600160ff198254161790556002825280604060002055604051908152a2005b34610184576000366003190112610184576020600b54604051908152f35b346101845760003660031901126101845761172d337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b005b346101845760a03660031901126101845767ffffffffffffffff60043581811161018457611761903690600401611c05565b611769611b95565b61179d337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b604051916117aa83611bc7565b825260018060a01b03166020820152604435604082015260016060820152606435608082015260843560a0820152600e5460005260056020526040600020918151805191821161048d576117fe8454611c72565b601f811161191e575b50602090601f83116001146118af5791806005949260a0946000926118a4575b50508160011b916000199060031b1c19161784555b60018401600180841b036020830151166001600160601b03841b8254161790556040810151600285015561188560608201511515600386019060ff801983541691151516179055565b60808101516004850155015191015561189f600e54611e00565b600e55005b015190508680611827565b908460005260206000209160005b601f19851681106119065750926005949260019260a09583601f198116106118ed575b505050811b01845561183c565b015160001960f88460031b161c191690558680806118e0565b919260206001819286850151815501940192016118bd565b846000526020600020601f840160051c8101916020851061195c575b601f0160051c01905b8181106119505750611807565b60008155600101611943565b909150819061193a565b34610184576000366003190112610184576020600e54604051908152f35b346101845760003660031901126101845760a0600954600a54600b54600c5490600d54926040519485526020850152604084015260608301526080820152f35b34610184576040366003190112610184576119dd611b7f565b6024357f1de3ece35391f6bba650736f2d5d3f12e2cfc54538a340cc5d762d34ca449de760018060a01b03809316928360005260209060018252611a2860ff60406000205416611e0f565b611a33841515611e54565b3360005260039081835260ff6006604060002001541615611ac5575b50336000528082526002604060002001611a6a858254611ea0565b9055336000528082526004604060002001611a86858254611ea0565b9055336000528152426005604060002001556004815260406000208460005281526040600020611ab7848254611ea0565b90556106a283600a54611ea0565b611b6b90600660405191611ad883611bab565b3383528583018981526040840160008152606085016000815260808601916000835260a08701936000855260c088019560018752336000528a8c52806040600020995116906001600160601b0360a01b91828b5416178a5560018a0192511690825416179055516002870155518786015551600485015551600584015551151591019060ff801983541691151516179055565b611b76600954611e00565b60095585611a4f565b600435906001600160a01b038216820361018457565b602435906001600160a01b038216820361018457565b60e0810190811067ffffffffffffffff82111761048d57604052565b60c0810190811067ffffffffffffffff82111761048d57604052565b90601f8019910116810190811067ffffffffffffffff82111761048d57604052565b81601f820112156101845780359067ffffffffffffffff821161048d5760405192611c3a601f8401601f191660200185611be3565b8284526020838301011161018457816000926020809301838601378301015290565b6040906003190112610184576004359060243590565b90600182811c92168015611ca2575b6020831014611c8c57565b634e487b7160e01b600052602260045260246000fd5b91607f1691611c81565b9060405191826000825492611cc084611c72565b908184526001948581169081600014611d2f5750600114611cec575b5050611cea92500383611be3565b565b9093915060005260209081600020936000915b818310611d17575050611cea93508201013880611cdc565b85548884018501529485019487945091830191611cff565b915050611cea94506020925060ff191682840152151560051b8201013880611cdc565b919082519283825260005b848110611d7e575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201611d5d565b8054821015611dae576000526007602060002091020190600090565b634e487b7160e01b600052603260045260246000fd5b15611dcb57565b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fd5b60001981146104a35760010190565b15611e1657565b60405162461bcd60e51b81526020600482015260166024820152752ab739bab83837b93a32b21039ba30b13632b1b7b4b760511b6044820152606490fd5b15611e5b57565b60405162461bcd60e51b815260206004820152601d60248201527f416d6f756e74206d7573742062652067726561746572207468616e20300000006044820152606490fd5b919082018092116104a357565b15611eb457565b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b919082039182116104a357565b9060009291805491611f0e83611c72565b918282526001938481169081600014611f705750600114611f30575b50505050565b90919394506000526020928360002092846000945b838610611f5c575050505001019038808080611f2a565b805485870183015294019385908201611f45565b9294505050602093945060ff191683830152151560051b01019038808080611f2a565b8051821015611dae5760209160051b01019056fea264697066735822122007edc8a099903c635a43e8d4ab979773656fb6f9d5c490bab694a3399d8e8ff064736f6c63430008140033",
+  "deployedBytecode": "0x6080604052600436101561001257600080fd5b60003560e01c8063033a9c7b146119c4578063136d888314611984578063185f84471461196657806328c5225b1461172f57806351858e27146116e85780635216aeec146116ca57806352eb35d11461162457806375259fec1461142e5780637d460cc7146113aa57806386c3dfd91461132157806388239d99146112d05780638c81e4d1146111485780638da5cb5b146111035780638e8ae37514610e4157806390eda7b514610e235780639244adcd14610d86578063927fef2e14610cf7578063a1617f8e14610b72578063b6b3eedf14610abd578063b85b91f114610a43578063bf7d911914610a04578063bff1f9e1146109e6578063c2c1325f14610860578063c4a2c52f146106b0578063c9671c33146105a6578063d21a74ff1461056c578063d2651b411461028a578063d721fe02146101a7578063eeca08f0146101895763ff50abdc1461016657600080fd5b34610184576000366003190112610184576020600a54604051908152f35b600080fd5b34610184576000366003190112610184576020600d54604051908152f35b3461018457600036600319011261018457604051600080546101c881611c72565b80845290600190818116908115610263575060011461020a575b610206846101f281860382611be3565b604051918291602083526020830190611d52565b0390f35b600080805292507f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e5635b82841061024b5750505081016020016101f2826101e2565b80546020858701810191909152909301928101610233565b60ff191660208087019190915292151560051b850190920192506101f291508390506101e2565b34610184576060366003190112610184576004356102a6611b95565b6044359060018060a01b0380911680600052602091600183526102d060ff60406000205416611e0f565b83156102dc8115611e54565b8560005260058452604060002060ff6003820154161561053157600481015486106104f5576005015485116104b9573360005260048452604060002083600052845261032f856040600020541015611ead565b670de0b6b3a764000080860291868304821417156104a357336000526006855260406000206040519161036183611bab565b33835286830193898552604084019187835260608501908a8252608086019204825260a085019242845260c0860194600186528054600160401b81101561048d576103b191600182018155611d92565b9790976104775788610412996006985116916001600160601b0360a01b92838b5416178a555160018a0155600289019251169082541617905551600386015551600485015551600584015551151591019060ff801983541691151516179055565b336000526004825260406000209060005281526040600020610435838254611ef0565b905561044382600b54611ea0565b600b556040519283528201527f0a9bd546b0677820e552855be50bea4847cd782448e9f00d2543ceb3b91c2c5b60403392a2005b634e487b7160e01b600052600060045260246000fd5b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b60405162461bcd60e51b8152600481018590526014602482015273416d6f756e742061626f7665206d6178696d756d60601b6044820152606490fd5b60405162461bcd60e51b8152600481018690526014602482015273416d6f756e742062656c6f77206d696e696d756d60601b6044820152606490fd5b60405162461bcd60e51b81526004810186905260136024820152725374726174656779206e6f742061637469766560681b6044820152606490fd5b34610184576020366003190112610184576001600160a01b0361058d611b7f565b1660005260026020526020604060002054604051908152f35b34610184576040366003190112610184576105bf611b7f565b6024359060018060a01b031690816000527f26aabd0b187d03562b9e52195f1ff57274164c7fd5588254b7654cc27dde2b0060206001815261060860ff60406000205416611e0f565b610613831515611e54565b33600052600481526040600020846000528152610637836040600020541015611ead565b33600052600381526003604060002001610652848254611ea0565b90553360005260038152600460406000200161066f848254611ef0565b9055336000526004815260406000208460005281526040600020610694848254611ef0565b90556106a283600a54611ef0565b600a556040519283523392a3005b34610184576040366003190112610184576106c9611b7f565b6024357fad7a046b77da2b78a35150b3d1f3820f14160df51ca88e6ac28c1c1acec76b0360018060a01b0380931692836000526020906001825261071460ff60406000205416611e0f565b61071f841515611e54565b33600052600482526040600020856000528252610743846040600020541015611ead565b336000526007825260ff60056040600020015416156107c0575b506002604060002001610771848254611ea0565b905533600052600781524260036040600020015560048152604060002084600052815260406000206107a4848254611ef0565b90556107b283600c54611ea0565b600c556040519283523392a3005b61085a906005604051916107d383611bc7565b338352848301888152604084016000815260608501906000825260808601926000845260a0870194600186523360005260078a52806040600020985116906001600160601b0360a01b91828a5416178955600189019251169082541617905551600286015551600385015551600484015551151591019060ff801983541691151516179055565b8461075d565b346101845761086e36611c5c565b9061087a821515611e54565b33600052602090600882526040600020548110156109ac576108a89033600052600883526040600020611d92565b50600581019283549360ff851661096e577fd176353c7ebabea1f8770a607428af3da0d72db189cec791714de4d07043532d93946108eb60038501938454611ea0565b8093556002840154831015610921575b505061091560405192604084526001604085019101611efd565b938201528033930390a2005b60019060ff19161790556040518481527f3033c750e3a83865f7afc469bfe356b34ffe53ac3b79014110d037436f163aa033918061096488820160018801611efd565b0390a284806108fb565b60405162461bcd60e51b815260048101859052601660248201527511dbd85b08185b1c9958591e4818dbdb5c1b195d195960521b6044820152606490fd5b60405162461bcd60e51b8152600481018390526012602482015271092dcecc2d8d2c840cedec2d840d2dcc8caf60731b6044820152606490fd5b34610184576000366003190112610184576020600954604051908152f35b34610184576020366003190112610184576001600160a01b03610a25611b7f565b166000526001602052602060ff604060002054166040519015158152f35b346101845760203660031901126101845760c06001600160a01b0380610a67611b7f565b1660005260076020526040600020818154169160018201541690600281015460038201549060ff6005600485015494015416936040519586526020860152604085015260608401526080830152151560a0820152f35b3461018457604036600319011261018457610ad6611b7f565b6001600160a01b03908116600090815260086020526040902080546024359081101561018457610b0591611d92565b5090815416610b1660018301611cac565b916002810154906003810154906004810154600660ff60058401541692015492610b52604051978897885260e0602089015260e0880190611d52565b94604087015260608601526080850152151560a084015260c08301520390f35b3461018457604036600319011261018457610b8b611b7f565b6024359060018060a01b03169081600052602060018152610bb360ff60406000205416611e0f565b610bbe821515611e54565b336000526007815260ff6005604060002001541615610cbe5733600052600781528160026040600020015410610c7a577f9495d03190a79a43e534c9e328ff322f6283261383f5f19c809564f6ad5a57b39033600052600781526002604060002001610c2b848254611ef0565b905533600052600781526004604060002001610c478154611e00565b9055336000526004815260406000208460005281526040600020610c6c848254611ea0565b90556107b283600c54611ef0565b6064906040519062461bcd60e51b82526004820152601e60248201527f496e73756666696369656e7420656d657267656e63792062616c616e636500006044820152fd5b6064906040519062461bcd60e51b825260048201526012602482015271139bc8195b595c99d95b98de481d985d5b1d60721b6044820152fd5b3461018457602036600319011261018457600435610d3f337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b6103e88111610d4d57600d55005b60405162461bcd60e51b815260206004820152601160248201527008ccaca40e4c2e8ca40e8dede40d0d2ced607b1b6044820152606490fd5b3461018457604036600319011261018457610d9f611b7f565b6024359060018060a01b038091166000526006602052604060002080548310156101845760e092610dcf91611d92565b50908082541691600181015491600282015416600382015460048301549160ff600660058601549501541694604051968752602087015260408601526060850152608084015260a0830152151560c0820152f35b34610184576000366003190112610184576020600c54604051908152f35b346101845760603660031901126101845767ffffffffffffffff60043581811161018457610e73903690600401611c05565b9060443590610e856024351515611e54565b428211156110be5733600052600860205260406000209060405191610ea983611bab565b33835260208301938585526024356040850152600060608501526080840152600060a08401524260c08401528054600160401b81101561048d57610ef291600182018155611d92565b93909361047757825184546001600160a01b0319166001600160a01b039190911617845551805191821161048d57610f2d6001850154611c72565b601f8111611077575b50602090601f83116001146110025791806006949260c094600092610ff7575b50508160011b916000199060031b1c19161760018501555b604081015160028501556060810151600385015560808101516004850155610fab60a08201511515600586019060ff801983541691151516179055565b01519101557fcbe86d965b7a734341821c9b1a56fe2212df4b71ba71b354a2811945d517dae8610fe660405192604084526040840190611d52565b9160243560208201528033930390a2005b015190508780610f56565b906001850160005260206000209160005b601f198516811061105f5750926006949260019260c09583601f19811610611046575b505050811b016001850155610f6e565b015160001960f88460031b161c19169055878080611036565b91926020600181928685015181550194019201611013565b600185016000526020600020601f840160051c8101602085106110b7575b601f830160051c820181106110ab575050610f36565b60008155600101611095565b5080611095565b60405162461bcd60e51b815260206004820152601e60248201527f446561646c696e65206d75737420626520696e207468652066757475726500006044820152606490fd5b34610184576000366003190112610184576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b3461018457602036600319011261018457611161611b7f565b60009060018060a01b031660005260036020526004604060002001546007602052600260406000200154916006602052604060002090815467ffffffffffffffff811161048d57604051926111bc60208360051b0185611be3565b818452602084019060005260206000206000915b83831061125e575050505060005b825181101561122e5760c06111f38285611f93565b510151611209575b61120490611e00565b6111de565b9061122661120491606061121d8587611f93565b51015190611ea0565b9190506111fb565b6080848387611246816112418486611ea0565b611ea0565b91604051938452602084015260408301526060820152f35b6007602060019260405161127181611bab565b848060a01b0386541681528486015483820152848060a01b0360028701541660408201526003860154606082015260048601546080820152600586015460a082015260ff600687015416151560c08201528152019201920191906111d0565b34610184576040366003190112610184576112e9611b7f565b6112f1611b95565b9060018060a01b038091166000526004602052604060002091166000526020526020604060002054604051908152f35b3461018457602036600319011261018457600435600052600560205261138a604060002061134e81611cac565b9060018060a01b036001820154169060028101549060ff600382015416600560048301549201549260405196879660c0885260c0880190611d52565b946020870152604086015215156060850152608084015260a08301520390f35b346101845760203660031901126101845760e06001600160a01b03806113ce611b7f565b16600052600360205260406000208181541691600182015416906002810154600382015460048301549160ff600660058601549501541694604051968752602087015260408601526060850152608084015260a0830152151560c0820152f35b346101845761143c36611c5c565b611447811515611e54565b33600052602091600683526040600020548110156115e6576114759033600052600684526040600020611d92565b50600681019081549160ff8316156115ab5760048201928354938585106115705760038401805495878702908782048914881517156104a357801561155a576001976114c8826114d094049a8b93611ef0565b809555611ef0565b90551561154d575b505033600052600484526040600020828060a01b0360028301541660005284526040600020611508848254611ea0565b905561151683600b54611ef0565b600b550154916040519283528201527f76f7baccc63349c3ae8ff1095e67a1a2f1174488051253300786957d942ecdfe60403392a2005b60ff1916905584806114d8565b634e487b7160e01b600052601260045260246000fd5b60405162461bcd60e51b8152600481018890526013602482015272496e73756666696369656e742073686172657360681b6044820152606490fd5b60405162461bcd60e51b8152600481018690526013602482015272506f736974696f6e206e6f742061637469766560681b6044820152606490fd5b60405162461bcd60e51b8152600481018490526016602482015275092dcecc2d8d2c840e0dee6d2e8d2dedc40d2dcc8caf60531b6044820152606490fd5b346101845760403660031901126101845761163d611b7f565b602435907f545d2dad8c10348e7856ed5a80dffdc2fdd064efc1298eaf30b2501206b8acb9906020906001600160a01b039061169c337f0000000000000000000000000000000000000000000000000000000000000000841614611dc4565b169283600052600182526040600020600160ff198254161790556002825280604060002055604051908152a2005b34610184576000366003190112610184576020600b54604051908152f35b346101845760003660031901126101845761172d337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b005b346101845760a03660031901126101845767ffffffffffffffff60043581811161018457611761903690600401611c05565b611769611b95565b61179d337f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031614611dc4565b604051916117aa83611bc7565b825260018060a01b03166020820152604435604082015260016060820152606435608082015260843560a0820152600e5460005260056020526040600020918151805191821161048d576117fe8454611c72565b601f811161191e575b50602090601f83116001146118af5791806005949260a0946000926118a4575b50508160011b916000199060031b1c19161784555b60018401600180841b036020830151166001600160601b03841b8254161790556040810151600285015561188560608201511515600386019060ff801983541691151516179055565b60808101516004850155015191015561189f600e54611e00565b600e55005b015190508680611827565b908460005260206000209160005b601f19851681106119065750926005949260019260a09583601f198116106118ed575b505050811b01845561183c565b015160001960f88460031b161c191690558680806118e0565b919260206001819286850151815501940192016118bd565b846000526020600020601f840160051c8101916020851061195c575b601f0160051c01905b8181106119505750611807565b60008155600101611943565b909150819061193a565b34610184576000366003190112610184576020600e54604051908152f35b346101845760003660031901126101845760a0600954600a54600b54600c5490600d54926040519485526020850152604084015260608301526080820152f35b34610184576040366003190112610184576119dd611b7f565b6024357f1de3ece35391f6bba650736f2d5d3f12e2cfc54538a340cc5d762d34ca449de760018060a01b03809316928360005260209060018252611a2860ff60406000205416611e0f565b611a33841515611e54565b3360005260039081835260ff6006604060002001541615611ac5575b50336000528082526002604060002001611a6a858254611ea0565b9055336000528082526004604060002001611a86858254611ea0565b9055336000528152426005604060002001556004815260406000208460005281526040600020611ab7848254611ea0565b90556106a283600a54611ea0565b611b6b90600660405191611ad883611bab565b3383528583018981526040840160008152606085016000815260808601916000835260a08701936000855260c088019560018752336000528a8c52806040600020995116906001600160601b0360a01b91828b5416178a5560018a0192511690825416179055516002870155518786015551600485015551600584015551151591019060ff801983541691151516179055565b611b76600954611e00565b60095585611a4f565b600435906001600160a01b038216820361018457565b602435906001600160a01b038216820361018457565b60e0810190811067ffffffffffffffff82111761048d57604052565b60c0810190811067ffffffffffffffff82111761048d57604052565b90601f8019910116810190811067ffffffffffffffff82111761048d57604052565b81601f820112156101845780359067ffffffffffffffff821161048d5760405192611c3a601f8401601f191660200185611be3565b8284526020838301011161018457816000926020809301838601378301015290565b6040906003190112610184576004359060243590565b90600182811c92168015611ca2575b6020831014611c8c57565b634e487b7160e01b600052602260045260246000fd5b91607f1691611c81565b9060405191826000825492611cc084611c72565b908184526001948581169081600014611d2f5750600114611cec575b5050611cea92500383611be3565b565b9093915060005260209081600020936000915b818310611d17575050611cea93508201013880611cdc565b85548884018501529485019487945091830191611cff565b915050611cea94506020925060ff191682840152151560051b8201013880611cdc565b919082519283825260005b848110611d7e575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201611d5d565b8054821015611dae576000526007602060002091020190600090565b634e487b7160e01b600052603260045260246000fd5b15611dcb57565b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fd5b60001981146104a35760010190565b15611e1657565b60405162461bcd60e51b81526020600482015260166024820152752ab739bab83837b93a32b21039ba30b13632b1b7b4b760511b6044820152606490fd5b15611e5b57565b60405162461bcd60e51b815260206004820152601d60248201527f416d6f756e74206d7573742062652067726561746572207468616e20300000006044820152606490fd5b919082018092116104a357565b15611eb457565b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b919082039182116104a357565b9060009291805491611f0e83611c72565b918282526001938481169081600014611f705750600114611f30575b50505050565b90919394506000526020928360002092846000945b838610611f5c575050505001019038808080611f2a565b805485870183015294019385908201611f45565b9294505050602093945060ff191683830152151560051b01019038808080611f2a565b8051821015611dae5760209160051b01019056fea264697066735822122007edc8a099903c635a43e8d4ab979773656fb6f9d5c490bab694a3399d8e8ff064736f6c63430008140033",
+  "devdoc": {
+    "author": "SafeNest Team",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "addInvestmentStrategy(string,address,uint256,uint256,uint256)": {
+        "notice": "Add investment strategy"
+      },
+      "addStablecoin(address,uint256)": {
+        "notice": "Add supported stablecoin"
+      },
+      "createSavingsGoal(string,uint256,uint256)": {
+        "notice": "Create savings goal"
+      },
+      "depositEmergencyFund(address,uint256)": {
+        "notice": "Deposit to emergency vault"
+      },
+      "depositSavings(address,uint256)": {
+        "notice": "Make micro-savings deposit"
+      },
+      "emergencyPause()": {
+        "notice": "Emergency function to pause platform (only owner)"
+      },
+      "getPlatformStats()": {
+        "notice": "Get platform statistics"
+      },
+      "getPortfolioValue(address)": {
+        "notice": "Get user's total portfolio value"
+      },
+      "investInStrategy(uint256,address,uint256)": {
+        "notice": "Invest in DeFi strategy"
+      },
+      "setPlatformFeeRate(uint256)": {
+        "notice": "Set platform fee rate (only owner)"
+      },
+      "updateGoalProgress(uint256,uint256)": {
+        "notice": "Update goal progress"
+      },
+      "withdrawEmergencyFund(address,uint256)": {
+        "notice": "Withdraw from emergency vault (instant)"
+      },
+      "withdrawFromInvestment(uint256,uint256)": {
+        "notice": "Withdraw from investment"
+      },
+      "withdrawSavings(address,uint256)": {
+        "notice": "Withdraw from savings"
+      }
+    },
+    "notice": "MicroSavings - Mobile-first DeFi savings and investment platform Enables micro-savings, micro-investments, and on-chain micro-pensions",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 6617,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "platformName",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 6621,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "supportedStablecoins",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_bool)"
+      },
+      {
+        "astId": 6625,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "stablecoinDecimals",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 6701,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "userSavingsAccounts",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_struct(SavingsAccount)6640_storage)"
+      },
+      {
+        "astId": 6707,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "userStablecoinBalances",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 6712,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "investmentStrategies",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_uint256,t_struct(InvestmentStrategy)6653_storage)"
+      },
+      {
+        "astId": 6718,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "userInvestments",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_mapping(t_address,t_array(t_struct(InvestmentPosition)6668_storage)dyn_storage)"
+      },
+      {
+        "astId": 6723,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "userEmergencyVaults",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_mapping(t_address,t_struct(EmergencyVault)6681_storage)"
+      },
+      {
+        "astId": 6729,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "userGoals",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_mapping(t_address,t_array(t_struct(SavingsGoal)6696_storage)dyn_storage)"
+      },
+      {
+        "astId": 6732,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "totalUsers",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 6735,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "totalDeposited",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 6738,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "totalInvested",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 6741,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "totalEmergencyFunds",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 6744,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "platformFeeRate",
+        "offset": 0,
+        "slot": "13",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 6747,
+        "contract": "contracts/MicroSavings.sol:MicroSavings",
+        "label": "nextStrategyId",
+        "offset": 0,
+        "slot": "14",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(InvestmentPosition)6668_storage)dyn_storage": {
+        "base": "t_struct(InvestmentPosition)6668_storage",
+        "encoding": "dynamic_array",
+        "label": "struct MicroSavings.InvestmentPosition[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_struct(SavingsGoal)6696_storage)dyn_storage": {
+        "base": "t_struct(SavingsGoal)6696_storage",
+        "encoding": "dynamic_array",
+        "label": "struct MicroSavings.SavingsGoal[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_array(t_struct(InvestmentPosition)6668_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct MicroSavings.InvestmentPosition[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_struct(InvestmentPosition)6668_storage)dyn_storage"
+      },
+      "t_mapping(t_address,t_array(t_struct(SavingsGoal)6696_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct MicroSavings.SavingsGoal[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_struct(SavingsGoal)6696_storage)dyn_storage"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_struct(EmergencyVault)6681_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct MicroSavings.EmergencyVault)",
+        "numberOfBytes": "32",
+        "value": "t_struct(EmergencyVault)6681_storage"
+      },
+      "t_mapping(t_address,t_struct(SavingsAccount)6640_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct MicroSavings.SavingsAccount)",
+        "numberOfBytes": "32",
+        "value": "t_struct(SavingsAccount)6640_storage"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_struct(InvestmentStrategy)6653_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct MicroSavings.InvestmentStrategy)",
+        "numberOfBytes": "32",
+        "value": "t_struct(InvestmentStrategy)6653_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(EmergencyVault)6681_storage": {
+        "encoding": "inplace",
+        "label": "struct MicroSavings.EmergencyVault",
+        "members": [
+          {
+            "astId": 6670,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 6672,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "stablecoin",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 6674,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "balance",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6676,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "lastDepositTime",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6678,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "withdrawalCount",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6680,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_struct(InvestmentPosition)6668_storage": {
+        "encoding": "inplace",
+        "label": "struct MicroSavings.InvestmentPosition",
+        "members": [
+          {
+            "astId": 6655,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 6657,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "strategyId",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6659,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "stablecoin",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address"
+          },
+          {
+            "astId": 6661,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "amount",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6663,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "shares",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6665,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "entryTime",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6667,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "224"
+      },
+      "t_struct(InvestmentStrategy)6653_storage": {
+        "encoding": "inplace",
+        "label": "struct MicroSavings.InvestmentStrategy",
+        "members": [
+          {
+            "astId": 6642,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "name",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 6644,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "strategyContract",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 6646,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "apy",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6648,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_bool"
+          },
+          {
+            "astId": 6650,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "minDeposit",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6652,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "maxDeposit",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_struct(SavingsAccount)6640_storage": {
+        "encoding": "inplace",
+        "label": "struct MicroSavings.SavingsAccount",
+        "members": [
+          {
+            "astId": 6627,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 6629,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "stablecoin",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 6631,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "totalDeposited",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6633,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "totalWithdrawn",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6635,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "currentBalance",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6637,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "lastDepositTime",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6639,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "224"
+      },
+      "t_struct(SavingsGoal)6696_storage": {
+        "encoding": "inplace",
+        "label": "struct MicroSavings.SavingsGoal",
+        "members": [
+          {
+            "astId": 6683,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 6685,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "goalName",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 6687,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "targetAmount",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6689,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "currentAmount",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6691,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "deadline",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 6693,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "isCompleted",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bool"
+          },
+          {
+            "astId": 6695,
+            "contract": "contracts/MicroSavings.sol:MicroSavings",
+            "label": "createdAt",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "224"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

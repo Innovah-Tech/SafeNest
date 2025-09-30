@@ -1,0 +1,1334 @@
+{
+  "address": "0x256EF23ffc4091663a36054fc75d4a8127A35366",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "applicant",
+          "type": "address"
+        }
+      ],
+      "name": "ApplicationApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "applicant",
+          "type": "address"
+        }
+      ],
+      "name": "ApplicationSubmitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ContributionMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "FundsDistributed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        }
+      ],
+      "name": "MemberJoined",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        }
+      ],
+      "name": "MemberLeft",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        }
+      ],
+      "name": "PoolCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum CommunityPools.PoolType",
+          "name": "poolType",
+          "type": "uint8"
+        }
+      ],
+      "name": "PoolCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_message",
+          "type": "string"
+        }
+      ],
+      "name": "applyToJoinPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_applicationIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "approveApplication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "contributeToPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        },
+        {
+          "internalType": "enum CommunityPools.PoolType",
+          "name": "_poolType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "_stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_contributionAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_contributionFrequency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isPublic",
+          "type": "bool"
+        }
+      ],
+      "name": "createPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPlatformStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_totalPools",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalContributionsAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_platformFeeRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPoolDetails",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "enum CommunityPools.PoolType",
+          "name": "poolType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "contributionAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "contributionFrequency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolTotalContributions",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isPublic",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "createdAt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "getUserMemberships",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "isMember",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        }
+      ],
+      "name": "joinPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        }
+      ],
+      "name": "leavePool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextPoolId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "platformFeeRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "platformName",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "poolApplications",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "applicant",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "appliedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isApproved",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isProcessed",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "pools",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "enum CommunityPools.PoolType",
+          "name": "poolType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "address",
+          "name": "stablecoin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "contributionAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "contributionFrequency",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentMembers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalContributions",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isPublic",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nextContribution",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rotationIndex",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPlatformFeeRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalContributions",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalMembers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalPools",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userCreatedPools",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userMemberships",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "joinedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalContributed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lastContribution",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reputation",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_poolId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawFromPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xafe538d6c14535a06055d51bfa8abc754d42e73b6776db077cc78334b562a1e2",
+  "receipt": {
+    "to": null,
+    "from": "0xA889121299B61D09A75088CEc84D4Fc2E76D2ed7",
+    "contractAddress": "0x256EF23ffc4091663a36054fc75d4a8127A35366",
+    "transactionIndex": 0,
+    "gasUsed": "2031715",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x0002ccd00000053af4601e485b0e6597fa4d655617ba2008176144a5f1979876",
+    "transactionHash": "0xafe538d6c14535a06055d51bfa8abc754d42e73b6776db077cc78334b562a1e2",
+    "logs": [],
+    "blockNumber": 60317147,
+    "cumulativeGasUsed": "2031715",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "0ada7a5da3d26f26d8ea40f0e25e5925",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"applicant\",\"type\":\"address\"}],\"name\":\"ApplicationApproved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"applicant\",\"type\":\"address\"}],\"name\":\"ApplicationSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ContributionMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"FundsDistributed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"}],\"name\":\"MemberJoined\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"member\",\"type\":\"address\"}],\"name\":\"MemberLeft\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"}],\"name\":\"PoolCompleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"enum CommunityPools.PoolType\",\"name\":\"poolType\",\"type\":\"uint8\"}],\"name\":\"PoolCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_message\",\"type\":\"string\"}],\"name\":\"applyToJoinPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_applicationIndex\",\"type\":\"uint256\"}],\"name\":\"approveApplication\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"contributeToPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_description\",\"type\":\"string\"},{\"internalType\":\"enum CommunityPools.PoolType\",\"name\":\"_poolType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"_stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_contributionAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_contributionFrequency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxMembers\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"_isPublic\",\"type\":\"bool\"}],\"name\":\"createPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPlatformStats\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_totalPools\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalContributionsAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_platformFeeRate\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"}],\"name\":\"getPoolDetails\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"enum CommunityPools.PoolType\",\"name\":\"poolType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"contributionAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"contributionFrequency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"poolTotalContributions\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"poolBalance\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isPublic\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"getUserMemberships\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"isMember\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"}],\"name\":\"joinPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"}],\"name\":\"leavePool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextPoolId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"platformFeeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"platformName\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"poolApplications\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"applicant\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"message\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"appliedAt\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isApproved\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isProcessed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"pools\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"enum CommunityPools.PoolType\",\"name\":\"poolType\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"stablecoin\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"contributionAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"contributionFrequency\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentMembers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalContributions\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"poolBalance\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isPublic\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nextContribution\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rotationIndex\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_newRate\",\"type\":\"uint256\"}],\"name\":\"setPlatformFeeRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalContributions\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalMembers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalPools\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userCreatedPools\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userMemberships\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"joinedAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalContributed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastContribution\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"reputation\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_poolId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdrawFromPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"SafeNest Team\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"applyToJoinPool(uint256,string)\":{\"notice\":\"Apply to join a private pool\"},\"approveApplication(uint256,uint256)\":{\"notice\":\"Approve pool application (only pool creator)\"},\"contributeToPool(uint256,uint256)\":{\"notice\":\"Make contribution to pool\"},\"createPool(string,string,uint8,address,uint256,uint256,uint256,bool)\":{\"notice\":\"Create a new community pool\"},\"getPlatformStats()\":{\"notice\":\"Get platform statistics\"},\"getPoolDetails(uint256)\":{\"notice\":\"Get pool details\"},\"getUserMemberships(address)\":{\"notice\":\"Get user's pool memberships\"},\"joinPool(uint256)\":{\"notice\":\"Join a public pool\"},\"leavePool(uint256)\":{\"notice\":\"Leave pool\"},\"setPlatformFeeRate(uint256)\":{\"notice\":\"Set platform fee rate (only owner)\"},\"withdrawFromPool(uint256,uint256)\":{\"notice\":\"Withdraw from pool (for non-rotating pools)\"}},\"notice\":\"CommunityPools - Rotating savings and community investment pools Enables digital chamas and collective yield farming\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/CommunityPools.sol\":\"CommunityPools\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/CommunityPools.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\r\\npragma solidity >=0.8.0 <0.9.0;\\r\\n\\r\\n// import \\\"hardhat/console.sol\\\";\\r\\n\\r\\n/**\\r\\n * CommunityPools - Rotating savings and community investment pools\\r\\n * Enables digital chamas and collective yield farming\\r\\n * @author SafeNest Team\\r\\n */\\r\\ncontract CommunityPools {\\r\\n    // State Variables\\r\\n    address public immutable owner;\\r\\n    string public platformName = \\\"Community Pools - Digital Chamas\\\";\\r\\n    \\r\\n    // Pool types\\r\\n    enum PoolType {\\r\\n        ROTATING_SAVINGS,    // Traditional chama - members take turns receiving funds\\r\\n        COLLECTIVE_INVESTMENT, // Pool funds for DeFi investments\\r\\n        EMERGENCY_FUND,      // Community emergency fund\\r\\n        GOAL_ORIENTED        // Pool for specific community goals\\r\\n    }\\r\\n    \\r\\n    // Pool structure\\r\\n    struct Pool {\\r\\n        uint256 id;\\r\\n        address creator;\\r\\n        string name;\\r\\n        string description;\\r\\n        PoolType poolType;\\r\\n        address stablecoin;\\r\\n        uint256 contributionAmount;\\r\\n        uint256 contributionFrequency; // in days\\r\\n        uint256 maxMembers;\\r\\n        uint256 currentMembers;\\r\\n        uint256 totalContributions;\\r\\n        uint256 poolBalance;\\r\\n        bool isActive;\\r\\n        bool isPublic;\\r\\n        uint256 createdAt;\\r\\n        uint256 nextContribution;\\r\\n        uint256 rotationIndex; // For rotating savings\\r\\n        mapping(address => bool) members;\\r\\n        mapping(address => uint256) memberContributions;\\r\\n        mapping(address => bool) hasReceived; // For rotating savings\\r\\n    }\\r\\n    \\r\\n    // Member structure\\r\\n    struct Member {\\r\\n        address user;\\r\\n        uint256 joinedAt;\\r\\n        uint256 totalContributed;\\r\\n        uint256 lastContribution;\\r\\n        bool isActive;\\r\\n        uint256 reputation;\\r\\n    }\\r\\n    \\r\\n    // Pool applications\\r\\n    struct PoolApplication {\\r\\n        address applicant;\\r\\n        uint256 poolId;\\r\\n        string message;\\r\\n        uint256 appliedAt;\\r\\n        bool isApproved;\\r\\n        bool isProcessed;\\r\\n    }\\r\\n    \\r\\n    // Mappings\\r\\n    mapping(uint256 => Pool) public pools;\\r\\n    mapping(address => Member[]) public userMemberships;\\r\\n    mapping(address => uint256[]) public userCreatedPools;\\r\\n    mapping(uint256 => PoolApplication[]) public poolApplications;\\r\\n    mapping(address => mapping(uint256 => bool)) public isMember;\\r\\n    \\r\\n    // Platform statistics\\r\\n    uint256 public totalPools = 0;\\r\\n    uint256 public totalMembers = 0;\\r\\n    uint256 public totalContributions = 0;\\r\\n    uint256 public nextPoolId = 1;\\r\\n    uint256 public platformFeeRate = 20; // 0.2% in basis points\\r\\n    \\r\\n    // Events\\r\\n    event PoolCreated(uint256 indexed poolId, address indexed creator, string name, PoolType poolType);\\r\\n    event MemberJoined(uint256 indexed poolId, address indexed member);\\r\\n    event MemberLeft(uint256 indexed poolId, address indexed member);\\r\\n    event ContributionMade(uint256 indexed poolId, address indexed member, uint256 amount);\\r\\n    event FundsDistributed(uint256 indexed poolId, address indexed recipient, uint256 amount);\\r\\n    event ApplicationSubmitted(uint256 indexed poolId, address indexed applicant);\\r\\n    event ApplicationApproved(uint256 indexed poolId, address indexed applicant);\\r\\n    event PoolCompleted(uint256 indexed poolId);\\r\\n    \\r\\n    // Modifiers\\r\\n    modifier onlyOwner() {\\r\\n        require(msg.sender == owner, \\\"Not the owner\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier validPoolId(uint256 _poolId) {\\r\\n        require(_poolId < nextPoolId, \\\"Invalid pool ID\\\");\\r\\n        require(pools[_poolId].isActive, \\\"Pool not active\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier onlyPoolMember(uint256 _poolId) {\\r\\n        require(isMember[msg.sender][_poolId], \\\"Not a pool member\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    modifier onlyPoolCreator(uint256 _poolId) {\\r\\n        require(pools[_poolId].creator == msg.sender, \\\"Not the pool creator\\\");\\r\\n        _;\\r\\n    }\\r\\n    \\r\\n    // Constructor\\r\\n    constructor() {\\r\\n        owner = msg.sender;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Create a new community pool\\r\\n     */\\r\\n    function createPool(\\r\\n        string memory _name,\\r\\n        string memory _description,\\r\\n        PoolType _poolType,\\r\\n        address _stablecoin,\\r\\n        uint256 _contributionAmount,\\r\\n        uint256 _contributionFrequency,\\r\\n        uint256 _maxMembers,\\r\\n        bool _isPublic\\r\\n    ) external {\\r\\n        require(bytes(_name).length > 0, \\\"Pool name required\\\");\\r\\n        require(_contributionAmount > 0, \\\"Contribution amount must be positive\\\");\\r\\n        require(_maxMembers > 1, \\\"Pool must have at least 2 members\\\");\\r\\n        require(_contributionFrequency > 0, \\\"Contribution frequency must be positive\\\");\\r\\n        \\r\\n        // Initialize pool struct\\r\\n        Pool storage newPool = pools[nextPoolId];\\r\\n        newPool.id = nextPoolId;\\r\\n        newPool.creator = msg.sender;\\r\\n        newPool.name = _name;\\r\\n        newPool.description = _description;\\r\\n        newPool.poolType = _poolType;\\r\\n        newPool.stablecoin = _stablecoin;\\r\\n        newPool.contributionAmount = _contributionAmount;\\r\\n        newPool.contributionFrequency = _contributionFrequency;\\r\\n        newPool.maxMembers = _maxMembers;\\r\\n        newPool.currentMembers = 0;\\r\\n        newPool.totalContributions = 0;\\r\\n        newPool.poolBalance = 0;\\r\\n        newPool.isActive = true;\\r\\n        newPool.isPublic = _isPublic;\\r\\n        newPool.createdAt = block.timestamp;\\r\\n        newPool.nextContribution = block.timestamp + _contributionFrequency * 1 days;\\r\\n        newPool.rotationIndex = 0;\\r\\n        \\r\\n        // Creator automatically becomes first member\\r\\n        newPool.members[msg.sender] = true;\\r\\n        newPool.currentMembers = 1;\\r\\n        isMember[msg.sender][nextPoolId] = true;\\r\\n        \\r\\n        userCreatedPools[msg.sender].push(nextPoolId);\\r\\n        totalPools++;\\r\\n        totalMembers++;\\r\\n        \\r\\n        emit PoolCreated(nextPoolId, msg.sender, _name, _poolType);\\r\\n        emit MemberJoined(nextPoolId, msg.sender);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Join a public pool\\r\\n     */\\r\\n    function joinPool(uint256 _poolId) external validPoolId(_poolId) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(pool.isPublic, \\\"Pool is not public\\\");\\r\\n        require(!isMember[msg.sender][_poolId], \\\"Already a member\\\");\\r\\n        require(pool.currentMembers < pool.maxMembers, \\\"Pool is full\\\");\\r\\n        \\r\\n        pool.members[msg.sender] = true;\\r\\n        pool.currentMembers++;\\r\\n        isMember[msg.sender][_poolId] = true;\\r\\n        totalMembers++;\\r\\n        \\r\\n        userMemberships[msg.sender].push(Member({\\r\\n            user: msg.sender,\\r\\n            joinedAt: block.timestamp,\\r\\n            totalContributed: 0,\\r\\n            lastContribution: 0,\\r\\n            isActive: true,\\r\\n            reputation: 0\\r\\n        }));\\r\\n        \\r\\n        emit MemberJoined(_poolId, msg.sender);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Apply to join a private pool\\r\\n     */\\r\\n    function applyToJoinPool(uint256 _poolId, string memory _message) external validPoolId(_poolId) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(!pool.isPublic, \\\"Pool is public - use joinPool\\\");\\r\\n        require(!isMember[msg.sender][_poolId], \\\"Already a member\\\");\\r\\n        require(pool.currentMembers < pool.maxMembers, \\\"Pool is full\\\");\\r\\n        \\r\\n        poolApplications[_poolId].push(PoolApplication({\\r\\n            applicant: msg.sender,\\r\\n            poolId: _poolId,\\r\\n            message: _message,\\r\\n            appliedAt: block.timestamp,\\r\\n            isApproved: false,\\r\\n            isProcessed: false\\r\\n        }));\\r\\n        \\r\\n        emit ApplicationSubmitted(_poolId, msg.sender);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Approve pool application (only pool creator)\\r\\n     */\\r\\n    function approveApplication(uint256 _poolId, uint256 _applicationIndex) external onlyPoolCreator(_poolId) {\\r\\n        require(_applicationIndex < poolApplications[_poolId].length, \\\"Invalid application index\\\");\\r\\n        \\r\\n        PoolApplication storage application = poolApplications[_poolId][_applicationIndex];\\r\\n        require(!application.isProcessed, \\\"Application already processed\\\");\\r\\n        \\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(pool.currentMembers < pool.maxMembers, \\\"Pool is full\\\");\\r\\n        \\r\\n        application.isApproved = true;\\r\\n        application.isProcessed = true;\\r\\n        \\r\\n        pool.members[application.applicant] = true;\\r\\n        pool.currentMembers++;\\r\\n        isMember[application.applicant][_poolId] = true;\\r\\n        totalMembers++;\\r\\n        \\r\\n        userMemberships[application.applicant].push(Member({\\r\\n            user: application.applicant,\\r\\n            joinedAt: block.timestamp,\\r\\n            totalContributed: 0,\\r\\n            lastContribution: 0,\\r\\n            isActive: true,\\r\\n            reputation: 0\\r\\n        }));\\r\\n        \\r\\n        emit ApplicationApproved(_poolId, application.applicant);\\r\\n        emit MemberJoined(_poolId, application.applicant);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Make contribution to pool\\r\\n     */\\r\\n    function contributeToPool(uint256 _poolId, uint256 _amount) external onlyPoolMember(_poolId) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(pool.isActive, \\\"Pool not active\\\");\\r\\n        require(_amount >= pool.contributionAmount, \\\"Contribution below minimum\\\");\\r\\n        require(block.timestamp >= pool.nextContribution, \\\"Too early for contribution\\\");\\r\\n        \\r\\n        // Transfer stablecoin from user\\r\\n        // Note: In production, use IERC20(pool.stablecoin).transferFrom(msg.sender, address(this), _amount)\\r\\n        \\r\\n        pool.memberContributions[msg.sender] += _amount;\\r\\n        pool.totalContributions += _amount;\\r\\n        pool.poolBalance += _amount;\\r\\n        \\r\\n        // Update member info\\r\\n        for (uint256 i = 0; i < userMemberships[msg.sender].length; i++) {\\r\\n            if (userMemberships[msg.sender][i].isActive) {\\r\\n                userMemberships[msg.sender][i].totalContributed += _amount;\\r\\n                userMemberships[msg.sender][i].lastContribution = block.timestamp;\\r\\n                userMemberships[msg.sender][i].reputation += 10; // Reputation points\\r\\n                break;\\r\\n            }\\r\\n        }\\r\\n        \\r\\n        // Update next contribution time\\r\\n        pool.nextContribution = block.timestamp + pool.contributionFrequency * 1 days;\\r\\n        \\r\\n        totalContributions += _amount;\\r\\n        \\r\\n        emit ContributionMade(_poolId, msg.sender, _amount);\\r\\n        \\r\\n        // Handle pool-specific logic\\r\\n        if (pool.poolType == PoolType.ROTATING_SAVINGS) {\\r\\n            _handleRotatingSavings(_poolId);\\r\\n        } else if (pool.poolType == PoolType.COLLECTIVE_INVESTMENT) {\\r\\n            _handleCollectiveInvestment(_poolId);\\r\\n        }\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Handle rotating savings distribution\\r\\n     */\\r\\n    function _handleRotatingSavings(uint256 _poolId) internal {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        \\r\\n        // Check if it's time for distribution\\r\\n        if (pool.currentMembers > 0 && pool.poolBalance >= pool.contributionAmount * pool.currentMembers) {\\r\\n            // Find next member to receive funds\\r\\n            address[] memory members = _getPoolMembers(_poolId);\\r\\n            address recipient = members[pool.rotationIndex % members.length];\\r\\n            \\r\\n            // Ensure member hasn't received funds yet\\r\\n            while (pool.hasReceived[recipient] && pool.rotationIndex < members.length * 2) {\\r\\n                pool.rotationIndex++;\\r\\n                recipient = members[pool.rotationIndex % members.length];\\r\\n            }\\r\\n            \\r\\n            if (!pool.hasReceived[recipient]) {\\r\\n                uint256 distributionAmount = pool.contributionAmount * pool.currentMembers;\\r\\n                pool.poolBalance -= distributionAmount;\\r\\n                pool.hasReceived[recipient] = true;\\r\\n                pool.rotationIndex++;\\r\\n                \\r\\n                // Transfer funds to recipient\\r\\n                // Note: In production, use IERC20(pool.stablecoin).transfer(recipient, distributionAmount)\\r\\n                \\r\\n                emit FundsDistributed(_poolId, recipient, distributionAmount);\\r\\n                \\r\\n                // Check if all members have received funds\\r\\n                bool allReceived = true;\\r\\n                for (uint256 i = 0; i < members.length; i++) {\\r\\n                    if (!pool.hasReceived[members[i]]) {\\r\\n                        allReceived = false;\\r\\n                        break;\\r\\n                    }\\r\\n                }\\r\\n                \\r\\n                if (allReceived) {\\r\\n                    pool.isActive = false;\\r\\n                    emit PoolCompleted(_poolId);\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Handle collective investment\\r\\n     */\\r\\n    function _handleCollectiveInvestment(uint256 _poolId) internal {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        \\r\\n        // In production, this would interact with DeFi protocols\\r\\n        // For now, we just track the balance\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Withdraw from pool (for non-rotating pools)\\r\\n     */\\r\\n    function withdrawFromPool(uint256 _poolId, uint256 _amount) external onlyPoolMember(_poolId) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(pool.poolType != PoolType.ROTATING_SAVINGS, \\\"Cannot withdraw from rotating savings\\\");\\r\\n        require(pool.poolBalance >= _amount, \\\"Insufficient pool balance\\\");\\r\\n        require(pool.memberContributions[msg.sender] >= _amount, \\\"Insufficient contribution\\\");\\r\\n        \\r\\n        pool.poolBalance -= _amount;\\r\\n        pool.memberContributions[msg.sender] -= _amount;\\r\\n        \\r\\n        // Transfer funds to user\\r\\n        // Note: In production, use IERC20(pool.stablecoin).transfer(msg.sender, _amount)\\r\\n        \\r\\n        emit FundsDistributed(_poolId, msg.sender, _amount);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Leave pool\\r\\n     */\\r\\n    function leavePool(uint256 _poolId) external onlyPoolMember(_poolId) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        require(pool.poolType != PoolType.ROTATING_SAVINGS, \\\"Cannot leave rotating savings pool\\\");\\r\\n        \\r\\n        pool.members[msg.sender] = false;\\r\\n        pool.currentMembers--;\\r\\n        isMember[msg.sender][_poolId] = false;\\r\\n        totalMembers--;\\r\\n        \\r\\n        // Update member status\\r\\n        for (uint256 i = 0; i < userMemberships[msg.sender].length; i++) {\\r\\n            if (userMemberships[msg.sender][i].isActive) {\\r\\n                userMemberships[msg.sender][i].isActive = false;\\r\\n                break;\\r\\n            }\\r\\n        }\\r\\n        \\r\\n        emit MemberLeft(_poolId, msg.sender);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get pool members (simplified - in production, maintain a member list)\\r\\n     */\\r\\n    function _getPoolMembers(uint256 _poolId) internal view returns (address[] memory) {\\r\\n        // This is simplified - in production, maintain a proper member list\\r\\n        address[] memory members = new address[](0);\\r\\n        return members;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get pool details\\r\\n     */\\r\\n    function getPoolDetails(uint256 _poolId) external view validPoolId(_poolId) returns (\\r\\n        string memory name,\\r\\n        string memory description,\\r\\n        PoolType poolType,\\r\\n        address stablecoin,\\r\\n        uint256 contributionAmount,\\r\\n        uint256 contributionFrequency,\\r\\n        uint256 maxMembers,\\r\\n        uint256 currentMembers,\\r\\n        uint256 poolTotalContributions,\\r\\n        uint256 poolBalance,\\r\\n        bool isPublic,\\r\\n        uint256 createdAt\\r\\n    ) {\\r\\n        Pool storage pool = pools[_poolId];\\r\\n        return (\\r\\n            pool.name,\\r\\n            pool.description,\\r\\n            pool.poolType,\\r\\n            pool.stablecoin,\\r\\n            pool.contributionAmount,\\r\\n            pool.contributionFrequency,\\r\\n            pool.maxMembers,\\r\\n            pool.currentMembers,\\r\\n            pool.totalContributions,\\r\\n            pool.poolBalance,\\r\\n            pool.isPublic,\\r\\n            pool.createdAt\\r\\n        );\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get user's pool memberships\\r\\n     */\\r\\n    function getUserMemberships(address _user) external view returns (uint256[] memory) {\\r\\n        uint256[] memory memberships = new uint256[](userMemberships[_user].length);\\r\\n        uint256 count = 0;\\r\\n        \\r\\n        for (uint256 i = 0; i < userMemberships[_user].length; i++) {\\r\\n            if (userMemberships[_user][i].isActive) {\\r\\n                memberships[count] = i; // Pool ID would be stored differently in production\\r\\n                count++;\\r\\n            }\\r\\n        }\\r\\n        \\r\\n        return memberships;\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Get platform statistics\\r\\n     */\\r\\n    function getPlatformStats() external view returns (\\r\\n        uint256 _totalPools,\\r\\n        uint256 _totalMembers,\\r\\n        uint256 _totalContributionsAmount,\\r\\n        uint256 _platformFeeRate\\r\\n    ) {\\r\\n        return (totalPools, totalMembers, totalContributions, platformFeeRate);\\r\\n    }\\r\\n    \\r\\n    /**\\r\\n     * Set platform fee rate (only owner)\\r\\n     */\\r\\n    function setPlatformFeeRate(uint256 _newRate) external onlyOwner {\\r\\n        require(_newRate <= 1000, \\\"Fee rate too high\\\"); // Max 10%\\r\\n        platformFeeRate = _newRate;\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0xce1a64140798656359cd2a8372d3889ddd099ed758004ebcbd9a6b1b63912f6a\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a08060405234620000e75760008054906001918281811c91168015620000dc575b6020821014620000c857601f811162000097575b50604181558080527f436f6d6d756e69747920506f6f6c73202d204469676974616c204368616d6173602082205580600655806007556008556009556014600a553360805261211c9081620000ed82396080518181816108f901526109b90152f35b8180528280601f60208520930160051c830192015b828110620000bc57505062000035565b838155018390620000ac565b634e487b7160e01b82526022600452602482fd5b90607f169062000021565b600080fdfe6080604052600436101561001257600080fd5b60003560e01c80630b1fe3aa14611c0d578063136d888314611bd657806318e5613114611bb8578063300131341461189b57806334e7a19f1461170357806337c08923146116e55780633ad0d08f146113f85780634633f48814611199578063471882b71461107757806372ef40c014610a5357806376e9255914610a3557806385752d03146109e85780638da5cb5b146109a3578063927fef2e146108e35780639ca53f821461073c578063ab3c7e521461071e578063ac4afa38146105ea578063b8764c39146104d3578063bbef6f901461047a578063be5fcb70146103e1578063d721fe02146102fe578063eeca08f0146102e05763ef1b31661461011957600080fd5b346102db5761012736611d65565b3360005260209160058352604060002081600052835261014e60ff60406000205416612074565b806000526001835260406000209260ff60048501541660048110156102c5571561027357600a840180549484861061022e57601001903360005281835284604060002054106101e9576101c4857f9f5926601e7fc353505f05fae61282ae5d67b716f95656849456e6aa7bbbbb5f9596976120b4565b905533600052815260406000206101dc8582546120b4565b90556040519384523393a3005b60405162461bcd60e51b815260048101849052601960248201527f496e73756666696369656e7420636f6e747269627574696f6e000000000000006044820152606490fd5b60405162461bcd60e51b815260048101849052601960248201527f496e73756666696369656e7420706f6f6c2062616c616e6365000000000000006044820152606490fd5b6084906040519062461bcd60e51b82526004820152602560248201527f43616e6e6f742077697468647261772066726f6d20726f746174696e6720736160448201526476696e677360d81b6064820152fd5b634e487b7160e01b600052602160045260246000fd5b600080fd5b346102db5760003660031901126102db576020600a54604051908152f35b346102db5760003660031901126102db576040516000805461031f81611d7b565b808452906001908181169081156103ba5750600114610361575b61035d8461034981860382611cec565b604051918291602083526020830190611e5b565b0390f35b600080805292507f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e5635b8284106103a257505050810160200161034982610339565b8054602085870181019190915290930192810161038a565b60ff191660208087019190915292151560051b850190920192506103499150839050610339565b346102db576103ef36611d65565b90600052600460205260406000209081548110156102db5761041091611ec0565b5060018060a01b0381541660018201549160ff61042f60028301611db5565b61045b60046003850154940154916040519687968752602087015260c0604087015260c0860190611e5b565b9260608501528181161515608085015260081c16151560a08301520390f35b346102db5760403660031901126102db57610493611c9e565b6001600160a01b03166000908152600360205260409020805460243591908210156102db576020916104c491611ea8565b90549060031b1c604051908152f35b346102db5760203660031901126102db576004356104f46009548210611ef8565b80600052600160205261051160ff600b6040600020015416611f36565b600052600160205261058860406000206004810154816005810154600682015460078301546008840154600985015491600a8601549360ff600b88015460081c1695610596610573600361056c6002600c8d01549c01611db5565b9c01611db5565b6040519c8d9c8d610180908181520190611e5b565b8c810360208e015290611e5b565b986105a760408c0160ff8316611e9b565b60081c6001600160a01b031660608b015260808a015260a089015260c088015260e087015261010086015261012085015215156101408401526101608301520390f35b346102db5760203660031901126102db57600435600052600160205260406000208054600160a01b60019003600183015416916002810161062a90611db5565b61063660038301611db5565b916004810154926005820154600683015460078401546008850154600986015491600a87015493600b88015495600c89015497600d8a015499600e01549a6040519e8f9e8f908152602001528d610220908160408201520161069791611e5b565b8d810360608f01526106a891611e5b565b9a6106b960808e0160ff8316611e9b565b600160a01b600190039060081c1660a08d015260c08c015260e08b01526101008a015261012089015261014088015261016087015260ff8116151561018087015260081c60ff1615156101a08601526101c08501526101e08401526102008301520390f35b346102db5760003660031901126102db576020600654604051908152f35b346102db576020806003193601126102db57600435903360005260058152604060002082600052815260ff906107788260406000205416612074565b826000526001918282526040600020918160048401541660048110156102c557156108945733600052600f83018152600860406000209360ff1994858154169055016107c481546120c1565b90553360005260058152604060002085600052815260406000208381541690556107ef6007546120c1565b6007556000845b610824575b33867fa8dcd974806422d974a6135dd981896f1694065789986f7ba7947fbb4759e899600080a3005b3360005260028083526040600020805483101561088d576004610848848793611cb4565b50015416610860575061085a90611ee9565b846107f6565b9091600494955061087b935033600052526040600020611cb4565b500190815416905581808080806107fb565b50506107fb565b6084906040519062461bcd60e51b82526004820152602260248201527f43616e6e6f74206c6561766520726f746174696e6720736176696e677320706f6044820152611bdb60f21b6064820152fd5b346102db5760203660031901126102db576004357f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316330361096e576103e8811161093557600a55005b60405162461bcd60e51b815260206004820152601160248201527008ccaca40e4c2e8ca40e8dede40d0d2ced607b1b6044820152606490fd5b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fd5b346102db5760003660031901126102db576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b346102db5760403660031901126102db576001600160a01b03610a09611c9e565b1660005260056020526040600020602435600052602052602060ff604060002054166040519015158152f35b346102db5760003660031901126102db576020600754604051908152f35b346102db576101003660031901126102db5760043567ffffffffffffffff81116102db57610a85903690600401611d0e565b60243567ffffffffffffffff81116102db57610aa5903690600401611d0e565b600460443510156102db576064356001600160a01b03811690036102db5760e435151560e435036102db5781511561103d5760843515610fec57600160c4351115610f9d5760a43515610f485760095491826000526001602052604060002092835560018301336001600160601b0360a01b82541617905580519267ffffffffffffffff8411610d9d57610b3c6002820154611d7b565b601f8111610f01575b50602093601f8111600114610e94578091929394600091610e89575b508160011b916000199060031b1c19161760028201555b825167ffffffffffffffff8111610d9d57610b966003830154611d7b565b601f8111610e42575b506020601f8211600114610dd45781929394600092610dc9575b50508160011b916000199060031b1c19161760038201555b6004810180546001600160a81b03191660443560ff1617606435600890811b610100600160a81b031691909117909155608435600583015560a435600683015560c4356007830155600081830181815560098401829055600a840191909155600b8301805461ffff191660e435151590931b61ff00169290921760011790915560ff19919042600c830155620151808060a435029060a435820403610db357600192610c7f600f9242611edc565b600d8201556000600e820155336000520160205260406000208284825416179055556005602052604060002060095460005260205260016040600020918254161790553360005260036020526040600020600954908054600160401b811015610d9d57610cf191600182018155611ea8565b819291549060031b91821b91600019901b1916179055610d12600654611ee9565b600655610d20600754611ee9565b60075560095490817f09da7c35cda271a2bd7c4da6e27385db034c13b672c268f23997dfb9e3871425610d5e60405193604085526040850190611e5b565b92610d6e60208201604435611e9b565b8033940390a333907f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b015190508480610bb9565b6003830160005260206000209060005b601f1984168110610e2a5750600193949583601f19811610610e11575b505050811b016003820155610bd1565b015160001960f88460031b161c19169055848080610e01565b9091602060018192858a015181550193019101610de4565b600383016000526020600020601f830160051c810160208410610e82575b601f830160051c82018110610e76575050610b9f565b60008155600101610e60565b5080610e60565b905083015185610b61565b60028201600052602060002060005b601f1983168110610ee9575060019293949582601f19811610610ed0575b5050811b016002820155610b78565b85015160001960f88460031b161c191690558580610ec1565b84870151825560209687019660019092019101610ea3565b600282016000526020600020601f860160051c810160208710610f41575b601f830160051c82018110610f35575050610b45565b60008155600101610f1f565b5080610f1f565b60405162461bcd60e51b815260206004820152602760248201527f436f6e747269627574696f6e206672657175656e6379206d75737420626520706044820152666f73697469766560c81b6064820152608490fd5b60405162461bcd60e51b815260206004820152602160248201527f506f6f6c206d7573742068617665206174206c656173742032206d656d6265726044820152607360f81b6064820152608490fd5b60405162461bcd60e51b8152602060048201526024808201527f436f6e747269627574696f6e20616d6f756e74206d75737420626520706f73696044820152637469766560e01b6064820152608490fd5b60405162461bcd60e51b8152602060048201526012602482015271141bdbdb081b985b59481c995c5d5a5c995960721b6044820152606490fd5b346102db576020806003193601126102db576001600160a01b03611099611c9e565b1680600052600291828152604060002054926110cd6110b7856120ce565b946110c56040519687611cec565b8086526120ce565b84830190601f190136823760009160005b85600052818552604060002080548210156111565760046111018360ff93611cb4565b50015416611118575b61111390611ee9565b6110de565b928651811015611140576111388185876111139460051b8b010152611ee9565b93905061110a565b634e487b7160e01b600052603260045260246000fd5b858885604051928392818401908285525180915260408401929160005b82811061118257505050500390f35b835185528695509381019392810192600101611173565b346102db576111a736611d65565b60008281526001602081815260409092208101546001600160a01b039390841633036113bc578460005260048352604060002054811015611377576111f89085600052600484526040600020611ec0565b50916004830180549060ff8260081c166113325790600f6112e194939288600052848452604060002090610101600883019461123a8654600786015411611fb3565b61ffff19161790558787541660005201825260406000209060ff199184838254161790556112688154611ee9565b90558585541660005260058252604060002087600052825282604060002091825416179055611298600754611ee9565b60075584845416918260005260028252604060002091604051936112bb85611cd0565b8452429084015260006040840152600060608401526080830152600060a0830152611fee565b54169081817fd4829f45099f9fa7e85153a0ea413a85dadd5d09c3ff1baa69160e014c86e4ea600080a37f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b60405162461bcd60e51b815260048101849052601d60248201527f4170706c69636174696f6e20616c72656164792070726f6365737365640000006044820152606490fd5b60405162461bcd60e51b815260048101849052601960248201527f496e76616c6964206170706c69636174696f6e20696e646578000000000000006044820152606490fd5b60405162461bcd60e51b81526004810184905260146024820152732737ba103a3432903837b7b61031b932b0ba37b960611b6044820152606490fd5b346102db5761140636611d65565b336000526005602092818452604060002081600052845260ff906114308260406000205416612074565b80600052600191828652604060002061144e82600b83015416611f36565b8481015486106116a057600d8101908154421061165b5733600052601081018852604060002061147f888254611edc565b905560098101611490888254611edc565b9055600a968782016114a3828254611edc565b905586866000815b6115a4575b5050506006820154926201518093848102948186041490151715610db3576114da60049442611edc565b90556114e881600854611edc565b600855604051908152847f0a4a91237423e0a1766a761c7cb029311d8b95d6b1b81db1b949a70c98b4e08e8a3393a301541660048110156102c5576115a25760005283526040600020600881015491821515938461157e575b5050505061154b57005b60405190810167ffffffffffffffff828210911117610d9d5760009052634e487b7160e01b600052601260045260246000fd5b820154910154808302935090918115918404141715610db357101582808080611541565b005b336000526002808d528760406000208054841015611653576115c884600492611cb4565b500154166115e557506115dc919250611ee9565b908891816114ab565b61163b925033600052808d5280611600836040600020611cb4565b500161160d868254611edc565b905533600052808d52611624826040600020611cb4565b50600342910155336000528c526040600020611cb4565b5001805490898201809211610db3575586868b6114b0565b5050506114b0565b60405162461bcd60e51b815260048101899052601a60248201527f546f6f206561726c7920666f7220636f6e747269627574696f6e0000000000006044820152606490fd5b60405162461bcd60e51b815260048101889052601a60248201527f436f6e747269627574696f6e2062656c6f77206d696e696d756d0000000000006044820152606490fd5b346102db5760003660031901126102db576020600854604051908152f35b346102db576020806003193601126102db57600435906117266009548310611ef8565b816000526001815261174260ff600b6040600020015416611f36565b8160005260018152604060002060ff600b82015460081c16156118615790611838913360005260058252604060002084600052825261178960ff6040600020541615611f74565b600f60088201916117a08354600783015411611fb3565b3360005201825260406000209060ff19916001838254161790556117c48154611ee9565b90553360005260058252604060002084600052825260016040600020918254161790556117f2600754611ee9565b600755336000526002815260406000206040519161180f83611cd0565b3383524290830152600060408301526000606083015260016080830152600060a0830152611fee565b33907f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b60405162461bcd60e51b8152600481018390526012602482015271506f6f6c206973206e6f74207075626c696360701b6044820152606490fd5b346102db5760403660031901126102db5767ffffffffffffffff6004356024358281116102db576118d0903690600401611d0e565b6118dd6009548310611ef8565b8160005260019060208281526118fd60ff600b6040600020015416611f36565b83600052828152604060002060ff600b82015460081c16611b7357611951903360005260058352604060002086600052835261194160ff6040600020541615611f74565b6007600882015491015411611fb3565b83600052600481526040600020916040519561196c87611cd0565b3387528287019486865260408801928352606088019342855260808901966000885260a08a0196600088528054600160401b811015610d9d576119b3918582018155611ec0565b9a909a611b5d5760018060a01b039051166001600160601b0360a01b8b5416178a5551828a01556002890193518051938411610d9d576119f38554611d7b565b601f8111611b14575b5081601f8511600114611a9e5750928080611a53979460049794611a6a9c9d97600094611a93575b50501b916000199060031b1c19161790555b5160038201550192511515839060ff801983541691151516179055565b51815461ff00191690151560081b61ff0016179055565b33907f394b2f46e841d2b670718e98a15dfb76853abc5a8761449c74e9cba62d901521600080a3005b015192508d80611a24565b9190601f9493941984168660005283600020936000905b828210611afd57505092611a6a9a9b95928592611a5399966004999610611ae4575b505050811b019055611a36565b015160001960f88460031b161c191690558b8080611ad7565b808886978294978701518155019601940190611ab5565b8560005282600020601f860160051c810191848710611b53575b601f0160051c019084905b828110611b475750506119fc565b60008155018490611b39565b9091508190611b2e565b634e487b7160e01b600052600060045260246000fd5b60405162461bcd60e51b815260048101839052601d60248201527f506f6f6c206973207075626c6963202d20757365206a6f696e506f6f6c0000006044820152606490fd5b346102db5760003660031901126102db576020600954604051908152f35b346102db5760003660031901126102db576080600654600754600854600a5491604051938452602084015260408301526060820152f35b346102db5760403660031901126102db57611c26611c9e565b6024359060018060a01b038091166000526002602052604060002080548310156102db5760c092611c5691611cb4565b5090815416906001810154906002810154600382015490600560ff600485015416930154936040519586526020860152604085015260608401521515608083015260a0820152f35b600435906001600160a01b03821682036102db57565b8054821015611140576000526006602060002091020190600090565b60c0810190811067ffffffffffffffff821117610d9d57604052565b90601f8019910116810190811067ffffffffffffffff821117610d9d57604052565b81601f820112156102db5780359067ffffffffffffffff8211610d9d5760405192611d43601f8401601f191660200185611cec565b828452602083830101116102db57816000926020809301838601378301015290565b60409060031901126102db576004359060243590565b90600182811c92168015611dab575b6020831014611d9557565b634e487b7160e01b600052602260045260246000fd5b91607f1691611d8a565b9060405191826000825492611dc984611d7b565b908184526001948581169081600014611e385750600114611df5575b5050611df392500383611cec565b565b9093915060005260209081600020936000915b818310611e20575050611df393508201013880611de5565b85548884018501529485019487945091830191611e08565b915050611df394506020925060ff191682840152151560051b8201013880611de5565b919082519283825260005b848110611e87575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201611e66565b9060048210156102c55752565b80548210156111405760005260206000200190600090565b8054821015611140576000526005602060002091020190600090565b91908201809211610db357565b6000198114610db35760010190565b15611eff57565b60405162461bcd60e51b815260206004820152600f60248201526e125b9d985b1a59081c1bdbdb081251608a1b6044820152606490fd5b15611f3d57565b60405162461bcd60e51b815260206004820152600f60248201526e506f6f6c206e6f742061637469766560881b6044820152606490fd5b15611f7b57565b60405162461bcd60e51b815260206004820152601060248201526f20b63932b0b23c90309036b2b6b132b960811b6044820152606490fd5b15611fba57565b60405162461bcd60e51b815260206004820152600c60248201526b141bdbdb081a5cc8199d5b1b60a21b6044820152606490fd5b8054600160401b811015610d9d5761200b91600182018155611cb4565b919091611b5d5760a0600591600180831b038151166001600160601b03831b85541617845560208101516001850155604081015160028501556060810151600385015561206d60808201511515600486019060ff801983541691151516179055565b0151910155565b1561207b57565b60405162461bcd60e51b81526020600482015260116024820152702737ba1030903837b7b61036b2b6b132b960791b6044820152606490fd5b91908203918211610db357565b8015610db3576000190190565b67ffffffffffffffff8111610d9d5760051b6020019056fea264697066735822122016c9563aad9e18a30ca9cd293f827940948be9d0724273a5ed1feedcdada3e8264736f6c63430008140033",
+  "deployedBytecode": "0x6080604052600436101561001257600080fd5b60003560e01c80630b1fe3aa14611c0d578063136d888314611bd657806318e5613114611bb8578063300131341461189b57806334e7a19f1461170357806337c08923146116e55780633ad0d08f146113f85780634633f48814611199578063471882b71461107757806372ef40c014610a5357806376e9255914610a3557806385752d03146109e85780638da5cb5b146109a3578063927fef2e146108e35780639ca53f821461073c578063ab3c7e521461071e578063ac4afa38146105ea578063b8764c39146104d3578063bbef6f901461047a578063be5fcb70146103e1578063d721fe02146102fe578063eeca08f0146102e05763ef1b31661461011957600080fd5b346102db5761012736611d65565b3360005260209160058352604060002081600052835261014e60ff60406000205416612074565b806000526001835260406000209260ff60048501541660048110156102c5571561027357600a840180549484861061022e57601001903360005281835284604060002054106101e9576101c4857f9f5926601e7fc353505f05fae61282ae5d67b716f95656849456e6aa7bbbbb5f9596976120b4565b905533600052815260406000206101dc8582546120b4565b90556040519384523393a3005b60405162461bcd60e51b815260048101849052601960248201527f496e73756666696369656e7420636f6e747269627574696f6e000000000000006044820152606490fd5b60405162461bcd60e51b815260048101849052601960248201527f496e73756666696369656e7420706f6f6c2062616c616e6365000000000000006044820152606490fd5b6084906040519062461bcd60e51b82526004820152602560248201527f43616e6e6f742077697468647261772066726f6d20726f746174696e6720736160448201526476696e677360d81b6064820152fd5b634e487b7160e01b600052602160045260246000fd5b600080fd5b346102db5760003660031901126102db576020600a54604051908152f35b346102db5760003660031901126102db576040516000805461031f81611d7b565b808452906001908181169081156103ba5750600114610361575b61035d8461034981860382611cec565b604051918291602083526020830190611e5b565b0390f35b600080805292507f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e5635b8284106103a257505050810160200161034982610339565b8054602085870181019190915290930192810161038a565b60ff191660208087019190915292151560051b850190920192506103499150839050610339565b346102db576103ef36611d65565b90600052600460205260406000209081548110156102db5761041091611ec0565b5060018060a01b0381541660018201549160ff61042f60028301611db5565b61045b60046003850154940154916040519687968752602087015260c0604087015260c0860190611e5b565b9260608501528181161515608085015260081c16151560a08301520390f35b346102db5760403660031901126102db57610493611c9e565b6001600160a01b03166000908152600360205260409020805460243591908210156102db576020916104c491611ea8565b90549060031b1c604051908152f35b346102db5760203660031901126102db576004356104f46009548210611ef8565b80600052600160205261051160ff600b6040600020015416611f36565b600052600160205261058860406000206004810154816005810154600682015460078301546008840154600985015491600a8601549360ff600b88015460081c1695610596610573600361056c6002600c8d01549c01611db5565b9c01611db5565b6040519c8d9c8d610180908181520190611e5b565b8c810360208e015290611e5b565b986105a760408c0160ff8316611e9b565b60081c6001600160a01b031660608b015260808a015260a089015260c088015260e087015261010086015261012085015215156101408401526101608301520390f35b346102db5760203660031901126102db57600435600052600160205260406000208054600160a01b60019003600183015416916002810161062a90611db5565b61063660038301611db5565b916004810154926005820154600683015460078401546008850154600986015491600a87015493600b88015495600c89015497600d8a015499600e01549a6040519e8f9e8f908152602001528d610220908160408201520161069791611e5b565b8d810360608f01526106a891611e5b565b9a6106b960808e0160ff8316611e9b565b600160a01b600190039060081c1660a08d015260c08c015260e08b01526101008a015261012089015261014088015261016087015260ff8116151561018087015260081c60ff1615156101a08601526101c08501526101e08401526102008301520390f35b346102db5760003660031901126102db576020600654604051908152f35b346102db576020806003193601126102db57600435903360005260058152604060002082600052815260ff906107788260406000205416612074565b826000526001918282526040600020918160048401541660048110156102c557156108945733600052600f83018152600860406000209360ff1994858154169055016107c481546120c1565b90553360005260058152604060002085600052815260406000208381541690556107ef6007546120c1565b6007556000845b610824575b33867fa8dcd974806422d974a6135dd981896f1694065789986f7ba7947fbb4759e899600080a3005b3360005260028083526040600020805483101561088d576004610848848793611cb4565b50015416610860575061085a90611ee9565b846107f6565b9091600494955061087b935033600052526040600020611cb4565b500190815416905581808080806107fb565b50506107fb565b6084906040519062461bcd60e51b82526004820152602260248201527f43616e6e6f74206c6561766520726f746174696e6720736176696e677320706f6044820152611bdb60f21b6064820152fd5b346102db5760203660031901126102db576004357f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316330361096e576103e8811161093557600a55005b60405162461bcd60e51b815260206004820152601160248201527008ccaca40e4c2e8ca40e8dede40d0d2ced607b1b6044820152606490fd5b60405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b6044820152606490fd5b346102db5760003660031901126102db576040517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b346102db5760403660031901126102db576001600160a01b03610a09611c9e565b1660005260056020526040600020602435600052602052602060ff604060002054166040519015158152f35b346102db5760003660031901126102db576020600754604051908152f35b346102db576101003660031901126102db5760043567ffffffffffffffff81116102db57610a85903690600401611d0e565b60243567ffffffffffffffff81116102db57610aa5903690600401611d0e565b600460443510156102db576064356001600160a01b03811690036102db5760e435151560e435036102db5781511561103d5760843515610fec57600160c4351115610f9d5760a43515610f485760095491826000526001602052604060002092835560018301336001600160601b0360a01b82541617905580519267ffffffffffffffff8411610d9d57610b3c6002820154611d7b565b601f8111610f01575b50602093601f8111600114610e94578091929394600091610e89575b508160011b916000199060031b1c19161760028201555b825167ffffffffffffffff8111610d9d57610b966003830154611d7b565b601f8111610e42575b506020601f8211600114610dd45781929394600092610dc9575b50508160011b916000199060031b1c19161760038201555b6004810180546001600160a81b03191660443560ff1617606435600890811b610100600160a81b031691909117909155608435600583015560a435600683015560c4356007830155600081830181815560098401829055600a840191909155600b8301805461ffff191660e435151590931b61ff00169290921760011790915560ff19919042600c830155620151808060a435029060a435820403610db357600192610c7f600f9242611edc565b600d8201556000600e820155336000520160205260406000208284825416179055556005602052604060002060095460005260205260016040600020918254161790553360005260036020526040600020600954908054600160401b811015610d9d57610cf191600182018155611ea8565b819291549060031b91821b91600019901b1916179055610d12600654611ee9565b600655610d20600754611ee9565b60075560095490817f09da7c35cda271a2bd7c4da6e27385db034c13b672c268f23997dfb9e3871425610d5e60405193604085526040850190611e5b565b92610d6e60208201604435611e9b565b8033940390a333907f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b015190508480610bb9565b6003830160005260206000209060005b601f1984168110610e2a5750600193949583601f19811610610e11575b505050811b016003820155610bd1565b015160001960f88460031b161c19169055848080610e01565b9091602060018192858a015181550193019101610de4565b600383016000526020600020601f830160051c810160208410610e82575b601f830160051c82018110610e76575050610b9f565b60008155600101610e60565b5080610e60565b905083015185610b61565b60028201600052602060002060005b601f1983168110610ee9575060019293949582601f19811610610ed0575b5050811b016002820155610b78565b85015160001960f88460031b161c191690558580610ec1565b84870151825560209687019660019092019101610ea3565b600282016000526020600020601f860160051c810160208710610f41575b601f830160051c82018110610f35575050610b45565b60008155600101610f1f565b5080610f1f565b60405162461bcd60e51b815260206004820152602760248201527f436f6e747269627574696f6e206672657175656e6379206d75737420626520706044820152666f73697469766560c81b6064820152608490fd5b60405162461bcd60e51b815260206004820152602160248201527f506f6f6c206d7573742068617665206174206c656173742032206d656d6265726044820152607360f81b6064820152608490fd5b60405162461bcd60e51b8152602060048201526024808201527f436f6e747269627574696f6e20616d6f756e74206d75737420626520706f73696044820152637469766560e01b6064820152608490fd5b60405162461bcd60e51b8152602060048201526012602482015271141bdbdb081b985b59481c995c5d5a5c995960721b6044820152606490fd5b346102db576020806003193601126102db576001600160a01b03611099611c9e565b1680600052600291828152604060002054926110cd6110b7856120ce565b946110c56040519687611cec565b8086526120ce565b84830190601f190136823760009160005b85600052818552604060002080548210156111565760046111018360ff93611cb4565b50015416611118575b61111390611ee9565b6110de565b928651811015611140576111388185876111139460051b8b010152611ee9565b93905061110a565b634e487b7160e01b600052603260045260246000fd5b858885604051928392818401908285525180915260408401929160005b82811061118257505050500390f35b835185528695509381019392810192600101611173565b346102db576111a736611d65565b60008281526001602081815260409092208101546001600160a01b039390841633036113bc578460005260048352604060002054811015611377576111f89085600052600484526040600020611ec0565b50916004830180549060ff8260081c166113325790600f6112e194939288600052848452604060002090610101600883019461123a8654600786015411611fb3565b61ffff19161790558787541660005201825260406000209060ff199184838254161790556112688154611ee9565b90558585541660005260058252604060002087600052825282604060002091825416179055611298600754611ee9565b60075584845416918260005260028252604060002091604051936112bb85611cd0565b8452429084015260006040840152600060608401526080830152600060a0830152611fee565b54169081817fd4829f45099f9fa7e85153a0ea413a85dadd5d09c3ff1baa69160e014c86e4ea600080a37f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b60405162461bcd60e51b815260048101849052601d60248201527f4170706c69636174696f6e20616c72656164792070726f6365737365640000006044820152606490fd5b60405162461bcd60e51b815260048101849052601960248201527f496e76616c6964206170706c69636174696f6e20696e646578000000000000006044820152606490fd5b60405162461bcd60e51b81526004810184905260146024820152732737ba103a3432903837b7b61031b932b0ba37b960611b6044820152606490fd5b346102db5761140636611d65565b336000526005602092818452604060002081600052845260ff906114308260406000205416612074565b80600052600191828652604060002061144e82600b83015416611f36565b8481015486106116a057600d8101908154421061165b5733600052601081018852604060002061147f888254611edc565b905560098101611490888254611edc565b9055600a968782016114a3828254611edc565b905586866000815b6115a4575b5050506006820154926201518093848102948186041490151715610db3576114da60049442611edc565b90556114e881600854611edc565b600855604051908152847f0a4a91237423e0a1766a761c7cb029311d8b95d6b1b81db1b949a70c98b4e08e8a3393a301541660048110156102c5576115a25760005283526040600020600881015491821515938461157e575b5050505061154b57005b60405190810167ffffffffffffffff828210911117610d9d5760009052634e487b7160e01b600052601260045260246000fd5b820154910154808302935090918115918404141715610db357101582808080611541565b005b336000526002808d528760406000208054841015611653576115c884600492611cb4565b500154166115e557506115dc919250611ee9565b908891816114ab565b61163b925033600052808d5280611600836040600020611cb4565b500161160d868254611edc565b905533600052808d52611624826040600020611cb4565b50600342910155336000528c526040600020611cb4565b5001805490898201809211610db3575586868b6114b0565b5050506114b0565b60405162461bcd60e51b815260048101899052601a60248201527f546f6f206561726c7920666f7220636f6e747269627574696f6e0000000000006044820152606490fd5b60405162461bcd60e51b815260048101889052601a60248201527f436f6e747269627574696f6e2062656c6f77206d696e696d756d0000000000006044820152606490fd5b346102db5760003660031901126102db576020600854604051908152f35b346102db576020806003193601126102db57600435906117266009548310611ef8565b816000526001815261174260ff600b6040600020015416611f36565b8160005260018152604060002060ff600b82015460081c16156118615790611838913360005260058252604060002084600052825261178960ff6040600020541615611f74565b600f60088201916117a08354600783015411611fb3565b3360005201825260406000209060ff19916001838254161790556117c48154611ee9565b90553360005260058252604060002084600052825260016040600020918254161790556117f2600754611ee9565b600755336000526002815260406000206040519161180f83611cd0565b3383524290830152600060408301526000606083015260016080830152600060a0830152611fee565b33907f78da64a590c3052953ad9e0a5546bbf12bb68ae7634e3fb2a774e22a8c6557c1600080a3005b60405162461bcd60e51b8152600481018390526012602482015271506f6f6c206973206e6f74207075626c696360701b6044820152606490fd5b346102db5760403660031901126102db5767ffffffffffffffff6004356024358281116102db576118d0903690600401611d0e565b6118dd6009548310611ef8565b8160005260019060208281526118fd60ff600b6040600020015416611f36565b83600052828152604060002060ff600b82015460081c16611b7357611951903360005260058352604060002086600052835261194160ff6040600020541615611f74565b6007600882015491015411611fb3565b83600052600481526040600020916040519561196c87611cd0565b3387528287019486865260408801928352606088019342855260808901966000885260a08a0196600088528054600160401b811015610d9d576119b3918582018155611ec0565b9a909a611b5d5760018060a01b039051166001600160601b0360a01b8b5416178a5551828a01556002890193518051938411610d9d576119f38554611d7b565b601f8111611b14575b5081601f8511600114611a9e5750928080611a53979460049794611a6a9c9d97600094611a93575b50501b916000199060031b1c19161790555b5160038201550192511515839060ff801983541691151516179055565b51815461ff00191690151560081b61ff0016179055565b33907f394b2f46e841d2b670718e98a15dfb76853abc5a8761449c74e9cba62d901521600080a3005b015192508d80611a24565b9190601f9493941984168660005283600020936000905b828210611afd57505092611a6a9a9b95928592611a5399966004999610611ae4575b505050811b019055611a36565b015160001960f88460031b161c191690558b8080611ad7565b808886978294978701518155019601940190611ab5565b8560005282600020601f860160051c810191848710611b53575b601f0160051c019084905b828110611b475750506119fc565b60008155018490611b39565b9091508190611b2e565b634e487b7160e01b600052600060045260246000fd5b60405162461bcd60e51b815260048101839052601d60248201527f506f6f6c206973207075626c6963202d20757365206a6f696e506f6f6c0000006044820152606490fd5b346102db5760003660031901126102db576020600954604051908152f35b346102db5760003660031901126102db576080600654600754600854600a5491604051938452602084015260408301526060820152f35b346102db5760403660031901126102db57611c26611c9e565b6024359060018060a01b038091166000526002602052604060002080548310156102db5760c092611c5691611cb4565b5090815416906001810154906002810154600382015490600560ff600485015416930154936040519586526020860152604085015260608401521515608083015260a0820152f35b600435906001600160a01b03821682036102db57565b8054821015611140576000526006602060002091020190600090565b60c0810190811067ffffffffffffffff821117610d9d57604052565b90601f8019910116810190811067ffffffffffffffff821117610d9d57604052565b81601f820112156102db5780359067ffffffffffffffff8211610d9d5760405192611d43601f8401601f191660200185611cec565b828452602083830101116102db57816000926020809301838601378301015290565b60409060031901126102db576004359060243590565b90600182811c92168015611dab575b6020831014611d9557565b634e487b7160e01b600052602260045260246000fd5b91607f1691611d8a565b9060405191826000825492611dc984611d7b565b908184526001948581169081600014611e385750600114611df5575b5050611df392500383611cec565b565b9093915060005260209081600020936000915b818310611e20575050611df393508201013880611de5565b85548884018501529485019487945091830191611e08565b915050611df394506020925060ff191682840152151560051b8201013880611de5565b919082519283825260005b848110611e87575050826000602080949584010152601f8019910116010190565b602081830181015184830182015201611e66565b9060048210156102c55752565b80548210156111405760005260206000200190600090565b8054821015611140576000526005602060002091020190600090565b91908201809211610db357565b6000198114610db35760010190565b15611eff57565b60405162461bcd60e51b815260206004820152600f60248201526e125b9d985b1a59081c1bdbdb081251608a1b6044820152606490fd5b15611f3d57565b60405162461bcd60e51b815260206004820152600f60248201526e506f6f6c206e6f742061637469766560881b6044820152606490fd5b15611f7b57565b60405162461bcd60e51b815260206004820152601060248201526f20b63932b0b23c90309036b2b6b132b960811b6044820152606490fd5b15611fba57565b60405162461bcd60e51b815260206004820152600c60248201526b141bdbdb081a5cc8199d5b1b60a21b6044820152606490fd5b8054600160401b811015610d9d5761200b91600182018155611cb4565b919091611b5d5760a0600591600180831b038151166001600160601b03831b85541617845560208101516001850155604081015160028501556060810151600385015561206d60808201511515600486019060ff801983541691151516179055565b0151910155565b1561207b57565b60405162461bcd60e51b81526020600482015260116024820152702737ba1030903837b7b61036b2b6b132b960791b6044820152606490fd5b91908203918211610db357565b8015610db3576000190190565b67ffffffffffffffff8111610d9d5760051b6020019056fea264697066735822122016c9563aad9e18a30ca9cd293f827940948be9d0724273a5ed1feedcdada3e8264736f6c63430008140033",
+  "devdoc": {
+    "author": "SafeNest Team",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "applyToJoinPool(uint256,string)": {
+        "notice": "Apply to join a private pool"
+      },
+      "approveApplication(uint256,uint256)": {
+        "notice": "Approve pool application (only pool creator)"
+      },
+      "contributeToPool(uint256,uint256)": {
+        "notice": "Make contribution to pool"
+      },
+      "createPool(string,string,uint8,address,uint256,uint256,uint256,bool)": {
+        "notice": "Create a new community pool"
+      },
+      "getPlatformStats()": {
+        "notice": "Get platform statistics"
+      },
+      "getPoolDetails(uint256)": {
+        "notice": "Get pool details"
+      },
+      "getUserMemberships(address)": {
+        "notice": "Get user's pool memberships"
+      },
+      "joinPool(uint256)": {
+        "notice": "Join a public pool"
+      },
+      "leavePool(uint256)": {
+        "notice": "Leave pool"
+      },
+      "setPlatformFeeRate(uint256)": {
+        "notice": "Set platform fee rate (only owner)"
+      },
+      "withdrawFromPool(uint256,uint256)": {
+        "notice": "Withdraw from pool (for non-rotating pools)"
+      }
+    },
+    "notice": "CommunityPools - Rotating savings and community investment pools Enables digital chamas and collective yield farming",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "platformName",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 91,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "pools",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_uint256,t_struct(Pool)60_storage)"
+      },
+      {
+        "astId": 97,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "userMemberships",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_array(t_struct(Member)73_storage)dyn_storage)"
+      },
+      {
+        "astId": 102,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "userCreatedPools",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)"
+      },
+      {
+        "astId": 108,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "poolApplications",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_uint256,t_array(t_struct(PoolApplication)86_storage)dyn_storage)"
+      },
+      {
+        "astId": 114,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "isMember",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_address,t_mapping(t_uint256,t_bool))"
+      },
+      {
+        "astId": 117,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "totalPools",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 120,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "totalMembers",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 123,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "totalContributions",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 126,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "nextPoolId",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 129,
+        "contract": "contracts/CommunityPools.sol:CommunityPools",
+        "label": "platformFeeRate",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(Member)73_storage)dyn_storage": {
+        "base": "t_struct(Member)73_storage",
+        "encoding": "dynamic_array",
+        "label": "struct CommunityPools.Member[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_struct(PoolApplication)86_storage)dyn_storage": {
+        "base": "t_struct(PoolApplication)86_storage",
+        "encoding": "dynamic_array",
+        "label": "struct CommunityPools.PoolApplication[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_uint256)dyn_storage": {
+        "base": "t_uint256",
+        "encoding": "dynamic_array",
+        "label": "uint256[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_enum(PoolType)12": {
+        "encoding": "inplace",
+        "label": "enum CommunityPools.PoolType",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_array(t_struct(Member)73_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct CommunityPools.Member[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_struct(Member)73_storage)dyn_storage"
+      },
+      "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_uint256)dyn_storage"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_uint256,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(uint256 => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_bool)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_array(t_struct(PoolApplication)86_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct CommunityPools.PoolApplication[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_struct(PoolApplication)86_storage)dyn_storage"
+      },
+      "t_mapping(t_uint256,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_uint256,t_struct(Pool)60_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct CommunityPools.Pool)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Pool)60_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Member)73_storage": {
+        "encoding": "inplace",
+        "label": "struct CommunityPools.Member",
+        "members": [
+          {
+            "astId": 62,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "user",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 64,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "joinedAt",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 66,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "totalContributed",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 68,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "lastContribution",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 70,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_bool"
+          },
+          {
+            "astId": 72,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "reputation",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_struct(Pool)60_storage": {
+        "encoding": "inplace",
+        "label": "struct CommunityPools.Pool",
+        "members": [
+          {
+            "astId": 14,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "id",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 16,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "creator",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 18,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "name",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 20,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "description",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 23,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "poolType",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_enum(PoolType)12"
+          },
+          {
+            "astId": 25,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "stablecoin",
+            "offset": 1,
+            "slot": "4",
+            "type": "t_address"
+          },
+          {
+            "astId": 27,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "contributionAmount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 29,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "contributionFrequency",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 31,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "maxMembers",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 33,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "currentMembers",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 35,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "totalContributions",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 37,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "poolBalance",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 39,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "isActive",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_bool"
+          },
+          {
+            "astId": 41,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "isPublic",
+            "offset": 1,
+            "slot": "11",
+            "type": "t_bool"
+          },
+          {
+            "astId": 43,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "createdAt",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 45,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "nextContribution",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 47,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "rotationIndex",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 51,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "members",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_mapping(t_address,t_bool)"
+          },
+          {
+            "astId": 55,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "memberContributions",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_mapping(t_address,t_uint256)"
+          },
+          {
+            "astId": 59,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "hasReceived",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_mapping(t_address,t_bool)"
+          }
+        ],
+        "numberOfBytes": "576"
+      },
+      "t_struct(PoolApplication)86_storage": {
+        "encoding": "inplace",
+        "label": "struct CommunityPools.PoolApplication",
+        "members": [
+          {
+            "astId": 75,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "applicant",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 77,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "poolId",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 79,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "message",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 81,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "appliedAt",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 83,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "isApproved",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_bool"
+          },
+          {
+            "astId": 85,
+            "contract": "contracts/CommunityPools.sol:CommunityPools",
+            "label": "isProcessed",
+            "offset": 1,
+            "slot": "4",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "160"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

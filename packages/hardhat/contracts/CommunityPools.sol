@@ -406,7 +406,7 @@ contract CommunityPools {
         uint256 contributionFrequency,
         uint256 maxMembers,
         uint256 currentMembers,
-        uint256 totalContributions,
+        uint256 poolTotalContributions,
         uint256 poolBalance,
         bool isPublic,
         uint256 createdAt

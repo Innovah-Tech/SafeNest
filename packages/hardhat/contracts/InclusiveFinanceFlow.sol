@@ -467,7 +467,7 @@ contract InclusiveFinanceFlow {
         // Unlock premium features based on education score
         if (_newScore >= 100 && !userAccounts[_user].isPremiumUser) {
             userAccounts[_user].isPremiumUser = true;
-            emit PremiumFeatureUnlocked(_user, "Premium User", 0, block.timestamp);
+            emit PremiumFeatureUnlocked(_user, "Premium User", block.timestamp);
         }
         
         emit EducationScoreUpdated(_user, oldScore, _newScore, block.timestamp);
