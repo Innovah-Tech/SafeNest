@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { QuickDepositModal } from "./_components/QuickDepositModal";
 import { InvestModal } from "./_components/InvestModal";
+import MicroSavingsIntegration from "~~/components/MicroSavingsIntegration";
 import { 
   CurrencyDollarIcon, 
   ChartBarIcon, 
@@ -17,11 +18,57 @@ import {
   BanknotesIcon
 } from "@heroicons/react/24/outline";
 
+interface Transaction {
+  id: string;
+  type: 'deposit' | 'withdraw';
+  amount: BigInt;
+  vaultType: number;
+  timestamp: number;
+  hash: string;
+}
+
 const SavingsPage: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const [activeTab, setActiveTab] = useState<"overview" | "deposit" | "invest" | "goals" | "community">("overview");
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isInvestModalOpen, setIsInvestModalOpen] = useState(false);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  // Load transactions from localStorage on component mount
+  useEffect(() => {
+    if (connectedAddress) {
+      const savedTransactions = localStorage.getItem(`transactions_${connectedAddress}`);
+      if (savedTransactions) {
+        try {
+          const parsed = JSON.parse(savedTransactions);
+          // Convert amount strings back to BigInt
+          const transactions = parsed.map((tx: any) => ({
+            ...tx,
+            amount: BigInt(tx.amount)
+          }));
+          setTransactions(transactions);
+        } catch (error) {
+          console.error("Failed to parse saved transactions:", error);
+        }
+      }
+    }
+  }, [connectedAddress]);
+
+  // Save transactions to localStorage whenever they change
+  useEffect(() => {
+    if (connectedAddress && transactions.length > 0) {
+      // Convert BigInt to string for JSON storage
+      const serializable = transactions.map(tx => ({
+        ...tx,
+        amount: tx.amount.toString()
+      }));
+      localStorage.setItem(`transactions_${connectedAddress}`, JSON.stringify(serializable));
+    }
+  }, [transactions, connectedAddress]);
+
+  const handleTransactionAdded = (transaction: Transaction) => {
+    setTransactions(prev => [...prev, transaction]);
+  };
 
   return (
     <>
@@ -121,32 +168,24 @@ const SavingsPage: NextPage = () => {
         <div className="px-4 py-6 space-y-6">
           {activeTab === "overview" && (
             <div className="space-y-6">
-              {/* Portfolio Summary */}
+              {/* Test Basic Display */}
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Portfolio Summary</h2>
-                
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">$0.00</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Total Savings</div>
+                <div className="text-center py-4">
+                  <div className="text-2xl font-bold text-green-600 mb-2">
+                    {transactions.length} Transactions
                   </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">$0.00</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Investments</div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-purple-600">$0.00</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Emergency Fund</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-orange-600">$0.00</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Goals Progress</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    Connected: {connectedAddress ? 'Yes' : 'No'}
                   </div>
                 </div>
               </div>
+
+              {/* Dynamic Portfolio Summary */}
+              <MicroSavingsIntegration 
+                transactions={transactions}
+                onTransactionAdded={handleTransactionAdded}
+              />
 
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
@@ -164,15 +203,6 @@ const SavingsPage: NextPage = () => {
                   <ArrowTrendingUpIcon className="h-6 w-6 mx-auto mb-2" />
                   <div className="text-sm font-medium">Invest Now</div>
                 </button>
-              </div>
-
-              {/* Recent Activity */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
-                <div className="text-center py-8">
-                  <div className="text-gray-500 dark:text-gray-400 mb-2">No recent activity</div>
-                  <div className="text-sm text-gray-400 dark:text-gray-500">Start by making your first deposit</div>
-                </div>
               </div>
             </div>
           )}

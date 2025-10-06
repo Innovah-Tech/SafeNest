@@ -39,14 +39,77 @@ interface UserVault {
   nextAutoDeposit: bigint;
 }
 
-const VaultIntegration = () => {
+interface VaultIntegrationProps {
+  onTransactionAdded?: (transaction: {
+    id: string;
+    vaultType: number;
+    type: 'deposit' | 'withdraw';
+    amount: bigint;
+    timestamp: number;
+    txHash: string;
+  }) => void;
+}
+
+const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   const { address: connectedAddress } = useAccount();
   const { writeContractAsync, isPending, isSuccess } = useWriteContract();
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [selectedVault, setSelectedVault] = useState<VaultData | null>(null);
-  const [depositAmount, setDepositAmount] = useState("");
-  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [depositAmounts, setDepositAmounts] = useState<string[]>(["", "", ""]);
+  const [withdrawAmounts, setWithdrawAmounts] = useState<string[]>(["", "", ""]);
   const [userVaults, setUserVaults] = useState<Record<number, UserVault>>({});
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [recentlyUpdated, setRecentlyUpdated] = useState<number | null>(null);
+  const [transactionHistory, setTransactionHistory] = useState<Array<{
+    id: string;
+    vaultType: number;
+    type: 'deposit' | 'withdraw';
+    amount: bigint;
+    timestamp: number;
+    txHash: string;
+  }>>([]);
+
+  // Calculate vault balances from transaction history
+  const calculateVaultBalances = (transactions: typeof transactionHistory) => {
+    const balances: Record<number, UserVault> = {};
+
+    // Initialize all vaults
+    vaultNames.forEach((name, index) => {
+      balances[index] = {
+        user: connectedAddress || "",
+        vaultType: index,
+        totalDeposited: BigInt(0),
+        currentBalance: BigInt(0),
+        totalWithdrawn: BigInt(0),
+        lastDepositTime: BigInt(0),
+        lastWithdrawalTime: BigInt(0),
+        yieldEarned: BigInt(0),
+        isActive: false,
+        autoDepositAmount: BigInt(0),
+        autoDepositFrequency: BigInt(0),
+        nextAutoDeposit: BigInt(0)
+      };
+    });
+
+    // Process transactions
+    transactions.forEach(tx => {
+      if (!balances[tx.vaultType]) return;
+
+      balances[tx.vaultType].isActive = true;
+
+      if (tx.type === 'deposit') {
+        balances[tx.vaultType].totalDeposited += tx.amount;
+        balances[tx.vaultType].currentBalance += tx.amount;
+        balances[tx.vaultType].lastDepositTime = BigInt(tx.timestamp);
+      } else if (tx.type === 'withdraw') {
+        balances[tx.vaultType].totalWithdrawn += tx.amount;
+        balances[tx.vaultType].currentBalance -= tx.amount;
+        balances[tx.vaultType].lastWithdrawalTime = BigInt(tx.timestamp);
+      }
+    });
+
+    return balances;
+  };
 
   const vaultTypes: VaultData[] = [
     {
@@ -84,147 +147,117 @@ const VaultIntegration = () => {
     }
   ];
 
-  // Read user vault data
-  const { data: microSavingsVault, refetch: refetchMicroSavings } = useReadContract({
-    address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
-    abi: [
-      {
-        inputs: [
-          { internalType: "address", name: "user", type: "address" },
-          { internalType: "uint8", name: "vaultType", type: "uint8" },
-        ],
-        name: "getUserVault",
-        outputs: [
-          {
-            components: [
-              { internalType: "address", name: "user", type: "address" },
-              { internalType: "uint8", name: "vaultType", type: "uint8" },
-              { internalType: "uint256", name: "totalDeposited", type: "uint256" },
-              { internalType: "uint256", name: "currentBalance", type: "uint256" },
-              { internalType: "uint256", name: "totalWithdrawn", type: "uint256" },
-              { internalType: "uint256", name: "lastDepositTime", type: "uint256" },
-              { internalType: "uint256", name: "lastWithdrawalTime", type: "uint256" },
-              { internalType: "uint256", name: "yieldEarned", type: "uint256" },
-              { internalType: "bool", name: "isActive", type: "bool" },
-              { internalType: "uint256", name: "autoDepositAmount", type: "uint256" },
-              { internalType: "uint256", name: "autoDepositFrequency", type: "uint256" },
-              { internalType: "uint256", name: "nextAutoDeposit", type: "uint256" },
-            ],
-            internalType: "struct VaultSystem.UserVault",
-            name: "",
-            type: "tuple",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-    ],
-    functionName: "getUserVault",
-    args: connectedAddress ? [connectedAddress, 0] : undefined, // 0 = Micro-Savings
-  });
+  const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 
-  const { data: pensionVault, refetch: refetchPension } = useReadContract({
-    address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
-    abi: [
-      {
-        inputs: [
-          { internalType: "address", name: "user", type: "address" },
-          { internalType: "uint8", name: "vaultType", type: "uint8" },
-        ],
-        name: "getUserVault",
-        outputs: [
-          {
-            components: [
-              { internalType: "address", name: "user", type: "address" },
-              { internalType: "uint8", name: "vaultType", type: "uint8" },
-              { internalType: "uint256", name: "totalDeposited", type: "uint256" },
-              { internalType: "uint256", name: "currentBalance", type: "uint256" },
-              { internalType: "uint256", name: "totalWithdrawn", type: "uint256" },
-              { internalType: "uint256", name: "lastDepositTime", type: "uint256" },
-              { internalType: "uint256", name: "lastWithdrawalTime", type: "uint256" },
-              { internalType: "uint256", name: "yieldEarned", type: "uint256" },
-              { internalType: "bool", name: "isActive", type: "bool" },
-              { internalType: "uint256", name: "autoDepositAmount", type: "uint256" },
-              { internalType: "uint256", name: "autoDepositFrequency", type: "uint256" },
-              { internalType: "uint256", name: "nextAutoDeposit", type: "uint256" },
-            ],
-            internalType: "struct VaultSystem.UserVault",
-            name: "",
-            type: "tuple",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-    ],
-    functionName: "getUserVault",
-    args: connectedAddress ? [connectedAddress, 1] : undefined, // 1 = Pension Nest
-  });
-
-  const { data: emergencyVault, refetch: refetchEmergency } = useReadContract({
-    address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
-    abi: [
-      {
-        inputs: [
-          { internalType: "address", name: "user", type: "address" },
-          { internalType: "uint8", name: "vaultType", type: "uint8" },
-        ],
-        name: "getUserVault",
-        outputs: [
-          {
-            components: [
-              { internalType: "address", name: "user", type: "address" },
-              { internalType: "uint8", name: "vaultType", type: "uint8" },
-              { internalType: "uint256", name: "totalDeposited", type: "uint256" },
-              { internalType: "uint256", name: "currentBalance", type: "uint256" },
-              { internalType: "uint256", name: "totalWithdrawn", type: "uint256" },
-              { internalType: "uint256", name: "lastDepositTime", type: "uint256" },
-              { internalType: "uint256", name: "lastWithdrawalTime", type: "uint256" },
-              { internalType: "uint256", name: "yieldEarned", type: "uint256" },
-              { internalType: "bool", name: "isActive", type: "bool" },
-              { internalType: "uint256", name: "autoDepositAmount", type: "uint256" },
-              { internalType: "uint256", name: "autoDepositFrequency", type: "uint256" },
-              { internalType: "uint256", name: "nextAutoDeposit", type: "uint256" },
-            ],
-            internalType: "struct VaultSystem.UserVault",
-            name: "",
-            type: "tuple",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-    ],
-    functionName: "getUserVault",
-    args: connectedAddress ? [connectedAddress, 2] : undefined, // 2 = Emergency Vault
-  });
-
+  // Load transaction history from localStorage on component mount
   useEffect(() => {
-    if (microSavingsVault) setUserVaults(prev => ({ ...prev, 0: microSavingsVault }));
-    if (pensionVault) setUserVaults(prev => ({ ...prev, 1: pensionVault }));
-    if (emergencyVault) setUserVaults(prev => ({ ...prev, 2: emergencyVault }));
-  }, [microSavingsVault, pensionVault, emergencyVault]);
-
-  // Refresh data after successful transactions
-  useEffect(() => {
-    if (isSuccess) {
-      const refreshData = async () => {
-        await Promise.all([
-          refetchMicroSavings(),
-          refetchPension(),
-          refetchEmergency()
-        ]);
-      };
-      refreshData();
+    if (connectedAddress) {
+      const savedTransactions = localStorage.getItem(`transactions_${connectedAddress}`);
+      if (savedTransactions) {
+        try {
+          const parsed = JSON.parse(savedTransactions);
+          // Convert amount strings back to BigInt
+          const transactions = parsed.map((tx: any) => ({
+            ...tx,
+            amount: BigInt(tx.amount)
+          }));
+          setTransactionHistory(transactions);
+          console.log("Loaded saved transactions:", transactions);
+        } catch (error) {
+          console.error("Failed to parse saved transactions:", error);
+        }
+      }
     }
-  }, [isSuccess, refetchMicroSavings, refetchPension, refetchEmergency]);
+  }, [connectedAddress]);
+
+  // Save transaction history to localStorage whenever it changes
+  useEffect(() => {
+    if (connectedAddress && transactionHistory.length > 0) {
+      // Convert BigInt to string for JSON storage
+      const serializable = transactionHistory.map(tx => ({
+        ...tx,
+        amount: tx.amount.toString()
+      }));
+      localStorage.setItem(`transactions_${connectedAddress}`, JSON.stringify(serializable));
+      console.log("Saved transactions to localStorage");
+    }
+  }, [transactionHistory, connectedAddress]);
+
+  // Update vault balances when transaction history changes
+  useEffect(() => {
+    const newBalances = calculateVaultBalances(transactionHistory);
+    setUserVaults(newBalances);
+    console.log("Updated vault balances from transactions:", newBalances);
+  }, [transactionHistory, connectedAddress]);
+
+  // Add transaction to history
+  const addTransactionToHistory = (vaultType: number, type: 'deposit' | 'withdraw', amount: bigint, txHash: string) => {
+    const newTransaction = {
+      id: Date.now().toString(),
+      vaultType,
+      type,
+      amount,
+      timestamp: Date.now(),
+      txHash
+    };
+    setTransactionHistory(prev => [newTransaction, ...prev]);
+    
+    // Notify parent component
+    if (onTransactionAdded) {
+      onTransactionAdded(newTransaction);
+    }
+    
+    console.log("Added transaction to history:", newTransaction);
+  };
+
+  // Clear transaction history (for debugging)
+  const clearTransactionHistory = () => {
+    setTransactionHistory([]);
+    if (connectedAddress) {
+      localStorage.removeItem(`transactions_${connectedAddress}`);
+    }
+    console.log("Cleared transaction history");
+  };
+
+  // No longer reading from contract - using transaction-based calculations
+
+
+
+  // No longer need to refresh from contract - balances update automatically from transactions
 
   const handleDeposit = async (vaultType: number) => {
+    const depositAmount = depositAmounts[vaultType];
     if (!connectedAddress || !depositAmount) return;
 
     try {
-      // Use the actual deployed VaultSystem contract ABI
-      await writeContractAsync({
+      // First, try to create the vault if it doesn't exist
+      try {
+        await writeContractAsync({
+          address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
+          abi: [
+            {
+              inputs: [
+                { internalType: "enum VaultSystem.VaultType", name: "_vaultType", type: "uint8" },
+              ],
+              name: "createVault",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+          ],
+          functionName: "createVault",
+          args: [vaultType],
+        });
+        console.log(`Vault ${vaultType} created successfully`);
+      } catch (createError: any) {
+        // If vault already exists, this is expected - continue with deposit
+        if (!createError.message.includes("Vault already exists")) {
+          console.warn("Vault creation failed (may already exist):", createError.message);
+        }
+      }
+
+      // Now deposit to the vault
+      const txResult = await writeContractAsync({
         address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
         abi: [
           {
@@ -242,8 +275,24 @@ const VaultIntegration = () => {
         args: [vaultType, BigInt(parseFloat(depositAmount) * 1e18)],
         value: BigInt(parseFloat(depositAmount) * 1e18),
       });
-      setDepositAmount("");
-      alert(`Successfully deposited ${depositAmount} U2U to vault ${vaultType}!`);
+      
+      console.log("Deposit transaction result:", txResult);
+      
+      // Add transaction to history
+      addTransactionToHistory(vaultType, 'deposit', BigInt(parseFloat(depositAmount) * 1e18), txResult);
+      
+      // Balances will update automatically from transaction history
+      
+      // Clear the specific vault's deposit amount
+      const newDepositAmounts = [...depositAmounts];
+      newDepositAmounts[vaultType] = "";
+      setDepositAmounts(newDepositAmounts);
+      
+      // Show success animation
+      setRecentlyUpdated(vaultType);
+      setTimeout(() => setRecentlyUpdated(null), 2000);
+      
+      alert(`Successfully deposited ${depositAmount} U2U to ${vaultTypes[vaultType].name}!`);
     } catch (error: any) {
       console.error("Deposit failed:", error);
       alert(`Deposit failed: ${error.message || error.toString()}`);
@@ -251,10 +300,11 @@ const VaultIntegration = () => {
   };
 
   const handleWithdraw = async (vaultType: number) => {
+    const withdrawAmount = withdrawAmounts[vaultType];
     if (!connectedAddress || !withdrawAmount) return;
 
     try {
-      await writeContractAsync({
+      const txResult = await writeContractAsync({
         address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
         abi: [
           {
@@ -271,8 +321,24 @@ const VaultIntegration = () => {
         functionName: "withdrawFromVault",
         args: [vaultType, BigInt(parseFloat(withdrawAmount) * 1e18)],
       });
-      setWithdrawAmount("");
-      alert(`Successfully withdrew ${withdrawAmount} U2U from vault ${vaultType}!`);
+      
+      console.log("Withdraw transaction result:", txResult);
+      
+      // Add transaction to history
+      addTransactionToHistory(vaultType, 'withdraw', BigInt(parseFloat(withdrawAmount) * 1e18), txResult);
+      
+      // Balances will update automatically from transaction history
+      
+      // Clear the specific vault's withdraw amount
+      const newWithdrawAmounts = [...withdrawAmounts];
+      newWithdrawAmounts[vaultType] = "";
+      setWithdrawAmounts(newWithdrawAmounts);
+      
+      // Show success animation
+      setRecentlyUpdated(vaultType);
+      setTimeout(() => setRecentlyUpdated(null), 2000);
+      
+      alert(`Successfully withdrew ${withdrawAmount} U2U from ${vaultTypes[vaultType].name}!`);
     } catch (error: any) {
       console.error("Withdrawal failed:", error);
       alert(`Withdrawal failed: ${error.message || error.toString()}`);
@@ -280,7 +346,12 @@ const VaultIntegration = () => {
   };
 
   const formatBalance = (balance: bigint) => {
-    return (Number(balance) / 1e18).toFixed(4);
+    const value = Number(balance) / 1e18;
+    if (value === 0) return "0.0000";
+    if (value < 0.0001) return value.toFixed(8);
+    if (value < 0.01) return value.toFixed(6);
+    if (value < 1) return value.toFixed(4);
+    return value.toFixed(2);
   };
 
   if (!connectedAddress) {
@@ -294,40 +365,138 @@ const VaultIntegration = () => {
 
   return (
     <div className="space-y-8">
+      {/* Transaction History */}
+      {transactionHistory.length > 0 && (
+        <div className="card bg-base-100 shadow-xl p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-bold">Recent Transactions</h3>
+            <button
+              className="btn btn-sm btn-outline btn-error"
+              onClick={clearTransactionHistory}
+            >
+              Clear History
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="table table-zebra w-full">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Vault</th>
+                  <th>Amount</th>
+                  <th>Time</th>
+                  <th>Transaction</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactionHistory.slice(0, 10).map((tx) => (
+                  <tr key={tx.id}>
+                    <td>
+                      <span className={`badge ${
+                        tx.type === 'deposit' ? 'badge-success' : 'badge-error'
+                      }`}>
+                        {tx.type === 'deposit' ? 'Deposit' : 'Withdraw'}
+                      </span>
+                    </td>
+                    <td className="font-medium">{vaultNames[tx.vaultType]}</td>
+                    <td className="font-mono">
+                      {tx.type === 'deposit' ? '+' : '-'}{formatBalance(tx.amount)} U2U
+                    </td>
+                    <td className="text-sm">
+                      {new Date(tx.timestamp).toLocaleString()}
+                    </td>
+                    <td>
+                      <a
+                        href={`https://u2uscan.xyz/tx/${tx.txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link link-primary text-xs"
+                      >
+                        View
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+
+
       {/* Vault Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {vaultTypes.map((vault, index) => {
           const userVault = userVaults[index];
+          console.log(`Vault ${index} (${vault.name}):`, userVault);
           return (
-            <div key={vault.type} className="card bg-base-100 shadow-xl">
+            <div key={vault.type} className={`card bg-base-100 shadow-xl transition-all duration-500 ${
+              recentlyUpdated === index ? 'ring-2 ring-green-500 bg-green-50 dark:bg-green-900/20' : ''
+            }`}>
               <div className="card-body">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`p-3 rounded-lg ${vault.color} text-white`}>
                     {vault.icon}
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold">
-                      {userVault ? formatBalance(userVault.currentBalance) : "0.0000"} U2U
+                    <div className="text-3xl font-bold flex items-center justify-end gap-2 mb-2">
+                      {isRefreshing ? (
+                        <div className="loading loading-spinner loading-sm"></div>
+                      ) : null}
+                      <span className={userVault && userVault.currentBalance > 0 ? "text-green-600" : "text-gray-700 dark:text-gray-300"}>
+                        {userVault ? formatBalance(userVault.currentBalance) : "0.0000"}
+                      </span>
+                      <span className="text-lg text-gray-500">U2U</span>
                     </div>
-                    <div className="text-sm text-gray-500">Current Balance</div>
+                    <div className="text-sm text-gray-500 mb-1">
+                      Current Balance
+                      {!userVault && <span className="text-orange-500 ml-2">(No vault data)</span>}
+                      {userVault && userVault.currentBalance > 0 && (
+                        <span className="text-green-600 ml-2">✓ Active</span>
+                      )}
+                    </div>
+                    {userVault && userVault.currentBalance > 0 && (
+                      <div className="text-xs text-green-600 font-medium">
+                        ≈ ${(Number(userVault.currentBalance) / 1e18 * 0.1).toFixed(2)} USD
+                      </div>
+                    )}
                   </div>
                 </div>
                 
                 <h3 className="card-title text-lg">{vault.name}</h3>
                 <p className="text-gray-600 text-sm mb-4">{vault.description}</p>
                 
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Yield Rate:</span>
-                    <span className="font-semibold text-green-600">{vault.yieldRate}</span>
+                <div className="space-y-3 mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-600">Yield Rate:</span>
+                    <span className="font-bold text-green-600 text-lg">{vault.yieldRate}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Total Deposited:</span>
-                    <span>{userVault ? formatBalance(userVault.totalDeposited) : "0.0000"} U2U</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-600">Total Deposited:</span>
+                    <div className="text-right">
+                      <div className="font-bold text-lg">
+                        {userVault ? formatBalance(userVault.totalDeposited) : "0.0000"} U2U
+                      </div>
+                      {userVault && userVault.totalDeposited > 0 && (
+                        <div className="text-xs text-gray-500">
+                          ≈ ${(Number(userVault.totalDeposited) / 1e18 * 0.1).toFixed(2)} USD
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Yield Earned:</span>
-                    <span className="text-green-600">{userVault ? formatBalance(userVault.yieldEarned) : "0.0000"} U2U</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-600">Yield Earned:</span>
+                    <div className="text-right">
+                      <div className="font-bold text-lg text-green-600">
+                        {userVault ? formatBalance(userVault.yieldEarned) : "0.0000"} U2U
+                      </div>
+                      {userVault && userVault.yieldEarned > 0 && (
+                        <div className="text-xs text-green-500">
+                          ≈ ${(Number(userVault.yieldEarned) / 1e18 * 0.1).toFixed(2)} USD
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -338,13 +507,17 @@ const VaultIntegration = () => {
                       type="number"
                       placeholder="Amount"
                       className="input input-bordered input-sm flex-1"
-                      value={depositAmount}
-                      onChange={(e) => setDepositAmount(e.target.value)}
+                      value={depositAmounts[index]}
+                      onChange={(e) => {
+                        const newAmounts = [...depositAmounts];
+                        newAmounts[index] = e.target.value;
+                        setDepositAmounts(newAmounts);
+                      }}
                     />
                     <button
                       className="btn btn-primary btn-sm"
                       onClick={() => handleDeposit(index)}
-                      disabled={isPending || !depositAmount}
+                      disabled={isPending || !depositAmounts[index]}
                     >
                       <PlusIcon className="h-4 w-4" />
                       Deposit
@@ -356,13 +529,17 @@ const VaultIntegration = () => {
                       type="number"
                       placeholder="Amount"
                       className="input input-bordered input-sm flex-1"
-                      value={withdrawAmount}
-                      onChange={(e) => setWithdrawAmount(e.target.value)}
+                      value={withdrawAmounts[index]}
+                      onChange={(e) => {
+                        const newAmounts = [...withdrawAmounts];
+                        newAmounts[index] = e.target.value;
+                        setWithdrawAmounts(newAmounts);
+                      }}
                     />
                     <button
                       className="btn btn-outline btn-sm"
                       onClick={() => handleWithdraw(index)}
-                      disabled={isPending || !withdrawAmount}
+                      disabled={isPending || !withdrawAmounts[index]}
                     >
                       <MinusIcon className="h-4 w-4" />
                       Withdraw
@@ -370,10 +547,48 @@ const VaultIntegration = () => {
                   </div>
                 </div>
 
-                {isSuccess && (
-                  <div className="alert alert-success mt-4">
+                {isSuccess && recentlyUpdated === index && (
+                  <div className="alert alert-success mt-4 animate-pulse">
                     <ArrowTrendingUpIcon className="h-4 w-4" />
-                    Transaction successful!
+                    Balance updated successfully!
+                  </div>
+                )}
+                
+                {/* Manual refresh button for this specific vault */}
+                <div className="mt-2">
+                  <button
+                    className="btn btn-xs btn-outline"
+                    onClick={async () => {
+                      console.log(`Manually refreshing vault ${index}...`);
+                      setIsRefreshing(true);
+                      try {
+                        if (index === 0) await refetchMicroSavings();
+                        else if (index === 1) await refetchPension();
+                        else if (index === 2) await refetchEmergency();
+                        console.log(`Vault ${index} refreshed manually`);
+                      } catch (error) {
+                        console.error(`Failed to refresh vault ${index}:`, error);
+                      } finally {
+                        setIsRefreshing(false);
+                      }
+                    }}
+                    disabled={isRefreshing}
+                  >
+                    {isRefreshing ? (
+                      <>
+                        <span className="loading loading-spinner loading-xs"></span>
+                        Refreshing...
+                      </>
+                    ) : (
+                      "Refresh This Vault"
+                    )}
+                  </button>
+                </div>
+                
+                {/* Show refresh status */}
+                {isRefreshing && (
+                  <div className="text-xs text-blue-600 mt-1">
+                    🔄 Waiting for blockchain confirmation... This may take 10-30 seconds.
                   </div>
                 )}
               </div>
@@ -387,6 +602,14 @@ const VaultIntegration = () => {
         <div className="alert alert-info">
           <div className="loading loading-spinner loading-sm"></div>
           Processing transaction...
+        </div>
+      )}
+
+      {/* Data Refresh Status */}
+      {isRefreshing && (
+        <div className="alert alert-info">
+          <div className="loading loading-spinner loading-sm"></div>
+          Updating vault balances...
         </div>
       )}
     </div>

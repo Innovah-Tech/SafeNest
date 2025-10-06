@@ -1,9 +1,54 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import VaultIntegration from "~~/components/VaultIntegration";
+import TransactionHistory from "~~/components/TransactionHistory";
+
+interface Transaction {
+  id: string;
+  vaultType: number;
+  type: 'deposit' | 'withdraw';
+  amount: bigint;
+  timestamp: number;
+  txHash: string;
+}
 
 const VaultsPage: NextPage = () => {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  // Load transactions from localStorage on component mount
+  useEffect(() => {
+    const savedTransactions = localStorage.getItem('global_transactions');
+    if (savedTransactions) {
+      try {
+        const parsed = JSON.parse(savedTransactions);
+        // Convert amount strings back to BigInt
+        const transactions = parsed.map((tx: any) => ({
+          ...tx,
+          amount: BigInt(tx.amount)
+        }));
+        setTransactions(transactions);
+        console.log("Loaded global transactions:", transactions);
+      } catch (error) {
+        console.error("Failed to parse saved global transactions:", error);
+      }
+    }
+  }, []);
+
+  // Save transactions to localStorage whenever they change
+  useEffect(() => {
+    if (transactions.length > 0) {
+      // Convert BigInt to string for JSON storage
+      const serializable = transactions.map(tx => ({
+        ...tx,
+        amount: tx.amount.toString()
+      }));
+      localStorage.setItem('global_transactions', JSON.stringify(serializable));
+      console.log("Saved global transactions to localStorage");
+    }
+  }, [transactions]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -19,47 +64,13 @@ const VaultsPage: NextPage = () => {
           </p>
         </div>
 
+
         {/* Vault Integration Component */}
-        <VaultIntegration />
+        <VaultIntegration onTransactionAdded={(tx) => setTransactions(prev => [tx, ...prev])} />
 
-        {/* Additional Information */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="bg-green-100 dark:bg-green-900 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">🏦</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Micro-Savings
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              Start with as little as 0.001 U2U and build your savings habit
-            </p>
-          </div>
+        {/* Transaction History */}
+        <TransactionHistory transactions={transactions} />
 
-          <div className="text-center">
-            <div className="bg-blue-100 dark:bg-blue-900 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">🏛️</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Pension Nest
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              Long-term retirement planning with higher yields and time-locked access
-            </p>
-          </div>
-
-          <div className="text-center">
-            <div className="bg-red-100 dark:bg-red-900 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-              <span className="text-2xl">🚨</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Emergency Vault
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
-              Instant access to your funds when you need them most
-            </p>
-          </div>
-        </div>
 
         {/* Network Information */}
         <div className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
