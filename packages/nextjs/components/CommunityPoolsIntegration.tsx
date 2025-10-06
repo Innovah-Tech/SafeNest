@@ -26,7 +26,7 @@ interface CommunityPool {
 
 const CommunityPoolsIntegration = () => {
   const { address: connectedAddress } = useAccount();
-  const { writeContract, isPending, isSuccess } = useWriteContract();
+  const { writeContractAsync, isPending, isSuccess } = useWriteContract();
   const [pools, setPools] = useState<CommunityPool[]>([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [newPool, setNewPool] = useState({
@@ -48,7 +48,7 @@ const CommunityPoolsIntegration = () => {
       currentMembers: 7,
       creator: "0x1234...5678",
       isActive: true,
-      createdAt: BigInt(Date.now() / 1000 - 86400), // 1 day ago
+      createdAt: BigInt(Math.floor(Date.now() / 1000 - 86400)), // 1 day ago
     },
     {
       id: 2,
@@ -60,7 +60,7 @@ const CommunityPoolsIntegration = () => {
       currentMembers: 15,
       creator: "0x8765...4321",
       isActive: true,
-      createdAt: BigInt(Date.now() / 1000 - 172800), // 2 days ago
+      createdAt: BigInt(Math.floor(Date.now() / 1000 - 172800)), // 2 days ago
     },
     {
       id: 3,
@@ -72,7 +72,7 @@ const CommunityPoolsIntegration = () => {
       currentMembers: 12,
       creator: "0xabcd...efgh",
       isActive: true,
-      createdAt: BigInt(Date.now() / 1000 - 259200), // 3 days ago
+      createdAt: BigInt(Math.floor(Date.now() / 1000 - 259200)), // 3 days ago
     },
   ];
 
@@ -84,7 +84,7 @@ const CommunityPoolsIntegration = () => {
     if (!connectedAddress || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit) return;
 
     try {
-      await writeContract({
+      await writeContractAsync({
         address: "0x8DaC034C5Ed072630789aF53a39A090f477bE7e2", // CommunityPools
         abi: [
           {
@@ -125,9 +125,10 @@ const CommunityPoolsIntegration = () => {
         memberLimit: "",
       });
       setIsCreateModalOpen(false);
-    } catch (error) {
+      alert(`Successfully created pool "${newPool.name}"!`);
+    } catch (error: any) {
       console.error("Create pool failed:", error);
-      alert(`Create pool failed: ${error.message}`);
+      alert(`Create pool failed: ${error.message || error.toString()}`);
     }
   };
 
@@ -135,7 +136,7 @@ const CommunityPoolsIntegration = () => {
     if (!connectedAddress) return;
 
     try {
-      await writeContract({
+      await writeContractAsync({
         address: "0x8DaC034C5Ed072630789aF53a39A090f477bE7e2", // CommunityPools
         abi: [
           {
@@ -149,9 +150,10 @@ const CommunityPoolsIntegration = () => {
         functionName: "joinPool",
         args: [BigInt(poolId)],
       });
-    } catch (error) {
+      alert(`Successfully joined pool ${poolId}!`);
+    } catch (error: any) {
       console.error("Join pool failed:", error);
-      alert(`Join pool failed: ${error.message}`);
+      alert(`Join pool failed: ${error.message || error.toString()}`);
     }
   };
 

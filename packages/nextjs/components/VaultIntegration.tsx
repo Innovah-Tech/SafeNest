@@ -41,7 +41,8 @@ interface UserVault {
 
 const VaultIntegration = () => {
   const { address: connectedAddress } = useAccount();
-  const { writeContract, isPending, isSuccess } = useWriteContract();
+  const { writeContractAsync, isPending, isSuccess } = useWriteContract();
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [selectedVault, setSelectedVault] = useState<VaultData | null>(null);
   const [depositAmount, setDepositAmount] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState("");
@@ -84,7 +85,7 @@ const VaultIntegration = () => {
   ];
 
   // Read user vault data
-  const { data: microSavingsVault } = useReadContract({
+  const { data: microSavingsVault, refetch: refetchMicroSavings } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -122,7 +123,7 @@ const VaultIntegration = () => {
     args: connectedAddress ? [connectedAddress, 0] : undefined, // 0 = Micro-Savings
   });
 
-  const { data: pensionVault } = useReadContract({
+  const { data: pensionVault, refetch: refetchPension } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -160,7 +161,7 @@ const VaultIntegration = () => {
     args: connectedAddress ? [connectedAddress, 1] : undefined, // 1 = Pension Nest
   });
 
-  const { data: emergencyVault } = useReadContract({
+  const { data: emergencyVault, refetch: refetchEmergency } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -204,12 +205,26 @@ const VaultIntegration = () => {
     if (emergencyVault) setUserVaults(prev => ({ ...prev, 2: emergencyVault }));
   }, [microSavingsVault, pensionVault, emergencyVault]);
 
+  // Refresh data after successful transactions
+  useEffect(() => {
+    if (isSuccess) {
+      const refreshData = async () => {
+        await Promise.all([
+          refetchMicroSavings(),
+          refetchPension(),
+          refetchEmergency()
+        ]);
+      };
+      refreshData();
+    }
+  }, [isSuccess, refetchMicroSavings, refetchPension, refetchEmergency]);
+
   const handleDeposit = async (vaultType: number) => {
     if (!connectedAddress || !depositAmount) return;
 
     try {
       // Use the actual deployed VaultSystem contract ABI
-      await writeContract({
+      await writeContractAsync({
         address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
         abi: [
           {
@@ -228,9 +243,10 @@ const VaultIntegration = () => {
         value: BigInt(parseFloat(depositAmount) * 1e18),
       });
       setDepositAmount("");
-    } catch (error) {
+      alert(`Successfully deposited ${depositAmount} U2U to vault ${vaultType}!`);
+    } catch (error: any) {
       console.error("Deposit failed:", error);
-      alert(`Deposit failed: ${error.message}`);
+      alert(`Deposit failed: ${error.message || error.toString()}`);
     }
   };
 
@@ -238,7 +254,7 @@ const VaultIntegration = () => {
     if (!connectedAddress || !withdrawAmount) return;
 
     try {
-      await writeContract({
+      await writeContractAsync({
         address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
         abi: [
           {
@@ -256,9 +272,10 @@ const VaultIntegration = () => {
         args: [vaultType, BigInt(parseFloat(withdrawAmount) * 1e18)],
       });
       setWithdrawAmount("");
-    } catch (error) {
+      alert(`Successfully withdrew ${withdrawAmount} U2U from vault ${vaultType}!`);
+    } catch (error: any) {
       console.error("Withdrawal failed:", error);
-      alert(`Withdrawal failed: ${error.message}`);
+      alert(`Withdrawal failed: ${error.message || error.toString()}`);
     }
   };
 
