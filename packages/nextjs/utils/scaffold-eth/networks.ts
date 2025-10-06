@@ -1,7 +1,7 @@
 import * as chains from "viem/chains";
 import scaffoldConfig from "~~/scaffold.config";
 
-// Custom U2U Network Nebulas chain definition
+// Custom U2U Network Nebulas chain definition (Testnet)
 export const u2uNebulas = {
   id: 2484,
   name: "U2U Network Nebulas",
@@ -28,6 +28,35 @@ export const u2uNebulas = {
     },
   },
   testnet: true,
+} as const satisfies chains.Chain;
+
+// Custom U2U Network Solaris chain definition (Mainnet)
+export const u2uSolaris = {
+  id: 39,
+  name: "U2U Solaris",
+  network: "u2u-solaris",
+  nativeCurrency: {
+    decimals: 18,
+    name: "U2U",
+    symbol: "U2U",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc-mainnet.u2u.xyz"],
+      webSocket: ["wss://ws-mainnet.u2u.xyz"],
+    },
+    public: {
+      http: ["https://rpc-mainnet.u2u.xyz"],
+      webSocket: ["wss://ws-mainnet.u2u.xyz"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "U2UScan",
+      url: "https://u2uscan.xyz",
+    },
+  },
+  testnet: false,
 } as const satisfies chains.Chain;
 
 type ChainAttributes = {
@@ -75,8 +104,11 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.hardhat.id]: {
     color: "#b8af0c",
   },
+  [u2uSolaris.id]: {
+    color: "#10b981", // Green for mainnet
+  },
   [u2uNebulas.id]: {
-    color: "#4f46e5",
+    color: "#4f46e5", // Blue for testnet
   },
   [chains.mainnet.id]: {
     color: "#ff8b9e",

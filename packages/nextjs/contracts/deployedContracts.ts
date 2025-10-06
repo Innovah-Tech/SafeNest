@@ -5,6 +5,386 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
+  39: {
+    SafeNest: {
+      address: "0xC62c2cD24C2D2fE2d91091344AcfFCfe6157DefC",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [{ internalType: "address", name: "", type: "address" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalHelpRequests",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "platformFee",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "string", name: "title", type: "string" },
+            { internalType: "string", name: "description", type: "string" },
+            { internalType: "string", name: "category", type: "string" },
+            { internalType: "bool", name: "isPremium", type: "bool" },
+          ],
+          name: "createHelpRequest",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "requestId", type: "uint256" }],
+          name: "getHelpRequest",
+          outputs: [
+            {
+              components: [
+                { internalType: "uint256", name: "id", type: "uint256" },
+                { internalType: "address", name: "requester", type: "address" },
+                { internalType: "string", name: "title", type: "string" },
+                { internalType: "string", name: "description", type: "string" },
+                { internalType: "string", name: "category", type: "string" },
+                { internalType: "uint256", name: "reward", type: "uint256" },
+                { internalType: "bool", name: "isResolved", type: "bool" },
+                { internalType: "bool", name: "isPremium", type: "bool" },
+                { internalType: "uint256", name: "createdAt", type: "uint256" },
+                { internalType: "address", name: "helper", type: "address" },
+                { internalType: "string", name: "solution", type: "string" },
+                { internalType: "uint256", name: "resolvedAt", type: "uint256" },
+              ],
+              internalType: "struct SafeNest.HelpRequest",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+    },
+    SAFEToken: {
+      address: "0x996cEB391a85d36CDD1e2e838A5dE4049A407db1",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "TOTAL_SUPPLY",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "account", type: "address" }],
+          name: "balanceOf",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "account", type: "address" }],
+          name: "stake",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "unstake",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "platform", type: "address" }],
+          name: "setPlatformContract",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+    },
+    VaultSystem: {
+      address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F",
+      abi: [
+        {
+          inputs: [{ internalType: "address", name: "_safeToken", type: "address" }],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "protocolFeeRate",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "uint8", name: "vaultType", type: "uint8" },
+            { internalType: "uint256", name: "amount", type: "uint256" },
+          ],
+          name: "depositToVault",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "uint8", name: "vaultType", type: "uint8" },
+            { internalType: "uint256", name: "amount", type: "uint256" },
+          ],
+          name: "withdrawFromVault",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "user", type: "address" },
+            { internalType: "uint8", name: "vaultType", type: "uint8" },
+          ],
+          name: "getUserVault",
+          outputs: [
+            {
+              components: [
+                { internalType: "address", name: "user", type: "address" },
+                { internalType: "uint8", name: "vaultType", type: "uint8" },
+                { internalType: "uint256", name: "totalDeposited", type: "uint256" },
+                { internalType: "uint256", name: "currentBalance", type: "uint256" },
+                { internalType: "uint256", name: "totalWithdrawn", type: "uint256" },
+                { internalType: "uint256", name: "lastDepositTime", type: "uint256" },
+                { internalType: "uint256", name: "lastWithdrawalTime", type: "uint256" },
+                { internalType: "uint256", name: "yieldEarned", type: "uint256" },
+                { internalType: "bool", name: "isActive", type: "bool" },
+                { internalType: "uint256", name: "autoDepositAmount", type: "uint256" },
+                { internalType: "uint256", name: "autoDepositFrequency", type: "uint256" },
+                { internalType: "uint256", name: "nextAutoDeposit", type: "uint256" },
+              ],
+              internalType: "struct VaultSystem.UserVault",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+    },
+    MicroSavings: {
+      address: "0x9E0bF00458e88807f25a7eCf9297Fcc75072d9D0",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+          name: "deposit",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+          name: "withdraw",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "user", type: "address" }],
+          name: "getUserSavingsAccount",
+          outputs: [
+            {
+              components: [
+                { internalType: "address", name: "user", type: "address" },
+                { internalType: "address", name: "stablecoin", type: "address" },
+                { internalType: "uint256", name: "totalDeposited", type: "uint256" },
+                { internalType: "uint256", name: "totalWithdrawn", type: "uint256" },
+                { internalType: "uint256", name: "currentBalance", type: "uint256" },
+                { internalType: "uint256", name: "lastDepositTime", type: "uint256" },
+                { internalType: "bool", name: "isActive", type: "bool" },
+              ],
+              internalType: "struct MicroSavings.SavingsAccount",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+    },
+    SimpleMicroSavings: {
+      address: "0x904A5c033778eff7CB03b3c1227573C9d62e4330",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+          name: "deposit",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+          name: "withdraw",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+    },
+    CommunityPools: {
+      address: "0x8DaC034C5Ed072630789aF53a39A090f477bE7e2",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "string", name: "name", type: "string" },
+            { internalType: "string", name: "description", type: "string" },
+            { internalType: "uint256", name: "targetAmount", type: "uint256" },
+            { internalType: "uint256", name: "memberLimit", type: "uint256" },
+          ],
+          name: "createPool",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "poolId", type: "uint256" }],
+          name: "joinPool",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+      ],
+    },
+    CommunityPoolsAdvanced: {
+      address: "0xBB19F0E41567e48Aa58F2A17dD903C0cDdc2C02e",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "platformName",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+    },
+    INCLToken: {
+      address: "0xF028cCA18B4A11C1c93d2FDbc483d9d2ca245624",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "account", type: "address" }],
+          name: "balanceOf",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+    },
+  },
   2484: {
     CommunityPools: {
       address: "0x256EF23ffc4091663a36054fc75d4a8127A35366",

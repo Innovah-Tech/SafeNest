@@ -131,6 +131,11 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
       chainId: 2484,
     },
+    u2uSolaris: {
+      url: "https://rpc-mainnet.u2u.xyz",
+      accounts: [deployerPrivateKey],
+      chainId: 39,
+    },
   },
   // Configuration for harhdat-verify plugin
   etherscan: {

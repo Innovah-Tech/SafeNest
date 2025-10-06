@@ -11,6 +11,8 @@
 
 ⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript with a focus on emerging markets and financial inclusion.
 
+🚀 **LIVE ON U2U SOLARIS MAINNET** - All contracts deployed and ready for production use!
+
 ## 🌟 Core Problem
 
 Millions of people are unbanked or underbanked but own smartphones. They need:
@@ -144,6 +146,24 @@ SafeNest is a mobile-first wallet that combines:
 
 ## 🌐 Deployed Contracts
 
+### **U2U Network Solaris Mainnet (Chain ID: 39)** 🚀
+- **RPC URL**: `https://rpc-mainnet.u2u.xyz`
+- **Block Explorer**: `https://u2uscan.xyz`
+
+#### **Core Contracts**
+- **SafeNest Platform**: `0xC62c2cD24C2D2fE2d91091344AcfFCfe6157DefC`
+- **SAFE Token**: `0x996cEB391a85d36CDD1e2e838A5dE4049A407db1`
+- **Vault System**: `0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F`
+
+#### **Micro-Savings Ecosystem**
+- **INCL Token**: `0xF028cCA18B4A11C1c93d2FDbc483d9d2ca245624`
+- **MicroSavings**: `0x9E0bF00458e88807f25a7eCf9297Fcc75072d9D0`
+- **SimpleMicroSavings**: `0x904A5c033778eff7CB03b3c1227573C9d62e4330`
+
+#### **Community Pools**
+- **CommunityPools**: `0x8DaC034C5Ed072630789aF53a39A090f477bE7e2`
+- **CommunityPoolsAdvanced**: `0xBB19F0E41567e48Aa58F2A17dD903C0cDdc2C02e`
+
 ### **U2U Network Nebulas Testnet (Chain ID: 2484)**
 - **RPC URL**: `https://rpc-nebulas-testnet.u2u.xyz`
 - **Block Explorer**: `https://testnet.u2uscan.xyz`
@@ -196,19 +216,37 @@ yarn chain
 yarn deploy
 ```
 
-5. **Deploy to U2U Network:**
+5. **Deploy to U2U Network Testnet:**
 ```bash
 yarn deploy --network u2uNebulas
 ```
 
-6. **Start frontend:**
+6. **Deploy to U2U Network Mainnet:**
+```bash
+yarn deploy --network u2uSolaris
+```
+
+7. **Start frontend:**
 ```bash
 yarn start
 ```
 
 Visit your app at: `http://localhost:3000`
 
-### **Connect to U2U Network**
+### **Connect to U2U Networks**
+
+#### **U2U Solaris Mainnet (Production)**
+1. Add U2U Solaris Mainnet to your wallet:
+   - **Network Name**: U2U Solaris
+   - **RPC URL**: `https://rpc-mainnet.u2u.xyz`
+   - **Chain ID**: 39
+   - **Currency Symbol**: U2U
+   - **Block Explorer**: `https://u2uscan.xyz`
+
+2. Get U2U tokens from exchanges
+3. Connect your wallet and start using SafeNest!
+
+#### **U2U Nebulas Testnet (Testing)**
 1. Add U2U Network Nebulas to your wallet:
    - **Network Name**: U2U Network Nebulas
    - **RPC URL**: `https://rpc-nebulas-testnet.u2u.xyz`
@@ -217,7 +255,7 @@ Visit your app at: `http://localhost:3000`
    - **Block Explorer**: `https://testnet.u2uscan.xyz`
 
 2. Get testnet U2U tokens from the U2U faucet
-3. Connect your wallet and start using SafeNest!
+3. Connect your wallet and start testing SafeNest!
 
 ## 📁 Project Structure
 
