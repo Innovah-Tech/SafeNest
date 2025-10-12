@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { formatEther } from "viem";
-import { useAccount } from "wagmi";
 
 interface Transaction {
   id: string;

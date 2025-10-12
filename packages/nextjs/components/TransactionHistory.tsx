@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { formatEther } from "viem";
-import { useAccount, useReadContract } from "wagmi";
+import { useAccount } from "wagmi";
 
 interface Transaction {
   id: string;
@@ -31,7 +31,7 @@ interface TransactionHistoryProps {
 const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
   const { address: connectedAddress } = useAccount();
   const [vaultBalances, setVaultBalances] = useState<VaultBalance[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 

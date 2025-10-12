@@ -35,7 +35,7 @@ const RealTransactionHistory = () => {
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 
   // Read contract events to get transaction history
-  const { data: depositEvents, refetch: refetchDeposits } = useReadContract({
+  const { data: depositEvents } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {

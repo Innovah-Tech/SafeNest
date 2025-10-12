@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
 import {
   ArrowTrendingUpIcon,
   BanknotesIcon,
@@ -53,8 +53,6 @@ interface VaultIntegrationProps {
 const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   const { address: connectedAddress } = useAccount();
   const { writeContractAsync, isPending, isSuccess } = useWriteContract();
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [selectedVault, setSelectedVault] = useState<VaultData | null>(null);
   const [depositAmounts, setDepositAmounts] = useState<string[]>(["", "", ""]);
   const [withdrawAmounts, setWithdrawAmounts] = useState<string[]>(["", "", ""]);
   const [userVaults, setUserVaults] = useState<Record<number, UserVault>>({});
