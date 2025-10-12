@@ -95,7 +95,7 @@ const BalanceTest = () => {
           <strong>Connected Address:</strong> {connectedAddress}
         </p>
         <p>
-          <strong>Vault Data:</strong> {microSavingsVault ? "Available" : "Not Available"}
+            <strong>Vault Data:</strong> {microSavingsVault ? &quot;Available&quot; : &quot;Not Available&quot;}
         </p>
         <p>
           <strong>Error:</strong> {microError ? microError.message : "None"}

@@ -78,7 +78,7 @@ const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
           <div className="text-blue-600 font-medium mb-2">{vaultName} - Not Created Yet</div>
           <div className="text-sm text-blue-500">
-            This vault hasn't been created yet. Create it by making your first deposit!
+            This vault hasn&apos;t been created yet. Create it by making your first deposit!
           </div>
         </div>
       );
@@ -98,7 +98,7 @@ const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
       <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
         <div className="text-blue-600 font-medium mb-2">{vaultName} - Not Created Yet</div>
         <div className="text-sm text-blue-500">
-          This vault hasn't been created yet. Create it by making your first deposit!
+          This vault hasn&apos;t been created yet. Create it by making your first deposit!
         </div>
       </div>
     );
@@ -109,11 +109,11 @@ const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
     currentBalance,
     vaultTotalWithdrawn,
     yieldEarned,
-    lastDepositTime,
-    lastWithdrawalTime,
+    ,
+    ,
     isActive,
-    autoDepositAmount,
-    autoDepositFrequency,
+    ,
+    ,
   ] = vaultData;
 
   return (

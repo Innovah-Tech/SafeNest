@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
-import { ArrowTrendingUpIcon, ClockIcon, CurrencyDollarIcon, PlusIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { useAccount, useWriteContract } from "wagmi";
+import { ArrowTrendingUpIcon, ClockIcon, PlusIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
 interface CommunityPool {

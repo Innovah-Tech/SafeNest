@@ -7,21 +7,18 @@ import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import {
   ArrowTrendingUpIcon,
-  BanknotesIcon,
   ChartBarIcon,
   ClockIcon,
   CurrencyDollarIcon,
   PlusIcon,
-  ShieldCheckIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import MicroSavingsIntegration from "~~/components/MicroSavingsIntegration";
-import { Address } from "~~/components/scaffold-eth";
 
 interface Transaction {
   id: string;
   type: "deposit" | "withdraw";
-  amount: BigInt;
+  amount: bigint;
   vaultType: number;
   timestamp: number;
   hash: string;
