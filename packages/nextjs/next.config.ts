@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
-  // Removed deprecated swcMinify option
+  // Force fresh deployment
   experimental: {
     // Enable experimental features if needed
   },
