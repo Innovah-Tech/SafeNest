@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 
@@ -38,7 +38,7 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
   // No mock data - only show real transactions
 
   // Calculate vault balances from transaction history
-  const calculateBalances = (txs: Transaction[]): VaultBalance[] => {
+  const calculateBalances = useCallback((txs: Transaction[]): VaultBalance[] => {
     const balances: Record<number, VaultBalance> = {};
 
     // Initialize all vaults
@@ -69,14 +69,14 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
     });
 
     return Object.values(balances);
-  };
+  }, [vaultNames]);
 
   // Calculate balances from current transactions
   useEffect(() => {
     const balances = calculateBalances(transactions);
     setVaultBalances(balances);
     console.log("Updated balances from transactions:", balances);
-  }, [transactions]);
+  }, [transactions, calculateBalances]);
 
   // Format amount for display
   const formatAmount = (amount: bigint) => {

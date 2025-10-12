@@ -16,6 +16,8 @@
     "vercel:yolo": "vercel --build-env YARN_ENABLE_IMMUTABLE_INSTALLS=false --build-env ENABLE_EXPERIMENTAL_COREPACK=1 --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true --build-env VERCEL_TELEMETRY_DISABLED=1"
   },
   "dependencies": {
+    "@base-org/account": "^2.4.0",
+    "@eslint/eslintrc": "^3.3.1",
     "@heroicons/react": "~2.1.5",
     "@next/env": "^15.5.4",
     "@next/swc-win32-x64-msvc": "^15.5.4",

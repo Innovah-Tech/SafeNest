@@ -28,10 +28,10 @@ export const HelpRequestsList = () => {
   // Read platform stats to get total requests
   const { data: platformStats } = useScaffoldReadContract({
     contractName: "SafeNest",
-    functionName: "getPlatformStats",
+    functionName: "totalHelpRequests",
   });
 
-  const totalRequests = platformStats?.[0] || 0;
+  const totalRequests = platformStats || 0;
 
   // Fetch help requests
   useEffect(() => {

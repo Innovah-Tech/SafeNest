@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { formatEther } from "viem";
 
 interface Transaction {
@@ -30,7 +30,7 @@ const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ trans
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 
   // Calculate vault balances from transaction history
-  const calculateVaultBalances = (transactions: Transaction[]) => {
+  const calculateVaultBalances = useCallback((transactions: Transaction[]) => {
     const balances: Record<number, VaultBalance> = {};
 
     // Initialize all vaults
@@ -59,13 +59,13 @@ const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ trans
     });
 
     return balances;
-  };
+  }, [vaultNames]);
 
   // Update balances when transactions change
   useEffect(() => {
     const balances = calculateVaultBalances(transactions);
     setVaultBalances(balances);
-  }, [transactions]);
+  }, [transactions, calculateVaultBalances]);
 
   const formatBalance = (balance: bigint) => {
     const balanceStr = formatEther(balance);

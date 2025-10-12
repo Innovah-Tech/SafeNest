@@ -12,10 +12,7 @@ export const HelpRequestForm = () => {
   const [isPremium, setIsPremium] = useState(false);
   const [reward, setReward] = useState("0");
 
-  const { writeContractAsync: createHelpRequest, isPending } = useScaffoldWriteContract({
-    contractName: "SafeNest",
-    functionName: "createHelpRequest",
-  });
+  const { writeContractAsync: createHelpRequest, isPending } = useScaffoldWriteContract("SafeNest");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +22,7 @@ export const HelpRequestForm = () => {
       const value = isPremium ? BigInt(parseFloat(reward) * 1e18) : BigInt(0);
 
       await createHelpRequest({
+        functionName: "createHelpRequest",
         args: [title, description, category, isPremium],
         value: value,
       });

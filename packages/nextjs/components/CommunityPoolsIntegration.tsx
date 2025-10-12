@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import { ArrowTrendingUpIcon, PlusIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
@@ -31,7 +31,7 @@ const CommunityPoolsIntegration = () => {
   });
 
   // Mock data for demonstration - in real implementation, you'd read from contract
-  const mockPools: CommunityPool[] = [
+  const mockPools = useCallback((): CommunityPool[] => [
     {
       id: 1,
       name: "Education Fund",
@@ -68,11 +68,11 @@ const CommunityPoolsIntegration = () => {
       isActive: true,
       createdAt: BigInt(Math.floor(Date.now() / 1000 - 259200)), // 3 days ago
     },
-  ];
+  ], []);
 
   useEffect(() => {
-    setPools(mockPools);
-  }, []);
+    setPools(mockPools());
+  }, [mockPools]);
 
   const handleCreatePool = async () => {
     if (!connectedAddress || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit)

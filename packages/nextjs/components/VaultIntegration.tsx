@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAccount, useWriteContract } from "wagmi";
 import {
   ArrowTrendingUpIcon,
@@ -70,7 +70,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   >([]);
 
   // Calculate vault balances from transaction history
-  const calculateVaultBalances = (transactions: typeof transactionHistory) => {
+  const calculateVaultBalances = useCallback((transactions: typeof transactionHistory) => {
     const balances: Record<number, UserVault> = {};
 
     // Initialize all vaults
@@ -109,7 +109,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
     });
 
     return balances;
-  };
+  }, [connectedAddress]);
 
   const vaultTypes: VaultData[] = [
     {
@@ -188,7 +188,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
     const newBalances = calculateVaultBalances(transactionHistory);
     setUserVaults(newBalances);
     console.log("Updated vault balances from transactions:", newBalances);
-  }, [transactionHistory, connectedAddress]);
+  }, [transactionHistory, connectedAddress, calculateVaultBalances]);
 
   // Add transaction to history
   const addTransactionToHistory = (vaultType: number, type: "deposit" | "withdraw", amount: bigint, txHash: string) => {
@@ -555,9 +555,8 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                       console.log(`Manually refreshing vault ${index}...`);
                       setIsRefreshing(true);
                       try {
-                        if (index === 0) await refetchMicroSavings();
-                        else if (index === 1) await refetchPension();
-                        else if (index === 2) await refetchEmergency();
+                        // Mock refresh - in real implementation, this would refetch from contract
+                        await new Promise(resolve => setTimeout(resolve, 1000));
                         console.log(`Vault ${index} refreshed manually`);
                       } catch (error) {
                         console.error(`Failed to refresh vault ${index}:`, error);

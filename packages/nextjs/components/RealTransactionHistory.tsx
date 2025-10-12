@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { formatEther } from "viem";
-import { useAccount, useBlockNumber, useReadContract } from "wagmi";
+import { useAccount, useBlockNumber } from "wagmi";
 
 interface Transaction {
   id: string;
@@ -71,7 +71,7 @@ const RealTransactionHistory = () => {
   };
 
   // Simulate fetching transaction history from blockchain
-  const loadTransactionHistory = async () => {
+  const loadTransactionHistory = useCallback(async () => {
     if (!connectedAddress) return;
 
     setIsLoading(true);
@@ -93,7 +93,7 @@ const RealTransactionHistory = () => {
           type: "deposit",
           amount: BigInt("1000000000000000000"), // 1 U2U
           timestamp: Date.now() - 3600000, // 1 hour ago
-          blockNumber: (blockNumber || 0) - 100,
+          blockNumber: Number(blockNumber || 0) - 100,
           txHash: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
         },
         {
@@ -103,7 +103,7 @@ const RealTransactionHistory = () => {
           type: "deposit",
           amount: BigInt("500000000000000000"), // 0.5 U2U
           timestamp: Date.now() - 1800000, // 30 minutes ago
-          blockNumber: (blockNumber || 0) - 50,
+          blockNumber: Number(blockNumber || 0) - 50,
           txHash: "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
         },
         {
@@ -113,7 +113,7 @@ const RealTransactionHistory = () => {
           type: "deposit",
           amount: BigInt("2000000000000000000"), // 2 U2U
           timestamp: Date.now() - 900000, // 15 minutes ago
-          blockNumber: (blockNumber || 0) - 25,
+          blockNumber: Number(blockNumber || 0) - 25,
           txHash: "0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba",
         },
         {
@@ -123,7 +123,7 @@ const RealTransactionHistory = () => {
           type: "withdraw",
           amount: BigInt("200000000000000000"), // 0.2 U2U
           timestamp: Date.now() - 300000, // 5 minutes ago
-          blockNumber: (blockNumber || 0) - 10,
+          blockNumber: Number(blockNumber || 0) - 10,
           txHash: "0xfedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
         },
       ];
@@ -139,7 +139,7 @@ const RealTransactionHistory = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [connectedAddress, blockNumber]);
 
   // Add a new transaction (called after successful deposit/withdraw)
   const addTransaction = (vaultType: number, type: "deposit" | "withdraw", amount: bigint, txHash: string) => {
@@ -150,7 +150,7 @@ const RealTransactionHistory = () => {
       type,
       amount,
       timestamp: Date.now(),
-      blockNumber: blockNumber || 0,
+      blockNumber: Number(blockNumber || 0),
       txHash,
     };
 
@@ -190,13 +190,13 @@ const RealTransactionHistory = () => {
     if (connectedAddress) {
       loadTransactionHistory();
     }
-  }, [connectedAddress]);
+  }, [connectedAddress, loadTransactionHistory]);
 
   // Auto-refresh when new blocks are mined
   useEffect(() => {
     if (blockNumber && blockNumber > lastProcessedBlock) {
       console.log(`New block detected: ${blockNumber}, last processed: ${lastProcessedBlock}`);
-      setLastProcessedBlock(blockNumber);
+      setLastProcessedBlock(Number(blockNumber));
       // In a real app, you would check for new events here
     }
   }, [blockNumber, lastProcessedBlock]);

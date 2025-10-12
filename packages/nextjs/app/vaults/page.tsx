@@ -8,9 +8,11 @@ import VaultIntegration from "~~/components/VaultIntegration";
 interface Transaction {
   id: string;
   vaultType: number;
+  vaultName: string;
   type: "deposit" | "withdraw";
   amount: bigint;
   timestamp: number;
+  blockNumber: number;
   txHash: string;
 }
 
@@ -23,10 +25,12 @@ const VaultsPage: NextPage = () => {
     if (savedTransactions) {
       try {
         const parsed = JSON.parse(savedTransactions);
-        // Convert amount strings back to BigInt
+        // Convert amount strings back to BigInt and add missing fields
         const transactions = parsed.map((tx: any) => ({
           ...tx,
           amount: BigInt(tx.amount),
+          vaultName: tx.vaultName || ["Micro-Savings", "Pension Nest", "Emergency Vault"][tx.vaultType] || "Unknown",
+          blockNumber: tx.blockNumber || 0,
         }));
         setTransactions(transactions);
         console.log("Loaded global transactions:", transactions);
@@ -65,7 +69,15 @@ const VaultsPage: NextPage = () => {
         </div>
 
         {/* Vault Integration Component */}
-        <VaultIntegration onTransactionAdded={tx => setTransactions(prev => [tx, ...prev])} />
+        <VaultIntegration onTransactionAdded={tx => {
+          const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
+          const fullTransaction: Transaction = {
+            ...tx,
+            vaultName: vaultNames[tx.vaultType] || "Unknown",
+            blockNumber: 0, // Default value since it's not provided by VaultIntegration
+          };
+          setTransactions(prev => [fullTransaction, ...prev]);
+        }} />
 
         {/* Transaction History */}
         <TransactionHistory transactions={transactions} />
