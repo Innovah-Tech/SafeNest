@@ -32,7 +32,7 @@ const VaultInputTest = () => {
                     setDepositAmounts(newAmounts);
                   }}
                 />
-                <div className="text-xs text-gray-500 mt-1">Value: "{depositAmounts[index]}"</div>
+                <div className="text-xs text-gray-500 mt-1">Value: &quot;{depositAmounts[index]}&quot;</div>
               </div>
 
               <div>
@@ -48,7 +48,7 @@ const VaultInputTest = () => {
                     setWithdrawAmounts(newAmounts);
                   }}
                 />
-                <div className="text-xs text-gray-500 mt-1">Value: "{withdrawAmounts[index]}"</div>
+                <div className="text-xs text-gray-500 mt-1">Value: &quot;{withdrawAmounts[index]}&quot;</div>
               </div>
             </div>
           </div>
