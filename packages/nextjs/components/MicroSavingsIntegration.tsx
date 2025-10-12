@@ -7,16 +7,16 @@ import { useAccount } from "wagmi";
 interface Transaction {
   id: string;
   type: "deposit" | "withdraw";
-  amount: BigInt;
+  amount: bigint;
   vaultType: number;
   timestamp: number;
   hash: string;
 }
 
 interface VaultBalance {
-  currentBalance: BigInt;
-  totalDeposited: BigInt;
-  totalWithdrawn: BigInt;
+  currentBalance: bigint;
+  totalDeposited: bigint;
+  totalWithdrawn: bigint;
   isActive: boolean;
 }
 
@@ -25,8 +25,7 @@ interface MicroSavingsIntegrationProps {
   onTransactionAdded?: (transaction: Transaction) => void;
 }
 
-const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ transactions, onTransactionAdded }) => {
-  const { address: connectedAddress } = useAccount();
+const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ transactions }) => {
   const [vaultBalances, setVaultBalances] = useState<Record<number, VaultBalance>>({});
 
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
@@ -69,7 +68,7 @@ const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ trans
     setVaultBalances(balances);
   }, [transactions]);
 
-  const formatBalance = (balance: BigInt) => {
+  const formatBalance = (balance: bigint) => {
     const balanceStr = formatEther(balance);
     const num = parseFloat(balanceStr);
 

@@ -10,7 +10,6 @@ import {
   MinusIcon,
   PlusIcon,
   ShieldCheckIcon,
-  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 
@@ -20,7 +19,7 @@ const GovernanceIntegration = () => {
   const [stakeAmount, setStakeAmount] = useState("");
   const [unstakeAmount, setUnstakeAmount] = useState("");
   const [userBalance, setUserBalance] = useState("0");
-  const [stakedBalance, setStakedBalance] = useState("0");
+  const [stakedBalance] = useState("0");
 
   // Read SAFE token balance
   const { data: safeBalance } = useReadContract({
