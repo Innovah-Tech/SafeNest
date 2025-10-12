@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useAccount, useReadContract } from "wagmi";
+import React, { useEffect, useState } from "react";
 import { formatEther } from "viem";
+import { useAccount, useReadContract } from "wagmi";
 
 interface Transaction {
   id: string;
   vaultType: number;
   vaultName: string;
-  type: 'deposit' | 'withdraw';
+  type: "deposit" | "withdraw";
   amount: bigint;
   timestamp: number;
   blockNumber: number;
@@ -49,7 +49,7 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
         totalDeposited: BigInt(0),
         totalWithdrawn: BigInt(0),
         currentBalance: BigInt(0),
-        transactionCount: 0
+        transactionCount: 0,
       };
     });
 
@@ -59,10 +59,10 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
 
       balances[tx.vaultType].transactionCount++;
 
-      if (tx.type === 'deposit') {
+      if (tx.type === "deposit") {
         balances[tx.vaultType].totalDeposited += tx.amount;
         balances[tx.vaultType].currentBalance += tx.amount;
-      } else if (tx.type === 'withdraw') {
+      } else if (tx.type === "withdraw") {
         balances[tx.vaultType].totalWithdrawn += tx.amount;
         balances[tx.vaultType].currentBalance -= tx.amount;
       }
@@ -77,7 +77,6 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
     setVaultBalances(balances);
     console.log("Updated balances from transactions:", balances);
   }, [transactions]);
-
 
   // Format amount for display
   const formatAmount = (amount: bigint) => {
@@ -100,7 +99,6 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
     return (value * 0.1).toFixed(2); // Assuming 1 U2U = 0.1 USD
   };
 
-
   if (!connectedAddress) {
     return (
       <div className="card bg-base-100 shadow-xl p-6">
@@ -114,15 +112,13 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
     <div className="space-y-6">
       {/* Vault Balances Summary */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {vaultBalances.map((balance) => (
+        {vaultBalances.map(balance => (
           <div key={balance.vaultType} className="card bg-base-100 shadow-xl p-4">
             <h3 className="text-lg font-semibold mb-2">{balance.vaultName}</h3>
             <div className="space-y-1 text-sm">
               <div className="flex justify-between">
                 <span>Current Balance:</span>
-                <span className="font-bold text-green-600">
-                  {formatAmount(balance.currentBalance)} U2U
-                </span>
+                <span className="font-bold text-green-600">{formatAmount(balance.currentBalance)} U2U</span>
               </div>
               <div className="flex justify-between">
                 <span>Total Deposited:</span>
@@ -136,9 +132,7 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
                 <span>Transactions:</span>
                 <span>{balance.transactionCount}</span>
               </div>
-              <div className="text-xs text-gray-500">
-                ≈ ${getUsdValue(balance.currentBalance)} USD
-              </div>
+              <div className="text-xs text-gray-500">≈ ${getUsdValue(balance.currentBalance)} USD</div>
             </div>
           </div>
         ))}
@@ -148,12 +142,9 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
       <div className="card bg-base-100 shadow-xl p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Transaction History</h2>
-            <button
-              className="btn btn-sm btn-outline"
-              onClick={() => window.location.reload()}
-            >
-              Refresh Page
-            </button>
+          <button className="btn btn-sm btn-outline" onClick={() => window.location.reload()}>
+            Refresh Page
+          </button>
         </div>
 
         {isLoading ? (
@@ -180,25 +171,20 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
                 </tr>
               </thead>
               <tbody>
-                {transactions.map((tx) => (
+                {transactions.map(tx => (
                   <tr key={tx.id}>
                     <td>
-                      <span className={`badge ${
-                        tx.type === 'deposit' ? 'badge-success' : 'badge-error'
-                      }`}>
-                        {tx.type === 'deposit' ? 'Deposit' : 'Withdraw'}
+                      <span className={`badge ${tx.type === "deposit" ? "badge-success" : "badge-error"}`}>
+                        {tx.type === "deposit" ? "Deposit" : "Withdraw"}
                       </span>
                     </td>
                     <td className="font-medium">{tx.vaultName}</td>
                     <td className="font-mono">
-                      {tx.type === 'deposit' ? '+' : '-'}{formatAmount(tx.amount)} U2U
+                      {tx.type === "deposit" ? "+" : "-"}
+                      {formatAmount(tx.amount)} U2U
                     </td>
-                    <td className="text-sm text-gray-500">
-                      ${getUsdValue(tx.amount)}
-                    </td>
-                    <td className="text-sm">
-                      {formatTimestamp(tx.timestamp)}
-                    </td>
+                    <td className="text-sm text-gray-500">${getUsdValue(tx.amount)}</td>
+                    <td className="text-sm">{formatTimestamp(tx.timestamp)}</td>
                     <td>
                       <a
                         href={`https://u2uscan.xyz/tx/${tx.txHash}`}
@@ -216,7 +202,6 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
           </div>
         )}
       </div>
-
     </div>
   );
 };

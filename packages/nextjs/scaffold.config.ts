@@ -1,5 +1,5 @@
-import * as chains from "viem/chains";
 import { u2uNebulas, u2uSolaris } from "./utils/scaffold-eth/networks";
+import * as chains from "viem/chains";
 
 export type BaseConfig = {
   targetNetworks: readonly chains.Chain[];

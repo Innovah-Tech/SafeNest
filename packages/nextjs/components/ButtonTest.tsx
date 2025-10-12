@@ -102,9 +102,7 @@ const ButtonTest = () => {
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">Button Functionality Test</h2>
-        <p className="text-sm text-gray-600 mb-4">
-          Test if the contract interaction buttons work correctly
-        </p>
+        <p className="text-sm text-gray-600 mb-4">Test if the contract interaction buttons work correctly</p>
 
         <div className="form-control mb-4">
           <label className="label">
@@ -115,32 +113,20 @@ const ButtonTest = () => {
             placeholder="0.001"
             className="input input-bordered"
             value={testAmount}
-            onChange={(e) => setTestAmount(e.target.value)}
+            onChange={e => setTestAmount(e.target.value)}
           />
         </div>
 
         <div className="space-y-3">
-          <button
-            className="btn btn-primary w-full"
-            onClick={testVaultDeposit}
-            disabled={isPending}
-          >
+          <button className="btn btn-primary w-full" onClick={testVaultDeposit} disabled={isPending}>
             {isPending ? "Testing..." : "Test Vault Deposit"}
           </button>
 
-          <button
-            className="btn btn-secondary w-full"
-            onClick={testSafeTokenStake}
-            disabled={isPending}
-          >
+          <button className="btn btn-secondary w-full" onClick={testSafeTokenStake} disabled={isPending}>
             {isPending ? "Testing..." : "Test SAFE Token Stake"}
           </button>
 
-          <button
-            className="btn btn-accent w-full"
-            onClick={testCommunityPoolJoin}
-            disabled={isPending}
-          >
+          <button className="btn btn-accent w-full" onClick={testCommunityPoolJoin} disabled={isPending}>
             {isPending ? "Testing..." : "Test Community Pool Join"}
           </button>
         </div>
@@ -158,7 +144,9 @@ const ButtonTest = () => {
         )}
 
         <div className="text-xs text-gray-500 mt-4">
-          <p><strong>Note:</strong> These are real transactions on U2U Solaris mainnet.</p>
+          <p>
+            <strong>Note:</strong> These are real transactions on U2U Solaris mainnet.
+          </p>
           <p>Make sure you have U2U tokens and are connected to the correct network.</p>
         </div>
       </div>

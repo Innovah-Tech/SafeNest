@@ -10,7 +10,11 @@ interface BalanceDisplayProps {
 const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
   const { address: connectedAddress } = useAccount();
 
-  const { data: vaultData, isLoading, error } = useReadContract({
+  const {
+    data: vaultData,
+    isLoading,
+    error,
+  } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -79,10 +83,12 @@ const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
         </div>
       );
     }
-    
+
     return (
       <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
-        <div className="text-yellow-600 font-medium">Error loading {vaultName}: {error.message}</div>
+        <div className="text-yellow-600 font-medium">
+          Error loading {vaultName}: {error.message}
+        </div>
       </div>
     );
   }
@@ -98,45 +104,47 @@ const BalanceDisplay = ({ vaultType, vaultName }: BalanceDisplayProps) => {
     );
   }
 
-  const [vaultTotalDeposited, currentBalance, vaultTotalWithdrawn, yieldEarned, lastDepositTime, lastWithdrawalTime, isActive, autoDepositAmount, autoDepositFrequency] = vaultData;
+  const [
+    vaultTotalDeposited,
+    currentBalance,
+    vaultTotalWithdrawn,
+    yieldEarned,
+    lastDepositTime,
+    lastWithdrawalTime,
+    isActive,
+    autoDepositAmount,
+    autoDepositFrequency,
+  ] = vaultData;
 
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 rounded-lg shadow-sm">
       <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">{vaultName} Balance</h3>
-      
+
       <div className="space-y-2">
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Current Balance:</span>
-          <span className="font-mono text-lg font-bold text-green-600">
-            {formatBalance(currentBalance)} U2U
-          </span>
+          <span className="font-mono text-lg font-bold text-green-600">{formatBalance(currentBalance)} U2U</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Total Deposited:</span>
-          <span className="font-mono text-sm font-medium">
-            {formatBalance(vaultTotalDeposited)} U2U
-          </span>
+          <span className="font-mono text-sm font-medium">{formatBalance(vaultTotalDeposited)} U2U</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Total Withdrawn:</span>
-          <span className="font-mono text-sm font-medium">
-            {formatBalance(vaultTotalWithdrawn)} U2U
-          </span>
+          <span className="font-mono text-sm font-medium">{formatBalance(vaultTotalWithdrawn)} U2U</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Yield Earned:</span>
-          <span className="font-mono text-sm font-medium text-green-600">
-            {formatBalance(yieldEarned)} U2U
-          </span>
+          <span className="font-mono text-sm font-medium text-green-600">{formatBalance(yieldEarned)} U2U</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Status:</span>
-          <span className={`text-sm font-medium ${isActive ? 'text-green-600' : 'text-red-600'}`}>
-            {isActive ? 'Active' : 'Inactive'}
+          <span className={`text-sm font-medium ${isActive ? "text-green-600" : "text-red-600"}`}>
+            {isActive ? "Active" : "Inactive"}
           </span>
         </div>
       </div>

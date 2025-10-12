@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 interface UserProfileData {
   name: string;
@@ -94,11 +94,7 @@ export const UserProfile = () => {
   };
 
   if (!address) {
-    return (
-      <div className="alert alert-warning">
-        Please connect your wallet to view your profile.
-      </div>
-    );
+    return <div className="alert alert-warning">Please connect your wallet to view your profile.</div>;
   }
 
   const profile = userProfile as UserProfileData | undefined;
@@ -110,10 +106,7 @@ export const UserProfile = () => {
         <div className="card-body">
           <div className="flex justify-between items-start">
             <h2 className="card-title">My Profile</h2>
-            <button
-              className="btn btn-sm btn-outline"
-              onClick={() => setIsEditing(!isEditing)}
-            >
+            <button className="btn btn-sm btn-outline" onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "Cancel" : "Edit"}
             </button>
           </div>
@@ -135,7 +128,7 @@ export const UserProfile = () => {
                   type="text"
                   className="input input-bordered"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={e => setName(e.target.value)}
                   placeholder="Enter your name"
                 />
               ) : (
@@ -151,7 +144,7 @@ export const UserProfile = () => {
                 <textarea
                   className="textarea textarea-bordered"
                   value={bio}
-                  onChange={(e) => setBio(e.target.value)}
+                  onChange={e => setBio(e.target.value)}
                   placeholder="Tell us about yourself"
                   rows={3}
                 />
@@ -172,9 +165,9 @@ export const UserProfile = () => {
                       type="text"
                       className="input input-bordered flex-1"
                       value={newSkill}
-                      onChange={(e) => setNewSkill(e.target.value)}
+                      onChange={e => setNewSkill(e.target.value)}
                       placeholder="Add a skill"
-                      onKeyPress={(e) => e.key === "Enter" && addSkill()}
+                      onKeyPress={e => e.key === "Enter" && addSkill()}
                     />
                     <button className="btn btn-sm" onClick={addSkill}>
                       Add
@@ -184,10 +177,7 @@ export const UserProfile = () => {
                     {skills.map((skill, index) => (
                       <span key={index} className="badge badge-primary gap-2">
                         {skill}
-                        <button
-                          className="btn btn-xs btn-circle btn-ghost"
-                          onClick={() => removeSkill(skill)}
-                        >
+                        <button className="btn btn-xs btn-circle btn-ghost" onClick={() => removeSkill(skill)}>
                           ×
                         </button>
                       </span>
@@ -209,21 +199,15 @@ export const UserProfile = () => {
             <div className="stats stats-horizontal shadow">
               <div className="stat">
                 <div className="stat-title">Help Requests</div>
-                <div className="stat-value text-primary">
-                  {Number(profile?.helpRequestsCount || 0)}
-                </div>
+                <div className="stat-value text-primary">{Number(profile?.helpRequestsCount || 0)}</div>
               </div>
               <div className="stat">
                 <div className="stat-title">Help Provided</div>
-                <div className="stat-value text-secondary">
-                  {Number(profile?.helpProvidedCount || 0)}
-                </div>
+                <div className="stat-value text-secondary">{Number(profile?.helpProvidedCount || 0)}</div>
               </div>
               <div className="stat">
                 <div className="stat-title">Reputation</div>
-                <div className="stat-value text-accent">
-                  {Number(profile?.reputation || 0)}
-                </div>
+                <div className="stat-value text-accent">{Number(profile?.reputation || 0)}</div>
               </div>
             </div>
 
@@ -237,11 +221,7 @@ export const UserProfile = () => {
             {/* Action Buttons */}
             {isEditing && (
               <div className="card-actions justify-end">
-                <button
-                  className="btn btn-primary"
-                  onClick={handleUpdateProfile}
-                  disabled={isUpdatingProfile}
-                >
+                <button className="btn btn-primary" onClick={handleUpdateProfile} disabled={isUpdatingProfile}>
                   {isUpdatingProfile ? "Updating..." : "Update Profile"}
                 </button>
               </div>

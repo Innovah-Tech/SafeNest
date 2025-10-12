@@ -17,11 +17,7 @@ export const PlatformStats = () => {
   }
 
   if (!platformStats) {
-    return (
-      <div className="alert alert-error">
-        Failed to load platform statistics.
-      </div>
-    );
+    return <div className="alert alert-error">Failed to load platform statistics.</div>;
   }
 
   const [totalRequests, totalHelpProvided, totalHelpers, platformBalance] = platformStats;
@@ -47,9 +43,7 @@ export const PlatformStats = () => {
             </svg>
           </div>
           <div className="stat-title text-primary-content">Total Requests</div>
-          <div className="stat-value text-primary-content">
-            {Number(totalRequests)}
-          </div>
+          <div className="stat-value text-primary-content">{Number(totalRequests)}</div>
           <div className="stat-desc text-primary-content">Help requests created</div>
         </div>
 
@@ -70,9 +64,7 @@ export const PlatformStats = () => {
             </svg>
           </div>
           <div className="stat-title text-secondary-content">Help Provided</div>
-          <div className="stat-value text-secondary-content">
-            {Number(totalHelpProvided)}
-          </div>
+          <div className="stat-value text-secondary-content">{Number(totalHelpProvided)}</div>
           <div className="stat-desc text-secondary-content">Requests resolved</div>
         </div>
 
@@ -93,9 +85,7 @@ export const PlatformStats = () => {
             </svg>
           </div>
           <div className="stat-title text-accent-content">Active Helpers</div>
-          <div className="stat-value text-accent-content">
-            {Number(totalHelpers)}
-          </div>
+          <div className="stat-value text-accent-content">{Number(totalHelpers)}</div>
           <div className="stat-desc text-accent-content">Registered helpers</div>
         </div>
 
@@ -116,9 +106,7 @@ export const PlatformStats = () => {
             </svg>
           </div>
           <div className="stat-title text-neutral-content">Platform Balance</div>
-          <div className="stat-value text-neutral-content">
-            {(Number(platformBalance) / 1e18).toFixed(4)}
-          </div>
+          <div className="stat-value text-neutral-content">{(Number(platformBalance) / 1e18).toFixed(4)}</div>
           <div className="stat-desc text-neutral-content">ETH in platform</div>
         </div>
       </div>
@@ -132,17 +120,16 @@ export const PlatformStats = () => {
               <div className="flex justify-between">
                 <span>Resolution Rate:</span>
                 <span className="font-semibold">
-                  {Number(totalRequests) > 0 
+                  {Number(totalRequests) > 0
                     ? ((Number(totalHelpProvided) / Number(totalRequests)) * 100).toFixed(1)
-                    : 0}%
+                    : 0}
+                  %
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Average Helpers per Request:</span>
                 <span className="font-semibold">
-                  {Number(totalHelpers) > 0 
-                    ? (Number(totalRequests) / Number(totalHelpers)).toFixed(1)
-                    : 0}
+                  {Number(totalHelpers) > 0 ? (Number(totalRequests) / Number(totalHelpers)).toFixed(1) : 0}
                 </span>
               </div>
               <div className="flex justify-between">

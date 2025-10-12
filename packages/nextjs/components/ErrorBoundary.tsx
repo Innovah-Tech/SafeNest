@@ -25,8 +25,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    if (process.env.NODE_ENV === "development") {
+      console.error("ErrorBoundary caught an error:", error, errorInfo);
     }
   }
 
@@ -47,16 +47,14 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             <div className="flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full mx-auto mb-6">
               <ExclamationTriangleIcon className="h-8 w-8 text-red-600 dark:text-red-400" />
             </div>
-            
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Something went wrong
-            </h1>
-            
+
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Something went wrong</h1>
+
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               We encountered an unexpected error. Please try refreshing the page.
             </p>
-            
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+
+            {process.env.NODE_ENV === "development" && this.state.error && (
               <details className="mb-6 text-left">
                 <summary className="cursor-pointer text-sm text-gray-500 dark:text-gray-400 mb-2">
                   Error Details (Development)
@@ -67,7 +65,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
                 </pre>
               </details>
             )}
-            
+
             <div className="flex space-x-4">
               <button
                 onClick={this.resetError}
@@ -94,8 +92,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 // Hook version for functional components
 export const useErrorHandler = () => {
   return (error: Error, errorInfo?: React.ErrorInfo) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error caught by useErrorHandler:', error, errorInfo);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error caught by useErrorHandler:", error, errorInfo);
     }
   };
 };

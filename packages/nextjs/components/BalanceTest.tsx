@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useAccount, useReadContract } from "wagmi";
+import React, { useEffect, useState } from "react";
 import { formatEther } from "viem";
+import { useAccount, useReadContract } from "wagmi";
 
 const BalanceTest = () => {
   const { address: connectedAddress } = useAccount();
@@ -12,7 +12,11 @@ const BalanceTest = () => {
     setTestResults(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
   };
 
-  const { data: microSavingsVault, refetch: refetchMicro, error: microError } = useReadContract({
+  const {
+    data: microSavingsVault,
+    refetch: refetchMicro,
+    error: microError,
+  } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -85,13 +89,21 @@ const BalanceTest = () => {
   return (
     <div className="card bg-base-100 shadow-xl p-6">
       <h2 className="text-2xl font-bold mb-4">Balance Test - Micro-Savings Vault</h2>
-      
+
       <div className="mb-4">
-        <p><strong>Connected Address:</strong> {connectedAddress}</p>
-        <p><strong>Vault Data:</strong> {microSavingsVault ? "Available" : "Not Available"}</p>
-        <p><strong>Error:</strong> {microError ? microError.message : "None"}</p>
+        <p>
+          <strong>Connected Address:</strong> {connectedAddress}
+        </p>
+        <p>
+          <strong>Vault Data:</strong> {microSavingsVault ? "Available" : "Not Available"}
+        </p>
+        <p>
+          <strong>Error:</strong> {microError ? microError.message : "None"}
+        </p>
         {microSavingsVault && Array.isArray(microSavingsVault) && (
-          <p><strong>Current Balance:</strong> {formatEther(microSavingsVault[1])} U2U</p>
+          <p>
+            <strong>Current Balance:</strong> {formatEther(microSavingsVault[1])} U2U
+          </p>
         )}
       </div>
 

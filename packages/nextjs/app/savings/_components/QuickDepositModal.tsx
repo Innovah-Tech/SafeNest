@@ -29,7 +29,7 @@ export const QuickDepositModal: React.FC<QuickDepositModalProps> = ({ isOpen, on
     try {
       // Convert amount to wei
       const amountInWei = (parseFloat(amount) * 1e18).toString();
-      
+
       // Call the SimpleMicroSavings contract
       await writeContract({
         address: CONTRACT_ADDRESSES.SimpleMicroSavings,
@@ -65,7 +65,7 @@ export const QuickDepositModal: React.FC<QuickDepositModalProps> = ({ isOpen, on
               Quick Amounts (ETH)
             </label>
             <div className="grid grid-cols-5 gap-2">
-              {presetAmounts.map((preset) => (
+              {presetAmounts.map(preset => (
                 <button
                   key={preset}
                   onClick={() => handlePresetClick(preset)}
@@ -92,7 +92,7 @@ export const QuickDepositModal: React.FC<QuickDepositModalProps> = ({ isOpen, on
               min="0.001"
               placeholder="0.00"
               value={amount}
-              onChange={(e) => {
+              onChange={e => {
                 setAmount(e.target.value);
                 setSelectedPreset(null);
               }}

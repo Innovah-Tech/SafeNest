@@ -35,9 +35,7 @@ const TokenomicsPage: NextPage = () => {
                   <p className="text-2xl font-bold text-blue-600">400M SAFE</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-sm">
-                Referrals, education, liquidity mining, and community incentives
-              </p>
+              <p className="text-gray-600 text-sm">Referrals, education, liquidity mining, and community incentives</p>
             </div>
           </div>
 
@@ -52,9 +50,7 @@ const TokenomicsPage: NextPage = () => {
                   <p className="text-2xl font-bold text-green-600">200M SAFE</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-sm">
-                Development, partnerships, operations, and ecosystem growth
-              </p>
+              <p className="text-gray-600 text-sm">Development, partnerships, operations, and ecosystem growth</p>
             </div>
           </div>
 
@@ -69,9 +65,7 @@ const TokenomicsPage: NextPage = () => {
                   <p className="text-2xl font-bold text-purple-600">150M SAFE</p>
                 </div>
               </div>
-              <p className="text-gray-600 text-sm">
-                4-year vesting schedule for team and advisory members
-              </p>
+              <p className="text-gray-600 text-sm">4-year vesting schedule for team and advisory members</p>
             </div>
           </div>
         </div>
@@ -81,7 +75,7 @@ const TokenomicsPage: NextPage = () => {
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
             Staking Tiers & Benefits
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="card bg-base-100 shadow-xl border-2 border-gray-200">
               <div className="card-body text-center">
@@ -144,16 +138,19 @@ const TokenomicsPage: NextPage = () => {
         {/* Network Information */}
         <div className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Deployed on U2U Solaris Mainnet
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Deployed on U2U Solaris Mainnet</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               SAFE tokens are secured by smart contracts on the U2U Solaris blockchain
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg">
-                <span className="font-semibold">Contract:</span> 
-                <a href="https://u2uscan.xyz/address/0x996cEB391a85d36CDD1e2e838A5dE4049A407db1" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">
+                <span className="font-semibold">Contract:</span>
+                <a
+                  href="https://u2uscan.xyz/address/0x996cEB391a85d36CDD1e2e838A5dE4049A407db1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 ml-1"
+                >
                   0x996c...7db1
                 </a>
               </div>

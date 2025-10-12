@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
-import { 
-  CurrencyDollarIcon, 
-  ChartBarIcon, 
-  ShieldCheckIcon,
-  PlusIcon,
-  MinusIcon,
+import {
   ArrowTrendingUpIcon,
+  ChartBarIcon,
   CheckCircleIcon,
-  XCircleIcon
+  CurrencyDollarIcon,
+  MinusIcon,
+  PlusIcon,
+  ShieldCheckIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Address } from "~~/components/scaffold-eth";
 
 const GovernanceIntegration = () => {
   const { address: connectedAddress } = useAccount();
@@ -192,9 +192,7 @@ const GovernanceIntegration = () => {
               </div>
             </div>
             <h3 className="card-title text-lg">Staked Tokens</h3>
-            <p className="text-gray-600 text-sm">
-              Tokens staked for governance and premium features
-            </p>
+            <p className="text-gray-600 text-sm">Tokens staked for governance and premium features</p>
           </div>
         </div>
 
@@ -205,16 +203,12 @@ const GovernanceIntegration = () => {
                 <ChartBarIcon className="h-8 w-8" />
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold">
-                  {totalSupply ? formatBalance(totalSupply) : "0.0000"}
-                </div>
+                <div className="text-2xl font-bold">{totalSupply ? formatBalance(totalSupply) : "0.0000"}</div>
                 <div className="text-sm text-gray-500">Total Supply</div>
               </div>
             </div>
             <h3 className="card-title text-lg">Total Supply</h3>
-            <p className="text-gray-600 text-sm">
-              1 billion SAFE tokens for governance
-            </p>
+            <p className="text-gray-600 text-sm">1 billion SAFE tokens for governance</p>
           </div>
         </div>
       </div>
@@ -223,7 +217,7 @@ const GovernanceIntegration = () => {
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title text-2xl mb-6">Governance Staking</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Stake Tokens */}
             <div className="space-y-4">
@@ -231,7 +225,7 @@ const GovernanceIntegration = () => {
               <p className="text-gray-600 text-sm">
                 Stake your SAFE tokens to participate in governance and unlock premium features
               </p>
-              
+
               <div className="space-y-3">
                 <div className="flex gap-2">
                   <input
@@ -239,13 +233,9 @@ const GovernanceIntegration = () => {
                     placeholder="Amount to stake"
                     className="input input-bordered flex-1"
                     value={stakeAmount}
-                    onChange={(e) => setStakeAmount(e.target.value)}
+                    onChange={e => setStakeAmount(e.target.value)}
                   />
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleStake}
-                    disabled={isPending || !stakeAmount}
-                  >
+                  <button className="btn btn-primary" onClick={handleStake} disabled={isPending || !stakeAmount}>
                     <PlusIcon className="h-4 w-4" />
                     Stake
                   </button>
@@ -259,7 +249,7 @@ const GovernanceIntegration = () => {
               <p className="text-gray-600 text-sm">
                 Unstake your tokens to regain full control (may have cooldown period)
               </p>
-              
+
               <div className="space-y-3">
                 <div className="flex gap-2">
                   <input
@@ -267,13 +257,9 @@ const GovernanceIntegration = () => {
                     placeholder="Amount to unstake"
                     className="input input-bordered flex-1"
                     value={unstakeAmount}
-                    onChange={(e) => setUnstakeAmount(e.target.value)}
+                    onChange={e => setUnstakeAmount(e.target.value)}
                   />
-                  <button
-                    className="btn btn-outline"
-                    onClick={handleUnstake}
-                    disabled={isPending || !unstakeAmount}
-                  >
+                  <button className="btn btn-outline" onClick={handleUnstake} disabled={isPending || !unstakeAmount}>
                     <MinusIcon className="h-4 w-4" />
                     Unstake
                   </button>
@@ -326,7 +312,7 @@ const GovernanceIntegration = () => {
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title text-2xl mb-6">SAFE Tokenomics</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600">40%</div>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useAccount, useWriteContract, useReadContract } from "wagmi";
+import { useEffect, useState } from "react";
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CONTRACT_ADDRESSES, SIMPLE_MICRO_SAVINGS_ABI } from "~~/utils/contracts";
 
@@ -44,7 +44,7 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
           apy: 500, // 5%
           isActive: true,
           minDeposit: "0.01",
-          maxDeposit: "10"
+          maxDeposit: "10",
         },
         {
           id: 2,
@@ -52,8 +52,8 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
           apy: 450, // 4.5%
           isActive: true,
           minDeposit: "0.01",
-          maxDeposit: "10"
-        }
+          maxDeposit: "10",
+        },
       ]);
     }
   }, [strategyCount]);
@@ -64,7 +64,7 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
     try {
       // Convert amount to wei
       const amountInWei = (parseFloat(amount) * 1e18).toString();
-      
+
       // Call the SimpleMicroSavings contract
       await writeContract({
         address: CONTRACT_ADDRESSES.SimpleMicroSavings,
@@ -96,12 +96,10 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
         <div className="p-6 space-y-6">
           {/* Investment Strategies */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-              Select Strategy
-            </label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Select Strategy</label>
             <div className="space-y-2">
               {strategies.length > 0 ? (
-                strategies.map((strategy) => (
+                strategies.map(strategy => (
                   <button
                     key={strategy.id}
                     onClick={() => setSelectedStrategy(strategy.id)}
@@ -119,9 +117,7 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
                         </p>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-semibold text-green-600">
-                          {(strategy.apy / 100).toFixed(1)}%
-                        </div>
+                        <div className="text-lg font-semibold text-green-600">{(strategy.apy / 100).toFixed(1)}%</div>
                         <div className="text-xs text-gray-500">APY</div>
                       </div>
                     </div>
@@ -149,13 +145,13 @@ export const InvestModal: React.FC<InvestModalProps> = ({ isOpen, onClose }) => 
               min="0.001"
               placeholder="0.00"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={e => setAmount(e.target.value)}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             {selectedStrategy && (
               <p className="text-xs text-gray-500 mt-1">
-                Min: {strategies.find(s => s.id === selectedStrategy)?.minDeposit} ETH • 
-                Max: {strategies.find(s => s.id === selectedStrategy)?.maxDeposit} ETH
+                Min: {strategies.find(s => s.id === selectedStrategy)?.minDeposit} ETH • Max:{" "}
+                {strategies.find(s => s.id === selectedStrategy)?.maxDeposit} ETH
               </p>
             )}
           </div>

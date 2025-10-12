@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import type { NextPage } from "next";
-import { useAccount } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
+import { useState } from "react";
 import { HelpRequestForm } from "./_components/HelpRequestForm";
 import { HelpRequestsList } from "./_components/HelpRequestsList";
-import { UserProfile } from "./_components/UserProfile";
 import { PlatformStats } from "./_components/PlatformStats";
-import { QuestionMarkCircleIcon, UserIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import { UserProfile } from "./_components/UserProfile";
+import type { NextPage } from "next";
+import { useAccount } from "wagmi";
+import { ChartBarIcon, QuestionMarkCircleIcon, UserIcon } from "@heroicons/react/24/outline";
+import { Address } from "~~/components/scaffold-eth";
 
 const HelpPage: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -29,7 +29,7 @@ const HelpPage: NextPage = () => {
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
                 Get help, provide assistance, and build your reputation
               </p>
-              
+
               {/* Wallet Connection Status */}
               {connectedAddress ? (
                 <div className="inline-flex items-center bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl px-6 py-3">
@@ -40,7 +40,9 @@ const HelpPage: NextPage = () => {
               ) : (
                 <div className="inline-flex items-center bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl px-6 py-3">
                   <div className="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                  <span className="text-yellow-700 dark:text-yellow-300 font-medium">Connect your wallet to get started</span>
+                  <span className="text-yellow-700 dark:text-yellow-300 font-medium">
+                    Connect your wallet to get started
+                  </span>
                 </div>
               )}
             </div>

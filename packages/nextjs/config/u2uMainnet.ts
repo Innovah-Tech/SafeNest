@@ -11,7 +11,7 @@ export const u2uMainnetConfig = {
     CommunityPoolsAdvanced: "0xBB19F0E41567e48Aa58F2A17dD903C0cDdc2C02e",
     INCLToken: "0xF028cCA18B4A11C1c93d2FDbc483d9d2ca245624",
   },
-  
+
   // U2U Solaris Mainnet network configuration
   network: {
     name: "U2U Solaris",
@@ -20,7 +20,7 @@ export const u2uMainnetConfig = {
     explorer: "https://u2uscan.xyz",
     currency: "U2U",
   },
-  
+
   // Features enabled for mainnet
   features: {
     enableAnalytics: true,
@@ -28,7 +28,7 @@ export const u2uMainnetConfig = {
     enablePerformanceMonitoring: true,
     enableMainnetMode: true,
   },
-  
+
   // Contract ABIs will be imported from typechain-types
   abis: {
     // These will be dynamically imported

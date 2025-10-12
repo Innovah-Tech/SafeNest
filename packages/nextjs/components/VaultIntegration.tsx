@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
-import { 
-  BanknotesIcon, 
-  ClockIcon, 
-  ShieldCheckIcon,
-  PlusIcon,
+import {
+  ArrowTrendingUpIcon,
+  BanknotesIcon,
+  ClockIcon,
   MinusIcon,
-  ArrowTrendingUpIcon
+  PlusIcon,
+  ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
+import { Address } from "~~/components/scaffold-eth";
 
 interface VaultData {
   type: "micro-savings" | "pension-nest" | "emergency-vault";
@@ -43,7 +43,7 @@ interface VaultIntegrationProps {
   onTransactionAdded?: (transaction: {
     id: string;
     vaultType: number;
-    type: 'deposit' | 'withdraw';
+    type: "deposit" | "withdraw";
     amount: bigint;
     timestamp: number;
     txHash: string;
@@ -60,14 +60,16 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   const [userVaults, setUserVaults] = useState<Record<number, UserVault>>({});
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [recentlyUpdated, setRecentlyUpdated] = useState<number | null>(null);
-  const [transactionHistory, setTransactionHistory] = useState<Array<{
-    id: string;
-    vaultType: number;
-    type: 'deposit' | 'withdraw';
-    amount: bigint;
-    timestamp: number;
-    txHash: string;
-  }>>([]);
+  const [transactionHistory, setTransactionHistory] = useState<
+    Array<{
+      id: string;
+      vaultType: number;
+      type: "deposit" | "withdraw";
+      amount: bigint;
+      timestamp: number;
+      txHash: string;
+    }>
+  >([]);
 
   // Calculate vault balances from transaction history
   const calculateVaultBalances = (transactions: typeof transactionHistory) => {
@@ -87,7 +89,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
         isActive: false,
         autoDepositAmount: BigInt(0),
         autoDepositFrequency: BigInt(0),
-        nextAutoDeposit: BigInt(0)
+        nextAutoDeposit: BigInt(0),
       };
     });
 
@@ -97,11 +99,11 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
 
       balances[tx.vaultType].isActive = true;
 
-      if (tx.type === 'deposit') {
+      if (tx.type === "deposit") {
         balances[tx.vaultType].totalDeposited += tx.amount;
         balances[tx.vaultType].currentBalance += tx.amount;
         balances[tx.vaultType].lastDepositTime = BigInt(tx.timestamp);
-      } else if (tx.type === 'withdraw') {
+      } else if (tx.type === "withdraw") {
         balances[tx.vaultType].totalWithdrawn += tx.amount;
         balances[tx.vaultType].currentBalance -= tx.amount;
         balances[tx.vaultType].lastWithdrawalTime = BigInt(tx.timestamp);
@@ -121,7 +123,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
       minDeposit: "0.001 U2U",
       yieldRate: "4.0% APY",
       features: ["Daily/Weekly deposits", "Auto-yield deployment", "Round-up savings", "Mobile money integration"],
-      premiumRequired: false
+      premiumRequired: false,
     },
     {
       type: "pension-nest",
@@ -132,7 +134,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
       minDeposit: "0.01 U2U",
       yieldRate: "7.0% APY",
       features: ["10-year vesting", "2% yield boost", "Retirement planning", "Monthly withdrawals"],
-      premiumRequired: false
+      premiumRequired: false,
     },
     {
       type: "emergency-vault",
@@ -143,8 +145,8 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
       minDeposit: "0.005 U2U",
       yieldRate: "2.25% APY",
       features: ["Instant withdrawal", "0.5% withdrawal fee", "0.25% parking incentive", "Insurance coverage"],
-      premiumRequired: false
-    }
+      premiumRequired: false,
+    },
   ];
 
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
@@ -159,7 +161,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
           // Convert amount strings back to BigInt
           const transactions = parsed.map((tx: any) => ({
             ...tx,
-            amount: BigInt(tx.amount)
+            amount: BigInt(tx.amount),
           }));
           setTransactionHistory(transactions);
           console.log("Loaded saved transactions:", transactions);
@@ -176,7 +178,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
       // Convert BigInt to string for JSON storage
       const serializable = transactionHistory.map(tx => ({
         ...tx,
-        amount: tx.amount.toString()
+        amount: tx.amount.toString(),
       }));
       localStorage.setItem(`transactions_${connectedAddress}`, JSON.stringify(serializable));
       console.log("Saved transactions to localStorage");
@@ -191,22 +193,22 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   }, [transactionHistory, connectedAddress]);
 
   // Add transaction to history
-  const addTransactionToHistory = (vaultType: number, type: 'deposit' | 'withdraw', amount: bigint, txHash: string) => {
+  const addTransactionToHistory = (vaultType: number, type: "deposit" | "withdraw", amount: bigint, txHash: string) => {
     const newTransaction = {
       id: Date.now().toString(),
       vaultType,
       type,
       amount,
       timestamp: Date.now(),
-      txHash
+      txHash,
     };
     setTransactionHistory(prev => [newTransaction, ...prev]);
-    
+
     // Notify parent component
     if (onTransactionAdded) {
       onTransactionAdded(newTransaction);
     }
-    
+
     console.log("Added transaction to history:", newTransaction);
   };
 
@@ -221,8 +223,6 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
 
   // No longer reading from contract - using transaction-based calculations
 
-
-
   // No longer need to refresh from contract - balances update automatically from transactions
 
   const handleDeposit = async (vaultType: number) => {
@@ -236,9 +236,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
           address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
           abi: [
             {
-              inputs: [
-                { internalType: "enum VaultSystem.VaultType", name: "_vaultType", type: "uint8" },
-              ],
+              inputs: [{ internalType: "enum VaultSystem.VaultType", name: "_vaultType", type: "uint8" }],
               name: "createVault",
               outputs: [],
               stateMutability: "nonpayable",
@@ -275,23 +273,23 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
         args: [vaultType, BigInt(parseFloat(depositAmount) * 1e18)],
         value: BigInt(parseFloat(depositAmount) * 1e18),
       });
-      
+
       console.log("Deposit transaction result:", txResult);
-      
+
       // Add transaction to history
-      addTransactionToHistory(vaultType, 'deposit', BigInt(parseFloat(depositAmount) * 1e18), txResult);
-      
+      addTransactionToHistory(vaultType, "deposit", BigInt(parseFloat(depositAmount) * 1e18), txResult);
+
       // Balances will update automatically from transaction history
-      
+
       // Clear the specific vault's deposit amount
       const newDepositAmounts = [...depositAmounts];
       newDepositAmounts[vaultType] = "";
       setDepositAmounts(newDepositAmounts);
-      
+
       // Show success animation
       setRecentlyUpdated(vaultType);
       setTimeout(() => setRecentlyUpdated(null), 2000);
-      
+
       alert(`Successfully deposited ${depositAmount} U2U to ${vaultTypes[vaultType].name}!`);
     } catch (error: any) {
       console.error("Deposit failed:", error);
@@ -321,23 +319,23 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
         functionName: "withdrawFromVault",
         args: [vaultType, BigInt(parseFloat(withdrawAmount) * 1e18)],
       });
-      
+
       console.log("Withdraw transaction result:", txResult);
-      
+
       // Add transaction to history
-      addTransactionToHistory(vaultType, 'withdraw', BigInt(parseFloat(withdrawAmount) * 1e18), txResult);
-      
+      addTransactionToHistory(vaultType, "withdraw", BigInt(parseFloat(withdrawAmount) * 1e18), txResult);
+
       // Balances will update automatically from transaction history
-      
+
       // Clear the specific vault's withdraw amount
       const newWithdrawAmounts = [...withdrawAmounts];
       newWithdrawAmounts[vaultType] = "";
       setWithdrawAmounts(newWithdrawAmounts);
-      
+
       // Show success animation
       setRecentlyUpdated(vaultType);
       setTimeout(() => setRecentlyUpdated(null), 2000);
-      
+
       alert(`Successfully withdrew ${withdrawAmount} U2U from ${vaultTypes[vaultType].name}!`);
     } catch (error: any) {
       console.error("Withdrawal failed:", error);
@@ -370,10 +368,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
         <div className="card bg-base-100 shadow-xl p-6">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold">Recent Transactions</h3>
-            <button
-              className="btn btn-sm btn-outline btn-error"
-              onClick={clearTransactionHistory}
-            >
+            <button className="btn btn-sm btn-outline btn-error" onClick={clearTransactionHistory}>
               Clear History
             </button>
           </div>
@@ -389,22 +384,19 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                 </tr>
               </thead>
               <tbody>
-                {transactionHistory.slice(0, 10).map((tx) => (
+                {transactionHistory.slice(0, 10).map(tx => (
                   <tr key={tx.id}>
                     <td>
-                      <span className={`badge ${
-                        tx.type === 'deposit' ? 'badge-success' : 'badge-error'
-                      }`}>
-                        {tx.type === 'deposit' ? 'Deposit' : 'Withdraw'}
+                      <span className={`badge ${tx.type === "deposit" ? "badge-success" : "badge-error"}`}>
+                        {tx.type === "deposit" ? "Deposit" : "Withdraw"}
                       </span>
                     </td>
                     <td className="font-medium">{vaultNames[tx.vaultType]}</td>
                     <td className="font-mono">
-                      {tx.type === 'deposit' ? '+' : '-'}{formatBalance(tx.amount)} U2U
+                      {tx.type === "deposit" ? "+" : "-"}
+                      {formatBalance(tx.amount)} U2U
                     </td>
-                    <td className="text-sm">
-                      {new Date(tx.timestamp).toLocaleString()}
-                    </td>
+                    <td className="text-sm">{new Date(tx.timestamp).toLocaleString()}</td>
                     <td>
                       <a
                         href={`https://u2uscan.xyz/tx/${tx.txHash}`}
@@ -423,28 +415,31 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
         </div>
       )}
 
-
-
       {/* Vault Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {vaultTypes.map((vault, index) => {
           const userVault = userVaults[index];
           console.log(`Vault ${index} (${vault.name}):`, userVault);
           return (
-            <div key={vault.type} className={`card bg-base-100 shadow-xl transition-all duration-500 ${
-              recentlyUpdated === index ? 'ring-2 ring-green-500 bg-green-50 dark:bg-green-900/20' : ''
-            }`}>
+            <div
+              key={vault.type}
+              className={`card bg-base-100 shadow-xl transition-all duration-500 ${
+                recentlyUpdated === index ? "ring-2 ring-green-500 bg-green-50 dark:bg-green-900/20" : ""
+              }`}
+            >
               <div className="card-body">
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 rounded-lg ${vault.color} text-white`}>
-                    {vault.icon}
-                  </div>
+                  <div className={`p-3 rounded-lg ${vault.color} text-white`}>{vault.icon}</div>
                   <div className="text-right">
                     <div className="text-3xl font-bold flex items-center justify-end gap-2 mb-2">
-                      {isRefreshing ? (
-                        <div className="loading loading-spinner loading-sm"></div>
-                      ) : null}
-                      <span className={userVault && userVault.currentBalance > 0 ? "text-green-600" : "text-gray-700 dark:text-gray-300"}>
+                      {isRefreshing ? <div className="loading loading-spinner loading-sm"></div> : null}
+                      <span
+                        className={
+                          userVault && userVault.currentBalance > 0
+                            ? "text-green-600"
+                            : "text-gray-700 dark:text-gray-300"
+                        }
+                      >
                         {userVault ? formatBalance(userVault.currentBalance) : "0.0000"}
                       </span>
                       <span className="text-lg text-gray-500">U2U</span>
@@ -458,15 +453,15 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                     </div>
                     {userVault && userVault.currentBalance > 0 && (
                       <div className="text-xs text-green-600 font-medium">
-                        ≈ ${(Number(userVault.currentBalance) / 1e18 * 0.1).toFixed(2)} USD
+                        ≈ ${((Number(userVault.currentBalance) / 1e18) * 0.1).toFixed(2)} USD
                       </div>
                     )}
                   </div>
                 </div>
-                
+
                 <h3 className="card-title text-lg">{vault.name}</h3>
                 <p className="text-gray-600 text-sm mb-4">{vault.description}</p>
-                
+
                 <div className="space-y-3 mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Yield Rate:</span>
@@ -480,7 +475,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                       </div>
                       {userVault && userVault.totalDeposited > 0 && (
                         <div className="text-xs text-gray-500">
-                          ≈ ${(Number(userVault.totalDeposited) / 1e18 * 0.1).toFixed(2)} USD
+                          ≈ ${((Number(userVault.totalDeposited) / 1e18) * 0.1).toFixed(2)} USD
                         </div>
                       )}
                     </div>
@@ -493,7 +488,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                       </div>
                       {userVault && userVault.yieldEarned > 0 && (
                         <div className="text-xs text-green-500">
-                          ≈ ${(Number(userVault.yieldEarned) / 1e18 * 0.1).toFixed(2)} USD
+                          ≈ ${((Number(userVault.yieldEarned) / 1e18) * 0.1).toFixed(2)} USD
                         </div>
                       )}
                     </div>
@@ -508,7 +503,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                       placeholder="Amount"
                       className="input input-bordered input-sm flex-1"
                       value={depositAmounts[index]}
-                      onChange={(e) => {
+                      onChange={e => {
                         const newAmounts = [...depositAmounts];
                         newAmounts[index] = e.target.value;
                         setDepositAmounts(newAmounts);
@@ -523,14 +518,14 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                       Deposit
                     </button>
                   </div>
-                  
+
                   <div className="flex gap-2">
                     <input
                       type="number"
                       placeholder="Amount"
                       className="input input-bordered input-sm flex-1"
                       value={withdrawAmounts[index]}
-                      onChange={(e) => {
+                      onChange={e => {
                         const newAmounts = [...withdrawAmounts];
                         newAmounts[index] = e.target.value;
                         setWithdrawAmounts(newAmounts);
@@ -553,7 +548,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                     Balance updated successfully!
                   </div>
                 )}
-                
+
                 {/* Manual refresh button for this specific vault */}
                 <div className="mt-2">
                   <button
@@ -584,7 +579,7 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
                     )}
                   </button>
                 </div>
-                
+
                 {/* Show refresh status */}
                 {isRefreshing && (
                   <div className="text-xs text-blue-600 mt-1">

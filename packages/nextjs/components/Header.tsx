@@ -5,7 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
-import { Bars3Icon, BugAntIcon, QuestionMarkCircleIcon, ShieldCheckIcon, CurrencyDollarIcon, ChartPieIcon, UsersIcon, BanknotesIcon } from "@heroicons/react/24/outline";
+import {
+  BanknotesIcon,
+  Bars3Icon,
+  BugAntIcon,
+  ChartPieIcon,
+  CurrencyDollarIcon,
+  QuestionMarkCircleIcon,
+  ShieldCheckIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 

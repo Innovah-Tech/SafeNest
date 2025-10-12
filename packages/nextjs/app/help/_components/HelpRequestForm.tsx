@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useAccount } from "wagmi";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 export const HelpRequestForm = () => {
   const { address } = useAccount();
@@ -23,7 +23,7 @@ export const HelpRequestForm = () => {
 
     try {
       const value = isPremium ? BigInt(parseFloat(reward) * 1e18) : BigInt(0);
-      
+
       await createHelpRequest({
         args: [title, description, category, isPremium],
         value: value,
@@ -35,7 +35,7 @@ export const HelpRequestForm = () => {
       setCategory("");
       setIsPremium(false);
       setReward("0");
-      
+
       alert("Help request created successfully!");
     } catch (error) {
       console.error("Error creating help request:", error);
@@ -44,11 +44,7 @@ export const HelpRequestForm = () => {
   };
 
   if (!address) {
-    return (
-      <div className="alert alert-warning">
-        Please connect your wallet to create a help request.
-      </div>
-    );
+    return <div className="alert alert-warning">Please connect your wallet to create a help request.</div>;
   }
 
   return (
@@ -64,7 +60,7 @@ export const HelpRequestForm = () => {
               placeholder="Brief description of your problem"
               className="input input-bordered"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={e => setTitle(e.target.value)}
               required
             />
           </div>
@@ -77,7 +73,7 @@ export const HelpRequestForm = () => {
               className="textarea textarea-bordered h-24"
               placeholder="Detailed description of what you need help with"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
               required
             />
           </div>
@@ -89,7 +85,7 @@ export const HelpRequestForm = () => {
             <select
               className="select select-bordered"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={e => setCategory(e.target.value)}
               required
             >
               <option value="">Select a category</option>
@@ -110,7 +106,7 @@ export const HelpRequestForm = () => {
                 type="checkbox"
                 className="toggle toggle-primary"
                 checked={isPremium}
-                onChange={(e) => setIsPremium(e.target.checked)}
+                onChange={e => setIsPremium(e.target.checked)}
               />
             </label>
           </div>
@@ -127,18 +123,14 @@ export const HelpRequestForm = () => {
                 placeholder="0.01"
                 className="input input-bordered"
                 value={reward}
-                onChange={(e) => setReward(e.target.value)}
+                onChange={e => setReward(e.target.value)}
                 required={isPremium}
               />
             </div>
           )}
 
           <div className="form-control mt-6">
-            <button
-              type="submit"
-              className={`btn btn-primary ${isPending ? "loading" : ""}`}
-              disabled={isPending}
-            >
+            <button type="submit" className={`btn btn-primary ${isPending ? "loading" : ""}`} disabled={isPending}>
               {isPending ? "Creating..." : "Create Help Request"}
             </button>
           </div>

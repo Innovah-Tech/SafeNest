@@ -9,9 +9,12 @@ const nextConfig: NextConfig = {
   },
   // Suppress console warnings in production
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? {
-      exclude: ["error", "warn"]
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error", "warn"],
+          }
+        : false,
   },
   // Optimize bundle size
   webpack: (config, { dev, isServer }) => {
@@ -24,7 +27,7 @@ const nextConfig: NextConfig = {
         /Content Script Bridge/,
       ];
     }
-    
+
     return config;
   },
   // Environment variables

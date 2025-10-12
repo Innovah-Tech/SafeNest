@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
-import VaultIntegration from "~~/components/VaultIntegration";
 import TransactionHistory from "~~/components/TransactionHistory";
+import VaultIntegration from "~~/components/VaultIntegration";
 
 interface Transaction {
   id: string;
   vaultType: number;
-  type: 'deposit' | 'withdraw';
+  type: "deposit" | "withdraw";
   amount: bigint;
   timestamp: number;
   txHash: string;
@@ -19,14 +19,14 @@ const VaultsPage: NextPage = () => {
 
   // Load transactions from localStorage on component mount
   useEffect(() => {
-    const savedTransactions = localStorage.getItem('global_transactions');
+    const savedTransactions = localStorage.getItem("global_transactions");
     if (savedTransactions) {
       try {
         const parsed = JSON.parse(savedTransactions);
         // Convert amount strings back to BigInt
         const transactions = parsed.map((tx: any) => ({
           ...tx,
-          amount: BigInt(tx.amount)
+          amount: BigInt(tx.amount),
         }));
         setTransactions(transactions);
         console.log("Loaded global transactions:", transactions);
@@ -42,9 +42,9 @@ const VaultsPage: NextPage = () => {
       // Convert BigInt to string for JSON storage
       const serializable = transactions.map(tx => ({
         ...tx,
-        amount: tx.amount.toString()
+        amount: tx.amount.toString(),
       }));
-      localStorage.setItem('global_transactions', JSON.stringify(serializable));
+      localStorage.setItem("global_transactions", JSON.stringify(serializable));
       console.log("Saved global transactions to localStorage");
     }
   }, [transactions]);
@@ -64,20 +64,16 @@ const VaultsPage: NextPage = () => {
           </p>
         </div>
 
-
         {/* Vault Integration Component */}
-        <VaultIntegration onTransactionAdded={(tx) => setTransactions(prev => [tx, ...prev])} />
+        <VaultIntegration onTransactionAdded={tx => setTransactions(prev => [tx, ...prev])} />
 
         {/* Transaction History */}
         <TransactionHistory transactions={transactions} />
 
-
         {/* Network Information */}
         <div className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Deployed on U2U Solaris Mainnet
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Deployed on U2U Solaris Mainnet</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               All vaults are secured by smart contracts on the U2U Solaris blockchain
             </p>
@@ -89,8 +85,13 @@ const VaultsPage: NextPage = () => {
                 <span className="font-semibold">Chain ID:</span> 39
               </div>
               <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg">
-                <span className="font-semibold">Explorer:</span> 
-                <a href="https://u2uscan.xyz" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 ml-1">
+                <span className="font-semibold">Explorer:</span>
+                <a
+                  href="https://u2uscan.xyz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 ml-1"
+                >
                   U2UScan
                 </a>
               </div>

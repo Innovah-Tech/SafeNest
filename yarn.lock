@@ -2313,6 +2313,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:^15.5.4":
+  version: 15.5.4
+  resolution: "@next/env@npm:15.5.4"
+  checksum: e0d22306daa5d3936ad947114ac59bb640786b626dc48b24bf58336010688a02eef3d3cb06905d7a79b3033e15471cd25b668958beb051f36103200e669ca7f5
+  languageName: node
+  linkType: hard
+
 "@next/eslint-plugin-next@npm:15.2.5":
   version: 15.2.5
   resolution: "@next/eslint-plugin-next@npm:15.2.5"
@@ -2374,6 +2381,14 @@ __metadata:
 "@next/swc-win32-x64-msvc@npm:15.2.5":
   version: 15.2.5
   resolution: "@next/swc-win32-x64-msvc@npm:15.2.5"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-x64-msvc@npm:^15.5.4":
+  version: 15.5.4
+  resolution: "@next/swc-win32-x64-msvc@npm:15.5.4"
+  checksum: 385983ed3a86c4d0b3d57d44b59ea8cf4e617e3248018145c8a4105ee5b95ac3f22c48e51bc76fd74478879e4faf52d8c8b62e0f9520bb062fd20228b2a30419
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3541,7 +3556,12 @@ __metadata:
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
     "@heroicons/react": ~2.1.5
+    "@next/env": ^15.5.4
+    "@next/swc-win32-x64-msvc": ^15.5.4
+    "@noble/curves": ^2.0.1
+    "@noble/hashes": ^2.0.1
     "@rainbow-me/rainbowkit": 2.2.8
+    "@swc/helpers": ^0.5.17
     "@tailwindcss/postcss": 4.0.15
     "@tanstack/react-query": ~5.59.15
     "@trivago/prettier-plugin-sort-imports": ~4.3.0
@@ -3553,7 +3573,6 @@ __metadata:
     autoprefixer: ~10.4.20
     bgipfs: ~0.0.12
     blo: ~1.2.0
-    burner-connector: 0.0.18
     daisyui: 5.0.9
     eslint: ~9.23.0
     eslint-config-next: ~15.2.3
@@ -3794,6 +3813,15 @@ __metadata:
   dependencies:
     tslib: ^2.8.0
   checksum: 1a9e0dbb792b2d1e0c914d69c201dbc96af3a0e6e6e8cf5a7f7d6a5d7b0e8b762915cd4447acb6b040e2ecc1ed49822875a7239f99a2d63c96c3c3407fb6fccf
+  languageName: node
+  linkType: hard
+
+"@swc/helpers@npm:^0.5.17":
+  version: 0.5.17
+  resolution: "@swc/helpers@npm:0.5.17"
+  dependencies:
+    tslib: ^2.8.0
+  checksum: 085e13b536323945dfc3a270debf270bda6dfc80a1c68fd2ed08f7cbdfcbdaeead402650b5b10722e54e4a24193afc8a3c6f63d3d6d719974e7470557fb415bd
   languageName: node
   linkType: hard
 
@@ -6509,17 +6537,6 @@ __metadata:
     node-gyp: latest
     node-gyp-build: ^4.3.0
   checksum: 51ce9ee19bc4b72c2eb9f9a231dd95e786ca5a00a6bdfcae83f1d5cd8169301c79245ce96913066a5a1bbe45c44e95bc5a1761a18798b835585c1a05af65b209
-  languageName: node
-  linkType: hard
-
-"burner-connector@npm:0.0.18":
-  version: 0.0.18
-  resolution: "burner-connector@npm:0.0.18"
-  dependencies:
-    "@rainbow-me/rainbowkit": 2.2.8
-    viem: 2.34.0
-    wagmi: 2.16.4
-  checksum: 3f8404d4331257b81d794b4bb604c014833ba16f053cec159faeb910644c292c1c3e3bdc352f615774d7bfbdd6f363aad0bda0d3fb77a1ed1b4ba6ef5555e6de
   languageName: node
   linkType: hard
 

@@ -1,26 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { InvestModal } from "./_components/InvestModal";
+import { QuickDepositModal } from "./_components/QuickDepositModal";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
-import { QuickDepositModal } from "./_components/QuickDepositModal";
-import { InvestModal } from "./_components/InvestModal";
-import MicroSavingsIntegration from "~~/components/MicroSavingsIntegration";
-import { 
-  CurrencyDollarIcon, 
-  ChartBarIcon, 
-  UsersIcon, 
-  ShieldCheckIcon,
-  PlusIcon,
+import {
   ArrowTrendingUpIcon,
+  BanknotesIcon,
+  ChartBarIcon,
   ClockIcon,
-  BanknotesIcon
+  CurrencyDollarIcon,
+  PlusIcon,
+  ShieldCheckIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
+import MicroSavingsIntegration from "~~/components/MicroSavingsIntegration";
+import { Address } from "~~/components/scaffold-eth";
 
 interface Transaction {
   id: string;
-  type: 'deposit' | 'withdraw';
+  type: "deposit" | "withdraw";
   amount: BigInt;
   vaultType: number;
   timestamp: number;
@@ -44,7 +44,7 @@ const SavingsPage: NextPage = () => {
           // Convert amount strings back to BigInt
           const transactions = parsed.map((tx: any) => ({
             ...tx,
-            amount: BigInt(tx.amount)
+            amount: BigInt(tx.amount),
           }));
           setTransactions(transactions);
         } catch (error) {
@@ -60,7 +60,7 @@ const SavingsPage: NextPage = () => {
       // Convert BigInt to string for JSON storage
       const serializable = transactions.map(tx => ({
         ...tx,
-        amount: tx.amount.toString()
+        amount: tx.amount.toString(),
       }));
       localStorage.setItem(`transactions_${connectedAddress}`, JSON.stringify(serializable));
     }
@@ -86,7 +86,7 @@ const SavingsPage: NextPage = () => {
                   <p className="text-sm text-gray-500 dark:text-gray-400">Mobile DeFi Platform</p>
                 </div>
               </div>
-              
+
               {/* Wallet Status */}
               {connectedAddress ? (
                 <div className="flex items-center space-x-2 bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded-lg">
@@ -172,31 +172,26 @@ const SavingsPage: NextPage = () => {
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Portfolio Summary</h2>
                 <div className="text-center py-4">
-                  <div className="text-2xl font-bold text-green-600 mb-2">
-                    {transactions.length} Transactions
-                  </div>
+                  <div className="text-2xl font-bold text-green-600 mb-2">{transactions.length} Transactions</div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    Connected: {connectedAddress ? 'Yes' : 'No'}
+                    Connected: {connectedAddress ? "Yes" : "No"}
                   </div>
                 </div>
               </div>
 
               {/* Dynamic Portfolio Summary */}
-              <MicroSavingsIntegration 
-                transactions={transactions}
-                onTransactionAdded={handleTransactionAdded}
-              />
+              <MicroSavingsIntegration transactions={transactions} onTransactionAdded={handleTransactionAdded} />
 
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
-                <button 
+                <button
                   onClick={() => setIsDepositModalOpen(true)}
                   className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-4 rounded-xl shadow-lg transition-all duration-200 transform hover:-translate-y-1"
                 >
                   <PlusIcon className="h-6 w-6 mx-auto mb-2" />
                   <div className="text-sm font-medium">Quick Deposit</div>
                 </button>
-                <button 
+                <button
                   onClick={() => setIsInvestModalOpen(true)}
                   className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-4 rounded-xl shadow-lg transition-all duration-200 transform hover:-translate-y-1"
                 >
@@ -212,7 +207,7 @@ const SavingsPage: NextPage = () => {
               {/* Deposit Form */}
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Make a Deposit</h2>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -223,19 +218,17 @@ const SavingsPage: NextPage = () => {
                       <option>DAI</option>
                     </select>
                   </div>
-                  
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Amount
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Amount</label>
                     <input
                       type="number"
                       placeholder="0.00"
                       className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     />
                   </div>
-                  
-                  <button 
+
+                  <button
                     onClick={() => setIsDepositModalOpen(true)}
                     className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-lg font-medium transition-all duration-200"
                   >
@@ -262,10 +255,12 @@ const SavingsPage: NextPage = () => {
               {/* Investment Strategies */}
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Investment Strategies</h2>
-                
+
                 <div className="text-center py-8">
                   <div className="text-gray-500 dark:text-gray-400 mb-2">No investment strategies available</div>
-                  <div className="text-sm text-gray-400 dark:text-gray-500">Strategies will be added by the platform owner</div>
+                  <div className="text-sm text-gray-400 dark:text-gray-500">
+                    Strategies will be added by the platform owner
+                  </div>
                 </div>
               </div>
             </div>
@@ -281,10 +276,12 @@ const SavingsPage: NextPage = () => {
                     <PlusIcon className="h-5 w-5" />
                   </button>
                 </div>
-                
+
                 <div className="text-center py-8">
                   <div className="text-gray-500 dark:text-gray-400 mb-2">No savings goals set</div>
-                  <div className="text-sm text-gray-400 dark:text-gray-500">Create your first goal to start tracking progress</div>
+                  <div className="text-sm text-gray-400 dark:text-gray-500">
+                    Create your first goal to start tracking progress
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,10 +297,12 @@ const SavingsPage: NextPage = () => {
                     <PlusIcon className="h-5 w-5" />
                   </button>
                 </div>
-                
+
                 <div className="text-center py-8">
                   <div className="text-gray-500 dark:text-gray-400 mb-2">No community pools available</div>
-                  <div className="text-sm text-gray-400 dark:text-gray-500">Create or join a pool to start community savings</div>
+                  <div className="text-sm text-gray-400 dark:text-gray-500">
+                    Create or join a pool to start community savings
+                  </div>
                 </div>
               </div>
             </div>
@@ -311,14 +310,8 @@ const SavingsPage: NextPage = () => {
         </div>
 
         {/* Modals */}
-        <QuickDepositModal 
-          isOpen={isDepositModalOpen} 
-          onClose={() => setIsDepositModalOpen(false)} 
-        />
-        <InvestModal 
-          isOpen={isInvestModalOpen} 
-          onClose={() => setIsInvestModalOpen(false)} 
-        />
+        <QuickDepositModal isOpen={isDepositModalOpen} onClose={() => setIsDepositModalOpen(false)} />
+        <InvestModal isOpen={isInvestModalOpen} onClose={() => setIsInvestModalOpen(false)} />
       </div>
     </>
   );

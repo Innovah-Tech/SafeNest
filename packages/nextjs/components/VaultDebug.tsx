@@ -5,7 +5,11 @@ import { useAccount, useReadContract } from "wagmi";
 const VaultDebug = () => {
   const { address: connectedAddress } = useAccount();
 
-  const { data: microSavingsVault, error: microError, isLoading: microLoading } = useReadContract({
+  const {
+    data: microSavingsVault,
+    error: microError,
+    isLoading: microLoading,
+  } = useReadContract({
     address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
     abi: [
       {
@@ -45,15 +49,30 @@ const VaultDebug = () => {
     <div className="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg">
       <h3 className="font-bold text-lg mb-2">Vault Debug Info</h3>
       <div className="space-y-2 text-sm">
-        <div><strong>Connected Address:</strong> {connectedAddress}</div>
-        <div><strong>Loading:</strong> {microLoading ? "Yes" : "No"}</div>
-        <div><strong>Error:</strong> {microError ? (microError.message.includes("returned no data") ? "Vault not created yet" : microError.message) : "None"}</div>
-        <div><strong>Vault Data:</strong> {microSavingsVault ? "Found" : microError ? "Not created" : "Not found"}</div>
+        <div>
+          <strong>Connected Address:</strong> {connectedAddress}
+        </div>
+        <div>
+          <strong>Loading:</strong> {microLoading ? "Yes" : "No"}
+        </div>
+        <div>
+          <strong>Error:</strong>{" "}
+          {microError
+            ? microError.message.includes("returned no data")
+              ? "Vault not created yet"
+              : microError.message
+            : "None"}
+        </div>
+        <div>
+          <strong>Vault Data:</strong> {microSavingsVault ? "Found" : microError ? "Not created" : "Not found"}
+        </div>
         {microSavingsVault && (
           <div className="mt-2 p-2 bg-white dark:bg-gray-800 rounded">
             <pre className="text-xs overflow-auto">
-              {JSON.stringify(microSavingsVault, (key, value) =>
-                typeof value === 'bigint' ? value.toString() : value, 2
+              {JSON.stringify(
+                microSavingsVault,
+                (key, value) => (typeof value === "bigint" ? value.toString() : value),
+                2,
               )}
             </pre>
           </div>

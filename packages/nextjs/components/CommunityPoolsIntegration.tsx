@@ -1,15 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { ArrowTrendingUpIcon, ClockIcon, CurrencyDollarIcon, PlusIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
-import { 
-  UsersIcon, 
-  PlusIcon,
-  ArrowTrendingUpIcon,
-  ClockIcon,
-  CurrencyDollarIcon
-} from "@heroicons/react/24/outline";
 
 interface CommunityPool {
   id: number;
@@ -81,7 +75,8 @@ const CommunityPoolsIntegration = () => {
   }, []);
 
   const handleCreatePool = async () => {
-    if (!connectedAddress || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit) return;
+    if (!connectedAddress || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit)
+      return;
 
     try {
       await writeContractAsync({
@@ -116,7 +111,7 @@ const CommunityPoolsIntegration = () => {
           true, // Public pool
         ],
       });
-      
+
       // Reset form
       setNewPool({
         name: "",
@@ -184,10 +179,7 @@ const CommunityPoolsIntegration = () => {
             Join or create community savings pools for shared goals
           </p>
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => setIsCreateModalOpen(true)}
-        >
+        <button className="btn btn-primary" onClick={() => setIsCreateModalOpen(true)}>
           <PlusIcon className="h-5 w-5" />
           Create Pool
         </button>
@@ -195,7 +187,7 @@ const CommunityPoolsIntegration = () => {
 
       {/* Pools Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {pools.map((pool) => (
+        {pools.map(pool => (
           <div key={pool.id} className="card bg-base-100 shadow-xl">
             <div className="card-body">
               <div className="flex items-start justify-between mb-4">
@@ -208,8 +200,8 @@ const CommunityPoolsIntegration = () => {
                     <p className="text-sm text-gray-500">Pool #{pool.id}</p>
                   </div>
                 </div>
-                <div className={`badge ${pool.isActive ? 'badge-success' : 'badge-error'}`}>
-                  {pool.isActive ? 'Active' : 'Inactive'}
+                <div className={`badge ${pool.isActive ? "badge-success" : "badge-error"}`}>
+                  {pool.isActive ? "Active" : "Inactive"}
                 </div>
               </div>
 
@@ -221,9 +213,9 @@ const CommunityPoolsIntegration = () => {
                   <span>Progress</span>
                   <span>{getProgressPercentage(pool.currentAmount, pool.targetAmount).toFixed(1)}%</span>
                 </div>
-                <progress 
-                  className="progress progress-primary w-full" 
-                  value={getProgressPercentage(pool.currentAmount, pool.targetAmount)} 
+                <progress
+                  className="progress progress-primary w-full"
+                  value={getProgressPercentage(pool.currentAmount, pool.targetAmount)}
                   max="100"
                 ></progress>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -236,13 +228,13 @@ const CommunityPoolsIntegration = () => {
               <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                 <div>
                   <div className="text-gray-500">Members</div>
-                  <div className="font-semibold">{pool.currentMembers}/{pool.memberLimit}</div>
+                  <div className="font-semibold">
+                    {pool.currentMembers}/{pool.memberLimit}
+                  </div>
                 </div>
                 <div>
                   <div className="text-gray-500">Created</div>
-                  <div className="font-semibold">
-                    {new Date(Number(pool.createdAt) * 1000).toLocaleDateString()}
-                  </div>
+                  <div className="font-semibold">{new Date(Number(pool.createdAt) * 1000).toLocaleDateString()}</div>
                 </div>
               </div>
 
@@ -252,7 +244,7 @@ const CommunityPoolsIntegration = () => {
                 onClick={() => handleJoinPool(pool.id)}
                 disabled={isPending || pool.currentMembers >= pool.memberLimit}
               >
-                {pool.currentMembers >= pool.memberLimit ? 'Pool Full' : 'Join Pool'}
+                {pool.currentMembers >= pool.memberLimit ? "Pool Full" : "Join Pool"}
               </button>
             </div>
           </div>
@@ -264,7 +256,7 @@ const CommunityPoolsIntegration = () => {
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg mb-4">Create New Community Pool</h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="label">
@@ -275,7 +267,7 @@ const CommunityPoolsIntegration = () => {
                   placeholder="Enter pool name"
                   className="input input-bordered w-full"
                   value={newPool.name}
-                  onChange={(e) => setNewPool({ ...newPool, name: e.target.value })}
+                  onChange={e => setNewPool({ ...newPool, name: e.target.value })}
                 />
               </div>
 
@@ -287,7 +279,7 @@ const CommunityPoolsIntegration = () => {
                   placeholder="Describe the purpose of this pool"
                   className="textarea textarea-bordered w-full"
                   value={newPool.description}
-                  onChange={(e) => setNewPool({ ...newPool, description: e.target.value })}
+                  onChange={e => setNewPool({ ...newPool, description: e.target.value })}
                 />
               </div>
 
@@ -300,7 +292,7 @@ const CommunityPoolsIntegration = () => {
                   placeholder="Enter target amount"
                   className="input input-bordered w-full"
                   value={newPool.targetAmount}
-                  onChange={(e) => setNewPool({ ...newPool, targetAmount: e.target.value })}
+                  onChange={e => setNewPool({ ...newPool, targetAmount: e.target.value })}
                 />
               </div>
 
@@ -313,24 +305,23 @@ const CommunityPoolsIntegration = () => {
                   placeholder="Maximum number of members"
                   className="input input-bordered w-full"
                   value={newPool.memberLimit}
-                  onChange={(e) => setNewPool({ ...newPool, memberLimit: e.target.value })}
+                  onChange={e => setNewPool({ ...newPool, memberLimit: e.target.value })}
                 />
               </div>
             </div>
 
             <div className="modal-action">
-              <button
-                className="btn btn-ghost"
-                onClick={() => setIsCreateModalOpen(false)}
-              >
+              <button className="btn btn-ghost" onClick={() => setIsCreateModalOpen(false)}>
                 Cancel
               </button>
               <button
                 className="btn btn-primary"
                 onClick={handleCreatePool}
-                disabled={isPending || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit}
+                disabled={
+                  isPending || !newPool.name || !newPool.description || !newPool.targetAmount || !newPool.memberLimit
+                }
               >
-                {isPending ? 'Creating...' : 'Create Pool'}
+                {isPending ? "Creating..." : "Create Pool"}
               </button>
             </div>
           </div>
