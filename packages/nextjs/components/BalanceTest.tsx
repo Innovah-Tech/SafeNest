@@ -95,7 +95,7 @@ const BalanceTest = () => {
           <strong>Connected Address:</strong> {connectedAddress}
         </p>
         <p>
-            <strong>Vault Data:</strong> {microSavingsVault ? "Available" : "Not Available"}
+          <strong>Vault Data:</strong> {microSavingsVault ? "Available" : "Not Available"}
         </p>
         <p>
           <strong>Error:</strong> {microError ? microError.message : "None"}
@@ -119,7 +119,7 @@ const BalanceTest = () => {
       <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg max-h-64 overflow-y-auto">
         <h3 className="font-bold mb-2">Test Results:</h3>
         {testResults.length === 0 ? (
-          <p className="text-gray-500">No test results yet. Click "Test Balance Refresh" to start.</p>
+          <p className="text-gray-500">No test results yet. Click &quot;Test Balance Refresh&quot; to start.</p>
         ) : (
           <div className="space-y-1">
             {testResults.map((result, index) => (
