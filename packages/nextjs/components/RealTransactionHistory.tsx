@@ -34,29 +34,7 @@ const RealTransactionHistory = () => {
 
   const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 
-  // Read contract events to get transaction history
-  const { data: depositEvents } = useReadContract({
-    address: "0x09A16F146D9CF82083f181E6238CDF8Be8E8f43F", // VaultSystem
-    abi: [
-      {
-        anonymous: false,
-        inputs: [
-          { indexed: true, name: "user", type: "address" },
-          { indexed: true, name: "vaultType", type: "uint8" },
-          { indexed: false, name: "amount", type: "uint256" },
-          { indexed: false, name: "timestamp", type: "uint256" },
-        ],
-        name: "DepositMade",
-        type: "event",
-      },
-    ],
-    functionName: "getDepositEvents", // This would need to be implemented in the contract
-    args: connectedAddress ? [connectedAddress] : undefined,
-    query: {
-      enabled: !!connectedAddress,
-      retry: false,
-    },
-  });
+  // Mock transaction history for demonstration
 
   // Calculate vault balances from transaction history
   const calculateBalances = (txs: Transaction[]): VaultBalance[] => {
