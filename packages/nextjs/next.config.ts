@@ -1,11 +1,24 @@
 import type { NextConfig } from "next";
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   // Force fresh deployment
   experimental: {
     // Enable experimental features if needed
+    optimizePackageImports: ['@heroicons/react', '@rainbow-me/rainbowkit', 'viem', 'wagmi'],
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
   // Suppress hydration warnings for browser extensions
   onDemandEntries: {
@@ -23,8 +36,8 @@ const nextConfig: NextConfig = {
           }
         : false,
   },
-  // Optimize bundle size
-  webpack: (config, { dev, isServer }) => {
+  // Optimize bundle size and build performance
+  webpack: (config, { dev, isServer, webpack }) => {
     // Suppress Coinbase Wallet SDK warnings in development
     if (dev) {
       config.ignoreWarnings = [
@@ -34,6 +47,64 @@ const nextConfig: NextConfig = {
         /Content Script Bridge/,
       ];
     }
+
+    // Optimize for production builds
+    if (!dev && !isServer) {
+      // Enable tree shaking
+      config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
+      
+      // Split chunks more efficiently
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          default: false,
+          vendors: false,
+          // Web3 libraries
+          web3: {
+            name: 'web3',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/](@rainbow-me|wagmi|viem|@tanstack)[\\/]/,
+            priority: 20,
+          },
+          // React libraries
+          react: {
+            name: 'react',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            priority: 30,
+          },
+          // UI libraries
+          ui: {
+            name: 'ui',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/](@heroicons|daisyui|tailwindcss)[\\/]/,
+            priority: 25,
+          },
+          // Common libraries
+          common: {
+            name: 'common',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            minChunks: 2,
+          },
+        },
+      };
+    }
+
+    // Add fallbacks for Node.js modules
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+      crypto: false,
+    };
+
+    // Optimize module resolution
+    config.resolve.modules = ['node_modules'];
+    config.resolve.extensions = ['.js', '.jsx', '.ts', '.tsx', '.json'];
 
     return config;
   },
@@ -65,4 +136,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
