@@ -45,7 +45,23 @@ const nextConfig: NextConfig = {
         /Coinbase Wallet SDK/,
         /TSS: Received response/,
         /Content Script Bridge/,
+        /webpack\.cache\.PackFileCacheStrategy/,
       ];
+    }
+
+    // Fix webpack caching issues on Windows
+    if (dev) {
+      config.cache = {
+        type: 'filesystem',
+        buildDependencies: {
+          config: [__filename],
+        },
+        // Disable pack file cache on Windows to avoid rename issues
+        ...(process.platform === 'win32' && {
+          cacheDirectory: '.next/cache/webpack',
+          compression: false,
+        }),
+      };
     }
 
     // Optimize for production builds
