@@ -51,6 +51,7 @@ const nextConfig: NextConfig = {
 
     // Fix webpack caching issues on Windows
     if (dev) {
+      const path = require("path");
       config.cache = {
         type: "filesystem",
         buildDependencies: {
@@ -58,7 +59,7 @@ const nextConfig: NextConfig = {
         },
         // Disable pack file cache on Windows to avoid rename issues
         ...(process.platform === "win32" && {
-          cacheDirectory: ".next/cache/webpack",
+          cacheDirectory: path.resolve(process.cwd(), ".next/cache/webpack"),
           compression: false,
         }),
       };
