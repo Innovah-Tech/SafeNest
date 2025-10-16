@@ -1,5 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import { ErrorBoundary } from "~~/components/ErrorBoundary";
+import { HydrationBoundary } from "~~/components/HydrationBoundary";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
@@ -17,12 +18,20 @@ export const metadata = getMetadata({
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning className={``}>
-      <body>
-        <ErrorBoundary>
-          <ThemeProvider enableSystem>
-            <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
-          </ThemeProvider>
-        </ErrorBoundary>
+      <body suppressHydrationWarning>
+        <HydrationBoundary
+          fallback={
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="loading loading-spinner loading-lg"></div>
+            </div>
+          }
+        >
+          <ErrorBoundary>
+            <ThemeProvider enableSystem>
+              <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+            </ThemeProvider>
+          </ErrorBoundary>
+        </HydrationBoundary>
       </body>
     </html>
   );

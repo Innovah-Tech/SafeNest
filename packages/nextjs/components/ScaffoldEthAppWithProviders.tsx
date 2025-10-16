@@ -5,6 +5,7 @@ import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
+import { ClientOnly } from "~~/components/ClientOnly";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { useInitializeNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
@@ -37,13 +38,23 @@ export const queryClient = new QueryClient({
 
 export const ScaffoldEthAppWithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <ProgressBar height="3px" color="#2299dd" />
-          <ScaffoldEthApp>{children}</ScaffoldEthApp>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ClientOnly
+      fallback={
+        <div className="flex flex-col min-h-screen">
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="loading loading-spinner loading-lg"></div>
+          </div>
+        </div>
+      }
+    >
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
+            <ProgressBar height="3px" color="#2299dd" />
+            <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          </RainbowKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </ClientOnly>
   );
 };
