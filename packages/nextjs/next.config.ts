@@ -5,7 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* config options here - Build optimizations applied */
   reactStrictMode: true,
   // Force fresh deployment
   experimental: {
