@@ -5,7 +5,6 @@ import scaffoldConfig from "~~/scaffold.config";
 export const u2uNebulas = {
   id: 2484,
   name: "U2U Network Nebulas",
-  network: "u2u-nebulas",
   nativeCurrency: {
     decimals: 18,
     name: "U2U",
@@ -34,7 +33,6 @@ export const u2uNebulas = {
 export const u2uSolaris = {
   id: 39,
   name: "U2U Solaris",
-  network: "u2u-solaris",
   nativeCurrency: {
     decimals: 18,
     name: "U2U",

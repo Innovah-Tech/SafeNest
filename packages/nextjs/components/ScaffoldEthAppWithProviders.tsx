@@ -1,16 +1,19 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { useInitializeNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
+import { useWalletErrorHandler } from "~~/hooks/scaffold-eth/useWalletErrorHandler";
 import { simpleWagmiConfig as wagmiConfig } from "~~/services/web3/simpleWagmiConfig";
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   useInitializeNativeCurrencyPrice();
+  useWalletErrorHandler(); // Handle wallet-related errors gracefully
 
   return (
     <>
@@ -36,8 +39,10 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <ProgressBar height="3px" color="#2299dd" />
-        <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        <RainbowKitProvider>
+          <ProgressBar height="3px" color="#2299dd" />
+          <ScaffoldEthApp>{children}</ScaffoldEthApp>
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

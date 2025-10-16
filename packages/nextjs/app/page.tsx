@@ -12,6 +12,7 @@ import {
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
+import { WalletConnectionStatus } from "~~/components/WalletConnectionStatus";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
@@ -48,26 +49,7 @@ const Home: NextPage = () => {
               </p>
 
               {/* Wallet Connection Status */}
-              {connectedAddress ? (
-                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-12 max-w-md mx-auto">
-                  <div className="flex items-center justify-center space-x-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-green-700 dark:text-green-300 font-medium">Wallet Connected</span>
-                  </div>
-                  <div className="mt-3">
-                    <Address address={connectedAddress} />
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 mb-12 max-w-md mx-auto">
-                  <div className="flex items-center justify-center space-x-3">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <span className="text-yellow-700 dark:text-yellow-300 font-medium">
-                      Connect your wallet to get started
-                    </span>
-                  </div>
-                </div>
-              )}
+              <WalletConnectionStatus />
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

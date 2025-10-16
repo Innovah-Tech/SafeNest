@@ -1,8 +1,19 @@
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
-import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
+import { 
+  metaMaskWallet,
+  injectedWallet,
+  walletConnectWallet,
+  coinbaseWallet
+} from "@rainbow-me/rainbowkit/wallets";
+import scaffoldConfig from "~~/scaffold.config";
 
-// Using only MetaMask to avoid all dependency issues
-const wallets = [metaMaskWallet];
+// Support multiple wallets for better compatibility
+const wallets = [
+  metaMaskWallet,
+  injectedWallet,
+  walletConnectWallet,
+  coinbaseWallet
+];
 
 /**
  * wagmi connectors for the wagmi context
@@ -24,7 +35,7 @@ export const wagmiConnectors = () => {
 
     {
       appName: "scaffold-eth-2",
-      // projectId: scaffoldConfig.walletConnectProjectId, // Disabled since WalletConnect is not used
+      projectId: scaffoldConfig.walletConnectProjectId, // Required for connectorsForWallets
     },
   );
 };
