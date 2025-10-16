@@ -31,44 +31,47 @@ const CommunityPoolsIntegration = () => {
   });
 
   // Mock data for demonstration - in real implementation, you'd read from contract
-  const mockPools = useCallback((): CommunityPool[] => [
-    {
-      id: 1,
-      name: "Education Fund",
-      description: "Saving for children's education expenses",
-      targetAmount: BigInt(1000 * 1e18), // 1000 U2U
-      currentAmount: BigInt(350 * 1e18), // 350 U2U
-      memberLimit: 10,
-      currentMembers: 7,
-      creator: "0x1234...5678",
-      isActive: true,
-      createdAt: BigInt(Math.floor(Date.now() / 1000 - 86400)), // 1 day ago
-    },
-    {
-      id: 2,
-      name: "Emergency Fund",
-      description: "Community emergency fund for unexpected expenses",
-      targetAmount: BigInt(5000 * 1e18), // 5000 U2U
-      currentAmount: BigInt(1200 * 1e18), // 1200 U2U
-      memberLimit: 20,
-      currentMembers: 15,
-      creator: "0x8765...4321",
-      isActive: true,
-      createdAt: BigInt(Math.floor(Date.now() / 1000 - 172800)), // 2 days ago
-    },
-    {
-      id: 3,
-      name: "Business Investment",
-      description: "Pool for small business investments in the community",
-      targetAmount: BigInt(10000 * 1e18), // 10000 U2U
-      currentAmount: BigInt(7500 * 1e18), // 7500 U2U
-      memberLimit: 15,
-      currentMembers: 12,
-      creator: "0xabcd...efgh",
-      isActive: true,
-      createdAt: BigInt(Math.floor(Date.now() / 1000 - 259200)), // 3 days ago
-    },
-  ], []);
+  const mockPools = useCallback(
+    (): CommunityPool[] => [
+      {
+        id: 1,
+        name: "Education Fund",
+        description: "Saving for children's education expenses",
+        targetAmount: BigInt(1000 * 1e18), // 1000 U2U
+        currentAmount: BigInt(350 * 1e18), // 350 U2U
+        memberLimit: 10,
+        currentMembers: 7,
+        creator: "0x1234...5678",
+        isActive: true,
+        createdAt: BigInt(Math.floor(Date.now() / 1000 - 86400)), // 1 day ago
+      },
+      {
+        id: 2,
+        name: "Emergency Fund",
+        description: "Community emergency fund for unexpected expenses",
+        targetAmount: BigInt(5000 * 1e18), // 5000 U2U
+        currentAmount: BigInt(1200 * 1e18), // 1200 U2U
+        memberLimit: 20,
+        currentMembers: 15,
+        creator: "0x8765...4321",
+        isActive: true,
+        createdAt: BigInt(Math.floor(Date.now() / 1000 - 172800)), // 2 days ago
+      },
+      {
+        id: 3,
+        name: "Business Investment",
+        description: "Pool for small business investments in the community",
+        targetAmount: BigInt(10000 * 1e18), // 10000 U2U
+        currentAmount: BigInt(7500 * 1e18), // 7500 U2U
+        memberLimit: 15,
+        currentMembers: 12,
+        creator: "0xabcd...efgh",
+        isActive: true,
+        createdAt: BigInt(Math.floor(Date.now() / 1000 - 259200)), // 3 days ago
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     setPools(mockPools());

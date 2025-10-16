@@ -8,12 +8,7 @@ export const PlatformStats = () => {
     functionName: "totalHelpRequests",
   });
 
-  const { data: platformFee, isLoading: loadingFee } = useScaffoldReadContract({
-    contractName: "SafeNest",
-    functionName: "platformFee",
-  });
-
-  const isLoading = loadingRequests || loadingFee;
+  const isLoading = loadingRequests;
 
   if (isLoading) {
     return (

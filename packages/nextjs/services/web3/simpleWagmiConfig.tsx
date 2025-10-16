@@ -1,7 +1,7 @@
+import { wagmiConnectors } from "./wagmiConnectors";
 import { http } from "viem";
 import { hardhat } from "viem/chains";
 import { createConfig } from "wagmi";
-import { wagmiConnectors } from "./wagmiConnectors";
 import scaffoldConfig from "~~/scaffold.config";
 
 const { targetNetworks } = scaffoldConfig;

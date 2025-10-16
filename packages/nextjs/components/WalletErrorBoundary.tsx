@@ -24,7 +24,7 @@ export class WalletErrorBoundary extends React.Component<WalletErrorBoundaryProp
 
   static getDerivedStateFromError(error: Error): WalletErrorBoundaryState {
     // Check if this is a wallet-related error
-    const isWalletError = 
+    const isWalletError =
       error.message?.includes("Error checking default wallet status") ||
       error.message?.includes("chrome-extension") ||
       error.message?.includes("wallet") ||
@@ -43,7 +43,7 @@ export class WalletErrorBoundary extends React.Component<WalletErrorBoundaryProp
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Check if this is a wallet-related error
-    const isWalletError = 
+    const isWalletError =
       error.message?.includes("Error checking default wallet status") ||
       error.message?.includes("chrome-extension") ||
       error.message?.includes("wallet") ||
@@ -111,4 +111,3 @@ export class WalletErrorBoundary extends React.Component<WalletErrorBoundaryProp
     return this.props.children;
   }
 }
-

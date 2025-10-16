@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig: NextConfig = {
@@ -10,12 +10,12 @@ const nextConfig: NextConfig = {
   // Force fresh deployment
   experimental: {
     // Enable experimental features if needed
-    optimizePackageImports: ['@heroicons/react', '@rainbow-me/rainbowkit', 'viem', 'wagmi'],
+    optimizePackageImports: ["@heroicons/react", "@rainbow-me/rainbowkit", "viem", "wagmi"],
     turbo: {
       rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
+        "*.svg": {
+          loaders: ["@svgr/webpack"],
+          as: "*.js",
         },
       },
     },
@@ -52,13 +52,13 @@ const nextConfig: NextConfig = {
     // Fix webpack caching issues on Windows
     if (dev) {
       config.cache = {
-        type: 'filesystem',
+        type: "filesystem",
         buildDependencies: {
           config: [__filename],
         },
         // Disable pack file cache on Windows to avoid rename issues
-        ...(process.platform === 'win32' && {
-          cacheDirectory: '.next/cache/webpack',
+        ...(process.platform === "win32" && {
+          cacheDirectory: ".next/cache/webpack",
           compression: false,
         }),
       };
@@ -69,38 +69,38 @@ const nextConfig: NextConfig = {
       // Enable tree shaking
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
-      
+
       // Split chunks more efficiently
       config.optimization.splitChunks = {
-        chunks: 'all',
+        chunks: "all",
         cacheGroups: {
           default: false,
           vendors: false,
           // Web3 libraries
           web3: {
-            name: 'web3',
-            chunks: 'all',
+            name: "web3",
+            chunks: "all",
             test: /[\\/]node_modules[\\/](@rainbow-me|wagmi|viem|@tanstack)[\\/]/,
             priority: 20,
           },
           // React libraries
           react: {
-            name: 'react',
-            chunks: 'all',
+            name: "react",
+            chunks: "all",
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
             priority: 30,
           },
           // UI libraries
           ui: {
-            name: 'ui',
-            chunks: 'all',
+            name: "ui",
+            chunks: "all",
             test: /[\\/]node_modules[\\/](@heroicons|daisyui|tailwindcss)[\\/]/,
             priority: 25,
           },
           // Common libraries
           common: {
-            name: 'common',
-            chunks: 'all',
+            name: "common",
+            chunks: "all",
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
             minChunks: 2,
@@ -119,8 +119,8 @@ const nextConfig: NextConfig = {
     };
 
     // Optimize module resolution
-    config.resolve.modules = ['node_modules'];
-    config.resolve.extensions = ['.js', '.jsx', '.ts', '.tsx', '.json'];
+    config.resolve.modules = ["node_modules"];
+    config.resolve.extensions = [".js", ".jsx", ".ts", ".tsx", ".json"];
 
     return config;
   },

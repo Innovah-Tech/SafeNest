@@ -113,7 +113,7 @@ const GovernanceIntegration = () => {
       setStakeAmount("");
     } catch (error) {
       console.error("Staking failed:", error);
-      alert(`Staking failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(`Staking failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -140,7 +140,7 @@ const GovernanceIntegration = () => {
       setUnstakeAmount("");
     } catch (error) {
       console.error("Unstaking failed:", error);
-      alert(`Unstaking failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      alert(`Unstaking failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 

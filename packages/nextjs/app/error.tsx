@@ -3,16 +3,10 @@
 import { useEffect } from "react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     // Check if this is a wallet-related error
-    const isWalletError = 
+    const isWalletError =
       error.message?.includes("Error checking default wallet status") ||
       error.message?.includes("chrome-extension") ||
       error.message?.includes("wallet") ||
@@ -32,7 +26,7 @@ export default function Error({
   }, [error, reset]);
 
   // Check if this is a wallet-related error
-  const isWalletError = 
+  const isWalletError =
     error.message?.includes("Error checking default wallet status") ||
     error.message?.includes("chrome-extension") ||
     error.message?.includes("wallet") ||
@@ -88,4 +82,3 @@ export default function Error({
     </div>
   );
 }
-

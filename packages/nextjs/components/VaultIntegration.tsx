@@ -70,46 +70,50 @@ const VaultIntegration = ({ onTransactionAdded }: VaultIntegrationProps) => {
   >([]);
 
   // Calculate vault balances from transaction history
-  const calculateVaultBalances = useCallback((transactions: typeof transactionHistory) => {
-    const balances: Record<number, UserVault> = {};
+  const calculateVaultBalances = useCallback(
+    (transactions: typeof transactionHistory) => {
+      const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
+      const balances: Record<number, UserVault> = {};
 
-    // Initialize all vaults
-    vaultNames.forEach((name, index) => {
-      balances[index] = {
-        user: connectedAddress || "",
-        vaultType: index,
-        totalDeposited: BigInt(0),
-        currentBalance: BigInt(0),
-        totalWithdrawn: BigInt(0),
-        lastDepositTime: BigInt(0),
-        lastWithdrawalTime: BigInt(0),
-        yieldEarned: BigInt(0),
-        isActive: false,
-        autoDepositAmount: BigInt(0),
-        autoDepositFrequency: BigInt(0),
-        nextAutoDeposit: BigInt(0),
-      };
-    });
+      // Initialize all vaults
+      vaultNames.forEach((name, index) => {
+        balances[index] = {
+          user: connectedAddress || "",
+          vaultType: index,
+          totalDeposited: BigInt(0),
+          currentBalance: BigInt(0),
+          totalWithdrawn: BigInt(0),
+          lastDepositTime: BigInt(0),
+          lastWithdrawalTime: BigInt(0),
+          yieldEarned: BigInt(0),
+          isActive: false,
+          autoDepositAmount: BigInt(0),
+          autoDepositFrequency: BigInt(0),
+          nextAutoDeposit: BigInt(0),
+        };
+      });
 
-    // Process transactions
-    transactions.forEach(tx => {
-      if (!balances[tx.vaultType]) return;
+      // Process transactions
+      transactions.forEach(tx => {
+        if (!balances[tx.vaultType]) return;
 
-      balances[tx.vaultType].isActive = true;
+        balances[tx.vaultType].isActive = true;
 
-      if (tx.type === "deposit") {
-        balances[tx.vaultType].totalDeposited += tx.amount;
-        balances[tx.vaultType].currentBalance += tx.amount;
-        balances[tx.vaultType].lastDepositTime = BigInt(tx.timestamp);
-      } else if (tx.type === "withdraw") {
-        balances[tx.vaultType].totalWithdrawn += tx.amount;
-        balances[tx.vaultType].currentBalance -= tx.amount;
-        balances[tx.vaultType].lastWithdrawalTime = BigInt(tx.timestamp);
-      }
-    });
+        if (tx.type === "deposit") {
+          balances[tx.vaultType].totalDeposited += tx.amount;
+          balances[tx.vaultType].currentBalance += tx.amount;
+          balances[tx.vaultType].lastDepositTime = BigInt(tx.timestamp);
+        } else if (tx.type === "withdraw") {
+          balances[tx.vaultType].totalWithdrawn += tx.amount;
+          balances[tx.vaultType].currentBalance -= tx.amount;
+          balances[tx.vaultType].lastWithdrawalTime = BigInt(tx.timestamp);
+        }
+      });
 
-    return balances;
-  }, [connectedAddress]);
+      return balances;
+    },
+    [connectedAddress],
+  );
 
   const vaultTypes: VaultData[] = [
     {

@@ -1,8 +1,8 @@
 "use client";
 
+import { WalletErrorBoundary } from "./WalletErrorBoundary";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { WalletErrorBoundary } from "./WalletErrorBoundary";
 
 /**
  * Enhanced wallet connection component with better error handling
@@ -82,9 +82,7 @@ const WalletConnectionStatusInner = () => {
     <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6 mb-12 max-w-md mx-auto">
       <div className="flex items-center justify-center space-x-3 mb-3">
         <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-        <span className="text-yellow-700 dark:text-yellow-300 font-medium">
-          Connect your wallet to get started
-        </span>
+        <span className="text-yellow-700 dark:text-yellow-300 font-medium">Connect your wallet to get started</span>
       </div>
       <button
         onClick={handleConnect}

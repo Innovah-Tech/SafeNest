@@ -33,43 +33,45 @@ const TransactionHistory = ({ transactions = [] }: TransactionHistoryProps) => {
   const [vaultBalances, setVaultBalances] = useState<VaultBalance[]>([]);
   const [isLoading] = useState(false);
 
-  const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
-
   // No mock data - only show real transactions
 
   // Calculate vault balances from transaction history
-  const calculateBalances = useCallback((txs: Transaction[]): VaultBalance[] => {
-    const balances: Record<number, VaultBalance> = {};
+  const calculateBalances = useCallback(
+    (txs: Transaction[]): VaultBalance[] => {
+      const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
+      const balances: Record<number, VaultBalance> = {};
 
-    // Initialize all vaults
-    vaultNames.forEach((name, index) => {
-      balances[index] = {
-        vaultType: index,
-        vaultName: name,
-        totalDeposited: BigInt(0),
-        totalWithdrawn: BigInt(0),
-        currentBalance: BigInt(0),
-        transactionCount: 0,
-      };
-    });
+      // Initialize all vaults
+      vaultNames.forEach((name, index) => {
+        balances[index] = {
+          vaultType: index,
+          vaultName: name,
+          totalDeposited: BigInt(0),
+          totalWithdrawn: BigInt(0),
+          currentBalance: BigInt(0),
+          transactionCount: 0,
+        };
+      });
 
-    // Process transactions
-    txs.forEach(tx => {
-      if (!balances[tx.vaultType]) return;
+      // Process transactions
+      txs.forEach(tx => {
+        if (!balances[tx.vaultType]) return;
 
-      balances[tx.vaultType].transactionCount++;
+        balances[tx.vaultType].transactionCount++;
 
-      if (tx.type === "deposit") {
-        balances[tx.vaultType].totalDeposited += tx.amount;
-        balances[tx.vaultType].currentBalance += tx.amount;
-      } else if (tx.type === "withdraw") {
-        balances[tx.vaultType].totalWithdrawn += tx.amount;
-        balances[tx.vaultType].currentBalance -= tx.amount;
-      }
-    });
+        if (tx.type === "deposit") {
+          balances[tx.vaultType].totalDeposited += tx.amount;
+          balances[tx.vaultType].currentBalance += tx.amount;
+        } else if (tx.type === "withdraw") {
+          balances[tx.vaultType].totalWithdrawn += tx.amount;
+          balances[tx.vaultType].currentBalance -= tx.amount;
+        }
+      });
 
-    return Object.values(balances);
-  }, [vaultNames]);
+      return Object.values(balances);
+    },
+    [],
+  );
 
   // Calculate balances from current transactions
   useEffect(() => {

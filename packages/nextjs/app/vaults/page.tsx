@@ -69,15 +69,17 @@ const VaultsPage: NextPage = () => {
         </div>
 
         {/* Vault Integration Component */}
-        <VaultIntegration onTransactionAdded={tx => {
-          const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
-          const fullTransaction: Transaction = {
-            ...tx,
-            vaultName: vaultNames[tx.vaultType] || "Unknown",
-            blockNumber: 0, // Default value since it's not provided by VaultIntegration
-          };
-          setTransactions(prev => [fullTransaction, ...prev]);
-        }} />
+        <VaultIntegration
+          onTransactionAdded={tx => {
+            const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
+            const fullTransaction: Transaction = {
+              ...tx,
+              vaultName: vaultNames[tx.vaultType] || "Unknown",
+              blockNumber: 0, // Default value since it's not provided by VaultIntegration
+            };
+            setTransactions(prev => [fullTransaction, ...prev]);
+          }}
+        />
 
         {/* Transaction History */}
         <TransactionHistory transactions={transactions} />

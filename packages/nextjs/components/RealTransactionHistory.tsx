@@ -139,7 +139,7 @@ const RealTransactionHistory = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [connectedAddress, blockNumber]);
+  }, [connectedAddress, blockNumber, calculateBalances]);
 
   // Add a new transaction (called after successful deposit/withdraw)
   const addTransaction = (vaultType: number, type: "deposit" | "withdraw", amount: bigint, txHash: string) => {

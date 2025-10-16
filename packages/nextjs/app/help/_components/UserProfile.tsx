@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+
+// Removed unused imports
 
 interface UserProfileData {
   name: string;
@@ -24,15 +25,17 @@ export const UserProfile = () => {
   const [newSkill, setNewSkill] = useState("");
 
   // Mock user profile data since these functions don't exist in the contract
-  const userProfile: UserProfileData | undefined = address ? {
-    name: "John Doe",
-    bio: "Blockchain developer with 5 years of experience",
-    helpRequestsCount: BigInt(3),
-    helpProvidedCount: BigInt(7),
-    reputation: BigInt(85),
-    isVerified: true,
-    skills: ["Solidity", "React", "Node.js", "Web3"]
-  } : undefined;
+  const userProfile: UserProfileData | undefined = address
+    ? {
+        name: "John Doe",
+        bio: "Blockchain developer with 5 years of experience",
+        helpRequestsCount: BigInt(3),
+        helpProvidedCount: BigInt(7),
+        reputation: BigInt(85),
+        isVerified: true,
+        skills: ["Solidity", "React", "Node.js", "Web3"],
+      }
+    : undefined;
 
   const isUpdatingProfile = false;
   const isRegistering = false;
