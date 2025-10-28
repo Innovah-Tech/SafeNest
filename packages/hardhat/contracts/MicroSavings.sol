@@ -12,11 +12,11 @@ contract MicroSavings {
     // State Variables
     address public immutable owner;
     string public platformName = "MicroSavings - Mobile DeFi Platform";
-    
+
     // Supported stablecoins
     mapping(address => bool) public supportedStablecoins;
     mapping(address => uint256) public stablecoinDecimals;
-    
+
     // User savings accounts
     struct SavingsAccount {
         address user;
@@ -27,7 +27,7 @@ contract MicroSavings {
         uint256 lastDepositTime;
         bool isActive;
     }
-    
+
     // Investment strategies
     struct InvestmentStrategy {
         string name;
@@ -37,7 +37,7 @@ contract MicroSavings {
         uint256 minDeposit;
         uint256 maxDeposit;
     }
-    
+
     // User investment positions
     struct InvestmentPosition {
         address user;
@@ -48,7 +48,7 @@ contract MicroSavings {
         uint256 entryTime;
         bool isActive;
     }
-    
+
     // Emergency fund vault
     struct EmergencyVault {
         address user;
@@ -58,7 +58,7 @@ contract MicroSavings {
         uint256 withdrawalCount;
         bool isActive;
     }
-    
+
     // Goal tracking
     struct SavingsGoal {
         address user;
@@ -69,7 +69,7 @@ contract MicroSavings {
         bool isCompleted;
         uint256 createdAt;
     }
-    
+
     // Mappings
     mapping(address => SavingsAccount) public userSavingsAccounts;
     mapping(address => mapping(address => uint256)) public userStablecoinBalances;
@@ -77,7 +77,7 @@ contract MicroSavings {
     mapping(address => InvestmentPosition[]) public userInvestments;
     mapping(address => EmergencyVault) public userEmergencyVaults;
     mapping(address => SavingsGoal[]) public userGoals;
-    
+
     // Platform statistics
     uint256 public totalUsers = 0;
     uint256 public totalDeposited = 0;
@@ -85,7 +85,7 @@ contract MicroSavings {
     uint256 public totalEmergencyFunds = 0;
     uint256 public platformFeeRate = 30; // 0.3% in basis points
     uint256 public nextStrategyId = 1;
-    
+
     // Events
     event StablecoinAdded(address indexed stablecoin, uint256 decimals);
     event DepositMade(address indexed user, address indexed stablecoin, uint256 amount);
@@ -97,28 +97,28 @@ contract MicroSavings {
     event GoalCreated(address indexed user, string goalName, uint256 targetAmount);
     event GoalUpdated(address indexed user, string goalName, uint256 currentAmount);
     event GoalCompleted(address indexed user, string goalName);
-    
+
     // Modifiers
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the owner");
         _;
     }
-    
+
     modifier validStablecoin(address _stablecoin) {
         require(supportedStablecoins[_stablecoin], "Unsupported stablecoin");
         _;
     }
-    
+
     modifier validAmount(uint256 _amount) {
         require(_amount > 0, "Amount must be greater than 0");
         _;
     }
-    
+
     // Constructor
     constructor() {
         owner = msg.sender;
     }
-    
+
     /**
      * Add supported stablecoin
      */
@@ -127,7 +127,7 @@ contract MicroSavings {
         stablecoinDecimals[_stablecoin] = _decimals;
         emit StablecoinAdded(_stablecoin, _decimals);
     }
-    
+
     /**
      * Add investment strategy
      */
@@ -148,7 +148,7 @@ contract MicroSavings {
         });
         nextStrategyId++;
     }
-    
+
     /**
      * Make micro-savings deposit
      */
@@ -158,7 +158,7 @@ contract MicroSavings {
     ) external validStablecoin(_stablecoin) validAmount(_amount) {
         // Transfer stablecoin from user
         // Note: In production, you'd use IERC20(_stablecoin).transferFrom(msg.sender, address(this), _amount)
-        
+
         // Update user savings account
         if (!userSavingsAccounts[msg.sender].isActive) {
             userSavingsAccounts[msg.sender] = SavingsAccount({
@@ -172,17 +172,17 @@ contract MicroSavings {
             });
             totalUsers++;
         }
-        
+
         userSavingsAccounts[msg.sender].totalDeposited += _amount;
         userSavingsAccounts[msg.sender].currentBalance += _amount;
         userSavingsAccounts[msg.sender].lastDepositTime = block.timestamp;
         userStablecoinBalances[msg.sender][_stablecoin] += _amount;
-        
+
         totalDeposited += _amount;
-        
+
         emit DepositMade(msg.sender, _stablecoin, _amount);
     }
-    
+
     /**
      * Withdraw from savings
      */
@@ -190,23 +190,20 @@ contract MicroSavings {
         address _stablecoin,
         uint256 _amount
     ) external validStablecoin(_stablecoin) validAmount(_amount) {
-        require(
-            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,
-            "Insufficient balance"
-        );
-        
+        require(userStablecoinBalances[msg.sender][_stablecoin] >= _amount, "Insufficient balance");
+
         userSavingsAccounts[msg.sender].totalWithdrawn += _amount;
         userSavingsAccounts[msg.sender].currentBalance -= _amount;
         userStablecoinBalances[msg.sender][_stablecoin] -= _amount;
-        
+
         totalDeposited -= _amount;
-        
+
         // Transfer stablecoin to user
         // Note: In production, you'd use IERC20(_stablecoin).transfer(msg.sender, _amount)
-        
+
         emit WithdrawalMade(msg.sender, _stablecoin, _amount);
     }
-    
+
     /**
      * Invest in DeFi strategy
      */
@@ -219,62 +216,55 @@ contract MicroSavings {
         require(strategy.isActive, "Strategy not active");
         require(_amount >= strategy.minDeposit, "Amount below minimum");
         require(_amount <= strategy.maxDeposit, "Amount above maximum");
-        require(
-            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,
-            "Insufficient balance"
-        );
-        
+        require(userStablecoinBalances[msg.sender][_stablecoin] >= _amount, "Insufficient balance");
+
         // Calculate shares (simplified - in production, use proper share calculation)
-        uint256 shares = _amount * 1e18 / 1e18; // 1:1 for simplicity
-        
-        userInvestments[msg.sender].push(InvestmentPosition({
-            user: msg.sender,
-            strategyId: _strategyId,
-            stablecoin: _stablecoin,
-            amount: _amount,
-            shares: shares,
-            entryTime: block.timestamp,
-            isActive: true
-        }));
-        
+        uint256 shares = (_amount * 1e18) / 1e18; // 1:1 for simplicity
+
+        userInvestments[msg.sender].push(
+            InvestmentPosition({
+                user: msg.sender,
+                strategyId: _strategyId,
+                stablecoin: _stablecoin,
+                amount: _amount,
+                shares: shares,
+                entryTime: block.timestamp,
+                isActive: true
+            })
+        );
+
         userStablecoinBalances[msg.sender][_stablecoin] -= _amount;
         totalInvested += _amount;
-        
+
         emit InvestmentMade(msg.sender, _strategyId, _amount);
     }
-    
+
     /**
      * Withdraw from investment
      */
-    function withdrawFromInvestment(
-        uint256 _positionIndex,
-        uint256 _shares
-    ) external validAmount(_shares) {
-        require(
-            _positionIndex < userInvestments[msg.sender].length,
-            "Invalid position index"
-        );
-        
+    function withdrawFromInvestment(uint256 _positionIndex, uint256 _shares) external validAmount(_shares) {
+        require(_positionIndex < userInvestments[msg.sender].length, "Invalid position index");
+
         InvestmentPosition storage position = userInvestments[msg.sender][_positionIndex];
         require(position.isActive, "Position not active");
         require(position.shares >= _shares, "Insufficient shares");
-        
+
         // Calculate withdrawal amount (simplified)
-        uint256 withdrawalAmount = position.amount * _shares / position.shares;
-        
+        uint256 withdrawalAmount = (position.amount * _shares) / position.shares;
+
         position.shares -= _shares;
         position.amount -= withdrawalAmount;
-        
+
         if (position.shares == 0) {
             position.isActive = false;
         }
-        
+
         userStablecoinBalances[msg.sender][position.stablecoin] += withdrawalAmount;
         totalInvested -= withdrawalAmount;
-        
+
         emit InvestmentWithdrawn(msg.sender, position.strategyId, withdrawalAmount);
     }
-    
+
     /**
      * Deposit to emergency vault
      */
@@ -282,11 +272,8 @@ contract MicroSavings {
         address _stablecoin,
         uint256 _amount
     ) external validStablecoin(_stablecoin) validAmount(_amount) {
-        require(
-            userStablecoinBalances[msg.sender][_stablecoin] >= _amount,
-            "Insufficient balance"
-        );
-        
+        require(userStablecoinBalances[msg.sender][_stablecoin] >= _amount, "Insufficient balance");
+
         if (!userEmergencyVaults[msg.sender].isActive) {
             userEmergencyVaults[msg.sender] = EmergencyVault({
                 user: msg.sender,
@@ -297,16 +284,16 @@ contract MicroSavings {
                 isActive: true
             });
         }
-        
+
         userEmergencyVaults[msg.sender].balance += _amount;
         userEmergencyVaults[msg.sender].lastDepositTime = block.timestamp;
         userStablecoinBalances[msg.sender][_stablecoin] -= _amount;
-        
+
         totalEmergencyFunds += _amount;
-        
+
         emit EmergencyDeposit(msg.sender, _stablecoin, _amount);
     }
-    
+
     /**
      * Withdraw from emergency vault (instant)
      */
@@ -315,20 +302,17 @@ contract MicroSavings {
         uint256 _amount
     ) external validStablecoin(_stablecoin) validAmount(_amount) {
         require(userEmergencyVaults[msg.sender].isActive, "No emergency vault");
-        require(
-            userEmergencyVaults[msg.sender].balance >= _amount,
-            "Insufficient emergency balance"
-        );
-        
+        require(userEmergencyVaults[msg.sender].balance >= _amount, "Insufficient emergency balance");
+
         userEmergencyVaults[msg.sender].balance -= _amount;
         userEmergencyVaults[msg.sender].withdrawalCount++;
         userStablecoinBalances[msg.sender][_stablecoin] += _amount;
-        
+
         totalEmergencyFunds -= _amount;
-        
+
         emit EmergencyWithdrawal(msg.sender, _stablecoin, _amount);
     }
-    
+
     /**
      * Create savings goal
      */
@@ -338,54 +322,54 @@ contract MicroSavings {
         uint256 _deadline
     ) external validAmount(_targetAmount) {
         require(_deadline > block.timestamp, "Deadline must be in the future");
-        
-        userGoals[msg.sender].push(SavingsGoal({
-            user: msg.sender,
-            goalName: _goalName,
-            targetAmount: _targetAmount,
-            currentAmount: 0,
-            deadline: _deadline,
-            isCompleted: false,
-            createdAt: block.timestamp
-        }));
-        
+
+        userGoals[msg.sender].push(
+            SavingsGoal({
+                user: msg.sender,
+                goalName: _goalName,
+                targetAmount: _targetAmount,
+                currentAmount: 0,
+                deadline: _deadline,
+                isCompleted: false,
+                createdAt: block.timestamp
+            })
+        );
+
         emit GoalCreated(msg.sender, _goalName, _targetAmount);
     }
-    
+
     /**
      * Update goal progress
      */
-    function updateGoalProgress(
-        uint256 _goalIndex,
-        uint256 _additionalAmount
-    ) external validAmount(_additionalAmount) {
+    function updateGoalProgress(uint256 _goalIndex, uint256 _additionalAmount) external validAmount(_additionalAmount) {
         require(_goalIndex < userGoals[msg.sender].length, "Invalid goal index");
-        
+
         SavingsGoal storage goal = userGoals[msg.sender][_goalIndex];
         require(!goal.isCompleted, "Goal already completed");
-        
+
         goal.currentAmount += _additionalAmount;
-        
+
         if (goal.currentAmount >= goal.targetAmount) {
             goal.isCompleted = true;
             emit GoalCompleted(msg.sender, goal.goalName);
         }
-        
+
         emit GoalUpdated(msg.sender, goal.goalName, goal.currentAmount);
     }
-    
+
     /**
      * Get user's total portfolio value
      */
-    function getPortfolioValue(address _user) external view returns (
-        uint256 totalSavings,
-        uint256 totalInvestments,
-        uint256 totalEmergency,
-        uint256 totalValue
-    ) {
+    function getPortfolioValue(
+        address _user
+    )
+        external
+        view
+        returns (uint256 totalSavings, uint256 totalInvestments, uint256 totalEmergency, uint256 totalValue)
+    {
         totalSavings = userSavingsAccounts[_user].currentBalance;
         totalEmergency = userEmergencyVaults[_user].balance;
-        
+
         // Calculate total investments (simplified to avoid stack too deep)
         InvestmentPosition[] memory investments = userInvestments[_user];
         for (uint256 i = 0; i < investments.length; i++) {
@@ -393,23 +377,27 @@ contract MicroSavings {
                 totalInvestments += investments[i].amount;
             }
         }
-        
+
         totalValue = totalSavings + totalInvestments + totalEmergency;
     }
-    
+
     /**
      * Get platform statistics
      */
-    function getPlatformStats() external view returns (
-        uint256 _totalUsers,
-        uint256 _totalDeposited,
-        uint256 _totalInvested,
-        uint256 _totalEmergencyFunds,
-        uint256 _platformFeeRate
-    ) {
+    function getPlatformStats()
+        external
+        view
+        returns (
+            uint256 _totalUsers,
+            uint256 _totalDeposited,
+            uint256 _totalInvested,
+            uint256 _totalEmergencyFunds,
+            uint256 _platformFeeRate
+        )
+    {
         return (totalUsers, totalDeposited, totalInvested, totalEmergencyFunds, platformFeeRate);
     }
-    
+
     /**
      * Set platform fee rate (only owner)
      */
@@ -417,7 +405,7 @@ contract MicroSavings {
         require(_newRate <= 1000, "Fee rate too high"); // Max 10%
         platformFeeRate = _newRate;
     }
-    
+
     /**
      * Emergency function to pause platform (only owner)
      */

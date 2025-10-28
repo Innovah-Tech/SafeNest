@@ -37,38 +37,47 @@ const RealTransactionHistory = () => {
   // Mock transaction history for demonstration
 
   // Calculate vault balances from transaction history
-  const calculateBalances = (txs: Transaction[]): VaultBalance[] => {
-    const balances: Record<number, VaultBalance> = {};
+  const calculateBalances = useCallback(
+    (txs: Transaction[]): VaultBalance[] => {
+      const balances: Record<number, VaultBalance> = {};
 
-    // Initialize all vaults
-    vaultNames.forEach((name, index) => {
-      balances[index] = {
-        vaultType: index,
-        vaultName: name,
-        totalDeposited: BigInt(0),
-        totalWithdrawn: BigInt(0),
-        currentBalance: BigInt(0),
-        transactionCount: 0,
-      };
-    });
+      // Initialize all vaults
+      vaultNames.forEach((name, index) => {
+        balances[index] = {
+          vaultType: index,
+          vaultName: name,
+          totalDeposited: BigInt(0),
+          totalWithdrawn: BigInt(0),
+          currentBalance: BigInt(0),
+          transactionCount: 0,
+        };
+      });
 
-    // Process transactions
-    txs.forEach(tx => {
-      if (!balances[tx.vaultType]) return;
+      // Process transactions
+      txs.forEach(tx => {
+        if (!balances[tx.vaultType]) return;
 
-      balances[tx.vaultType].transactionCount++;
+        balances[tx.vaultType].transactionCount++;
 
-      if (tx.type === "deposit") {
-        balances[tx.vaultType].totalDeposited += tx.amount;
-        balances[tx.vaultType].currentBalance += tx.amount;
-      } else if (tx.type === "withdraw") {
-        balances[tx.vaultType].totalWithdrawn += tx.amount;
-        balances[tx.vaultType].currentBalance -= tx.amount;
-      }
-    });
+        if (tx.type === "deposit") {
+          balances[tx.vaultType].totalDeposited += tx.amount;
+          balances[tx.vaultType].currentBalance += tx.amount;
+        } else if (tx.type === "withdraw") {
+          balances[tx.vaultType].totalWithdrawn += tx.amount;
+          balances[tx.vaultType].currentBalance -= tx.amount;
+        }
+      });
 
-    return Object.values(balances);
-  };
+      return Object.values(balances);
+    },
+    [vaultNames],
+  );
+
+  // Update balances when transactions change
+  useEffect(() => {
+    const newBalances = calculateBalances(transactions);
+    setVaultBalances(newBalances);
+  }, [transactions, calculateBalances]);
 
   // Simulate fetching transaction history from blockchain
   const loadTransactionHistory = useCallback(async () => {

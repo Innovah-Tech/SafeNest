@@ -47,9 +47,9 @@ describe("SafeNest", function () {
       const isPremium = false;
 
       await safeNest.connect(user1).createHelpRequest(title, description, category, isPremium, { value: 0 });
-      
+
       expect(await safeNest.totalHelpRequests()).to.equal(1);
-      
+
       const helpRequest = await safeNest.getHelpRequest(0);
       expect(helpRequest.title).to.equal(title);
       expect(helpRequest.description).to.equal(description);
@@ -68,9 +68,9 @@ describe("SafeNest", function () {
       const expectedReward = totalValue - platformFee;
 
       await safeNest.connect(user2).createHelpRequest(title, description, category, isPremium, { value: totalValue });
-      
+
       expect(await safeNest.totalHelpRequests()).to.equal(2);
-      
+
       const helpRequest = await safeNest.getHelpRequest(1);
       expect(helpRequest.title).to.equal(title);
       expect(helpRequest.isPremium).to.equal(true);
@@ -85,9 +85,9 @@ describe("SafeNest", function () {
       const skills = ["solidity", "defi", "smart-contracts"];
 
       await safeNest.connect(user1).registerAsHelper(name, bio, skills);
-      
+
       expect(await safeNest.isHelper(user1.address)).to.equal(true);
-      
+
       const profile = await safeNest.getUserProfile(user1.address);
       expect(profile.name).to.equal(name);
       expect(profile.bio).to.equal(bio);

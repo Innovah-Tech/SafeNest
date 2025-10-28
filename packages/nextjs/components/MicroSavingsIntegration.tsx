@@ -28,40 +28,37 @@ const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ trans
   const [vaultBalances, setVaultBalances] = useState<Record<number, VaultBalance>>({});
 
   // Calculate vault balances from transaction history
-  const calculateVaultBalances = useCallback(
-    (transactions: Transaction[]) => {
-      const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
-      const balances: Record<number, VaultBalance> = {};
+  const calculateVaultBalances = useCallback((transactions: Transaction[]) => {
+    const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
+    const balances: Record<number, VaultBalance> = {};
 
-      // Initialize all vaults
-      vaultNames.forEach((_, index) => {
-        balances[index] = {
-          currentBalance: BigInt(0),
-          totalDeposited: BigInt(0),
-          totalWithdrawn: BigInt(0),
-          isActive: false,
-        };
-      });
+    // Initialize all vaults
+    vaultNames.forEach((_, index) => {
+      balances[index] = {
+        currentBalance: BigInt(0),
+        totalDeposited: BigInt(0),
+        totalWithdrawn: BigInt(0),
+        isActive: false,
+      };
+    });
 
-      // Process transactions
-      transactions.forEach(tx => {
-        if (!balances[tx.vaultType]) return;
+    // Process transactions
+    transactions.forEach(tx => {
+      if (!balances[tx.vaultType]) return;
 
-        balances[tx.vaultType].isActive = true;
+      balances[tx.vaultType].isActive = true;
 
-        if (tx.type === "deposit") {
-          balances[tx.vaultType].totalDeposited += tx.amount;
-          balances[tx.vaultType].currentBalance += tx.amount;
-        } else if (tx.type === "withdraw") {
-          balances[tx.vaultType].totalWithdrawn += tx.amount;
-          balances[tx.vaultType].currentBalance -= tx.amount;
-        }
-      });
+      if (tx.type === "deposit") {
+        balances[tx.vaultType].totalDeposited += tx.amount;
+        balances[tx.vaultType].currentBalance += tx.amount;
+      } else if (tx.type === "withdraw") {
+        balances[tx.vaultType].totalWithdrawn += tx.amount;
+        balances[tx.vaultType].currentBalance -= tx.amount;
+      }
+    });
 
-      return balances;
-    },
-    [],
-  );
+    return balances;
+  }, []);
 
   // Update balances when transactions change
   useEffect(() => {

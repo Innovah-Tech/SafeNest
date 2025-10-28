@@ -10,7 +10,7 @@ const deployVaultSystem: DeployFunction = async function (hre: HardhatRuntimeEnv
 
   // Get SAFEToken address
   const safeToken = await hre.deployments.get("SAFEToken");
-  
+
   await deploy("VaultSystem", {
     from: deployer,
     args: [safeToken.address],
