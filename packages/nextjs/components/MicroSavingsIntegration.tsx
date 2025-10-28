@@ -26,10 +26,10 @@ interface MicroSavingsIntegrationProps {
 
 const MicroSavingsIntegration: React.FC<MicroSavingsIntegrationProps> = ({ transactions }) => {
   const [vaultBalances, setVaultBalances] = useState<Record<number, VaultBalance>>({});
+  const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
 
   // Calculate vault balances from transaction history
   const calculateVaultBalances = useCallback((transactions: Transaction[]) => {
-    const vaultNames = ["Micro-Savings", "Pension Nest", "Emergency Vault"];
     const balances: Record<number, VaultBalance> = {};
 
     // Initialize all vaults
